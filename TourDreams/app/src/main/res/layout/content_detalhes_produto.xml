@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="tourdreams.com.br.DetalhesProduto"
+    tools:showIn="@layout/activity_detalhes_produto">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="5dp"
+            android:layout_marginLeft="10dp"
+            >
+
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="São Paulo, Brasil"
+               android:textSize="20dp"
+               android:textColor="#000"
+               android:drawableLeft="@drawable/ic_location_on_black_18dp"
+               />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Diárias a partir de:"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="R$ 339,99"
+                android:textSize="20dp"
+                android:textColor="#248f24"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="15dp"
+                android:weightSum="2">
+
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Checkin"
+                    android:textColor="#000"
+                    android:textSize="24dp"/>
+
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Checkout"
+                    android:textSize="24dp"
+                    android:textColor="#000"
+                    />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="19/09/2017"
+                    android:textSize="18dp"
+                    android:drawableLeft="@drawable/ic_date_range_black_24dp"
+                    />
+
+
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="19/09/2017"
+                    android:textSize="18dp"
+                    android:drawableLeft="@drawable/ic_date_range_black_24dp"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+
+                <Button
+                    android:layout_weight="1.4"
+                    android:paddingLeft="10dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginRight="15dp"
+                    android:text="Reservar"
+                    android:textSize="20dp"
+                    android:gravity="center_vertical"
+                    android:textColor="#fff"
+                    android:background="@color/cor_verde"
+                    android:textAlignment="center"
+                    android:drawableLeft="@drawable/ic_send_white_24dp"
+                    />
+
+
+
+                    <TextView
+                        android:layout_weight="0.2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:textAlignment="center"
+                        android:text="OU"
+                        android:textSize="16dp"
+                        android:textColor="#000"
+                        />
+
+
+
+                <Button
+                    android:layout_weight="1.4"
+                    android:paddingLeft="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginRight="15dp"
+                    android:text="Fale Conosco"
+                    android:textSize="16dp"
+                    android:gravity="center_vertical"
+                    android:textColor="#fff"
+                    android:background="@color/cor_verde"
+                    android:textAlignment="center"
+                    android:drawableLeft="@drawable/ic_chat_white_24dp"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/linha_bottom"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="15dp"/>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Características"
+                    android:textSize="20dp"
+                    android:textColor="#000"
+                    android:layout_marginTop="10dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+
+                <ListView
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="250dp"
+                    android:id="@+id/list_view_caracteristicas_1">
+
+                </ListView>
+
+
+                <ListView
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="250dp"
+                    android:id="@+id/list_view_caracteristicas_2">
+
+                </ListView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="35dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Avaliação Média"
+                    android:textColor="#000"
+                    android:textSize="18dp"
+                    android:layout_marginTop="15dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RatingBar
+                        android:id="@+id/ratingBar"
+                        android:layout_height="45dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_width="242dp"
+                        android:stepSize="5"
+                        android:numStars="5" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="28dp"
+                        android:text="5,0"
+                        android:textColor="#000"
+                        android:textAlignment="center"
+                        android:layout_marginTop="10dp"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/linha_bottom"
+                    />
+
+                <LinearLayout
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+
+                    <TextView
+                        android:layout_weight="0.6"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Nota por atributo"
+                        android:textSize="20dp"
+                        android:textColor="#000"
+                        />
+
+                    <TextView
+                        android:layout_weight="0.4"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Nota"
+                        android:textSize="20dp"
+                        android:textColor="#000"
+                        android:textAlignment="center"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="25dp"
+                    android:weightSum="1"
+                    android:background="@drawable/linha_verde">
+
+                    <TextView
+                        android:layout_weight="0.6"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="  Limpeza"
+                        android:textSize="20dp"
+                        android:textColor="#000"
+                        android:drawableLeft="@drawable/ic_home_black_24dp"
+                        android:paddingBottom="5dp"
+
+                        />
+
+                    <TextView
+                        android:layout_weight="0.4"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="5,0"
+                        android:textSize="20dp"
+                        android:textColor="#000"
+                        android:textAlignment="center"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="25dp"
+                    android:weightSum="1"
+                    android:background="@drawable/linha_verde">
+
+                    <TextView
+                        android:layout_weight="0.6"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="  Limpeza"
+                        android:textSize="20dp"
+                        android:textColor="#000"
+                        android:drawableLeft="@drawable/ic_home_black_24dp"
+                        android:paddingBottom="5dp"
+
+                        />
+
+                    <TextView
+                        android:layout_weight="0.4"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="5,0"
+                        android:textSize="20dp"
+                        android:textColor="#000"
+                        android:textAlignment="center"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="25dp"
+                    android:weightSum="1"
+                    android:background="@drawable/linha_verde">
+
+                    <TextView
+                        android:layout_weight="0.6"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="  Limpeza"
+                        android:textSize="20dp"
+                        android:textColor="#000"
+                        android:drawableLeft="@drawable/ic_home_black_24dp"
+                        android:paddingBottom="5dp"
+
+                        />
+
+                    <TextView
+                        android:layout_weight="0.4"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="5,0"
+                        android:textSize="20dp"
+                        android:textColor="#000"
+                        android:textAlignment="center"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="25dp"
+                    android:weightSum="1"
+                    android:background="@drawable/linha_verde">
+
+                    <TextView
+                        android:layout_weight="0.6"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="  Limpeza"
+                        android:textSize="20dp"
+                        android:textColor="#000"
+                        android:drawableLeft="@drawable/ic_home_black_24dp"
+                        android:paddingBottom="5dp"
+
+                        />
+
+                    <TextView
+                        android:layout_weight="0.4"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="5,0"
+                        android:textSize="20dp"
+                        android:textColor="#000"
+                        android:textAlignment="center"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="25dp"
+                    android:weightSum="1"
+                    android:background="@drawable/linha_verde">
+
+                    <TextView
+                        android:layout_weight="0.6"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="  Limpeza"
+                        android:textSize="20dp"
+                        android:textColor="#000"
+                        android:drawableLeft="@drawable/ic_home_black_24dp"
+                        android:paddingBottom="5dp"
+
+                        />
+
+                    <TextView
+                        android:layout_weight="0.4"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="5,0"
+                        android:textSize="20dp"
+                        android:textColor="#000"
+                        android:textAlignment="center"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Comentários"
+                    android:textSize="20dp"
+                    android:textColor="#000"
+                    android:layout_marginTop="10dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/linha_bottom"
+                    android:layout_marginRight="10dp"
+                    />
+
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/list_view_comentarios">
+
+                </ListView>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</android.support.v4.widget.NestedScrollView>

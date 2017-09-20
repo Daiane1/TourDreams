@@ -1,0 +1,1091 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="tourdreams.com.br.MainActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+
+        android:id="@+id/content_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:showIn="@layout/app_bar_main"
+        android:orientation="vertical"
+        android:background="#f2f2f2">
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/fundo_pesquisa">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pesquisar"
+                android:textColor="#000"
+                android:textSize="25dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="15dp"/>
+
+
+            <EditText
+
+                android:id="@+id/edit_pesquisa"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/edittext_bg"
+                android:drawableLeft="@drawable/ic_location_on_black_24dp"
+                android:fontFamily="sans-serif"
+                android:hint="  Localização"
+                android:paddingLeft="5dp"
+                android:textColor="#000"
+                android:textSize="18dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="0.5"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/edittext_bg"
+                    android:onClick="calendario_checkin">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="15dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="sans-serif"
+                            android:text=" Check-in"
+                            android:textColor="#000"
+                            android:textSize="14dp" />
+
+                        <TextView
+                            android:id="@+id/text_checkin"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="-10dp"
+                            android:textColor="@color/cor_azul" />
+                    </LinearLayout>
+
+
+                </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_weight="0.5"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/edittext_bg"
+                    android:onClick="calendario_checkout">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" Check-out"
+                            android:textColor="#000"
+                            android:fontFamily="sans-serif"
+                            android:textSize="14dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginBottom="15dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+
+                            android:layout_marginTop="-10dp"
+                            android:textColor="@color/cor_azul"
+                            android:id="@+id/text_checkout"/>
+                    </LinearLayout>
+                </TableRow>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:background="@drawable/edittext_bg">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edittext_bg"
+                    android:onClick="abrirDialog">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="15dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="5dp"
+                            android:textAlignment="center"
+                            android:fontFamily="sans-serif"
+                            android:text="Quartos"
+                            android:textColor="#000"
+                            android:textSize="14dp" />
+
+
+                        <TextView
+                            android:id="@+id/text_quartos"
+                            android:layout_width="match_parent"
+                            android:layout_height="25dp"
+                            android:text=""
+                            android:textAlignment="center"
+                            android:textColor="#000"
+                            android:textSize="18dp" />
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edittext_bg"
+                    android:onClick="abrirDialog">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="15dp"
+                            android:textAlignment="center"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="sans-serif"
+                            android:text="Adultos"
+                            android:textColor="#000"
+                            android:textSize="14dp" />
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="25dp"
+                            android:text=""
+                            android:textAlignment="center"
+                            android:textColor="#000"
+                            android:textSize="18dp"
+                            android:id="@+id/text_adultos"/>
+
+
+                    </LinearLayout>
+                </TableRow>
+
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edittext_bg"
+                    android:onClick="abrirDialog">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="15dp"
+                            android:textAlignment="center"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="sans-serif"
+                            android:text="Crianças"
+                            android:textColor="#000"
+                            android:textSize="14dp" />
+
+
+                        <TextView
+                            android:id="@+id/text_criancas"
+                            android:layout_width="match_parent"
+                            android:layout_height="25dp"
+                            android:text=""
+                            android:textAlignment="center"
+                            android:textColor="#000"
+                            android:textSize="18dp"
+                            />
+                    </LinearLayout>
+                </TableRow>
+
+            </LinearLayout>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="13dp"
+                android:layout_marginRight="15dp"
+                android:text="Pesquisar"
+                android:textColor="#fff"
+                android:background="@color/cor_azul"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="25dp" />
+        </LinearLayout>
+
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/borda_cima_baixo"
+                >
+
+                <TableRow
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    >
+
+                    <LinearLayout android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        >
+
+                        <ImageView
+                            android:src="@drawable/ic_wifi_black_36dp"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="5dp"
+
+                            />
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:text="Wi-fi"
+                            android:textAlignment="center"
+                            android:textColor="#000"
+                            android:textSize="14dp"/>
+
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    >
+
+                    <LinearLayout android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:src="@drawable/ic_spa_black_36dp"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="5dp"/>
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center"
+                            android:text="Spa"
+
+                            android:textColor="#000"
+                            android:textSize="14dp"/>
+
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    >
+
+                    <LinearLayout android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:src="@drawable/ic_restaurant_black_36dp"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="5dp"/>
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:text="Restaurante"
+                            android:textColor="#000"
+                            android:textAlignment="center"
+                            android:textSize="14dp"/>
+
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/imageView2"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="5dp"
+                            android:src="@drawable/ic_pets_black_36dp" />
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:text="Animais"
+                            android:textColor="#000"
+                            android:textAlignment="center"
+                            android:textSize="15dp" />
+
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    >
+
+                    <LinearLayout android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:src="@drawable/ic_local_florist_black_36dp"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="5dp"/>
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:text="Natureza"
+                            android:textAlignment="center"
+                            android:textColor="#000"
+                            android:textSize="15dp"/>
+
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    >
+
+                    <LinearLayout android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:src="@drawable/ic_games_black_36dp"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="5dp"/>
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:text="Lazer"
+                            android:textAlignment="center"
+                            android:textColor="#000"
+                            android:textSize="15dp"/>
+
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    >
+
+                    <LinearLayout android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:src="@drawable/ic_directions_car_black_36dp"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="5dp"/>
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:text="Garagem"
+                            android:textAlignment="center"
+                            android:textColor="#000"
+                            android:textSize="15dp"/>
+
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    >
+
+                    <LinearLayout android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+
+                        >
+
+                        <ImageView
+                            android:src="@drawable/ic_add_black_36dp"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="5dp"
+                            />
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:text="Todos"
+                            android:textAlignment="center"
+                            android:textColor="#000"
+                            android:textSize="15dp"/>
+
+                    </LinearLayout>
+                </TableRow>
+
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Melhores Avaliados"
+                android:textSize="18dp"
+                android:textColor="#000"
+                />
+            
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/ic_star_rate_black_18dp"/>
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/ic_star_rate_black_18dp"/>
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/ic_star_rate_black_18dp"/>
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/ic_star_rate_black_18dp"/>
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/ic_star_rate_black_18dp"/>
+        </LinearLayout>
+            <TextView
+                android:layout_marginTop="-13dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="__________________________________________________"
+                android:textColor="#000"
+                android:layout_marginBottom="15dp"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:background="@drawable/box_coisas">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:background="@drawable/img_redonda"
+                    android:onClick="selecionar_hotel">
+
+                    <ImageView
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginRight="1dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="95dp"
+                        android:background="@drawable/resort2"
+
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Hotel Casa Verde"
+                        android:textColor="#000"
+                        android:textSize="20dp"
+                        android:layout_marginLeft="2dp"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=" São Paulo, Brasil"
+                        android:textSize="15dp"
+                        android:layout_marginLeft="10dp"
+                        android:drawableLeft="@drawable/ic_location_on_black_18dp"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:textSize="13dp"
+                        android:text="Á partir de"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:textSize="18dp"
+                            android:text="R$ 229,00"
+                            android:textColor="#006400"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:textSize="14dp"
+                            android:text="Diária"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                 </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:background="@drawable/box_coisas">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:background="@drawable/img_redonda">
+
+                    <ImageView
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginRight="1dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="95dp"
+                        android:background="@drawable/resort1"
+
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Hotel Casa Verde"
+                        android:textColor="#000"
+                        android:textSize="20dp"
+                        android:layout_marginLeft="2dp"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=" São Paulo, Brasil"
+                        android:textSize="15dp"
+                        android:layout_marginLeft="10dp"
+                        android:drawableLeft="@drawable/ic_location_on_black_18dp"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:textSize="13dp"
+                        android:text="Á partir de"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:textSize="18dp"
+                            android:text="R$ 229,00"
+                            android:textColor="#006400"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:textSize="14dp"
+                            android:text="Diária"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:background="@drawable/box_coisas">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:background="@drawable/img_redonda">
+
+                    <ImageView
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginRight="1dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="95dp"
+                        android:background="@drawable/resort3"
+
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Hotel Casa Verde"
+                        android:textColor="#000"
+                        android:textSize="20dp"
+                        android:layout_marginLeft="2dp"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=" São Paulo, Brasil"
+                        android:textSize="15dp"
+                        android:layout_marginLeft="10dp"
+                        android:drawableLeft="@drawable/ic_location_on_black_18dp"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:textSize="13dp"
+                        android:text="Á partir de"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:textSize="18dp"
+                            android:text="R$ 229,00"
+                            android:textColor="#006400"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:textSize="14dp"
+                            android:text="Diária"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:background="@drawable/box_coisas">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:background="@drawable/img_redonda">
+
+                    <ImageView
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginRight="1dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="95dp"
+                        android:background="@drawable/resort4"
+
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Hotel Casa Verde"
+                        android:textColor="#000"
+                        android:textSize="20dp"
+                        android:layout_marginLeft="2dp"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=" São Paulo, Brasil"
+                        android:textSize="15dp"
+                        android:layout_marginLeft="10dp"
+                        android:drawableLeft="@drawable/ic_location_on_black_18dp"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:textSize="13dp"
+                        android:text="Á partir de"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:textSize="18dp"
+                            android:text="R$ 229,00"
+                            android:textColor="#006400"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:textSize="14dp"
+                            android:text="Diária"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:background="@drawable/box_coisas">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:background="@drawable/img_redonda">
+
+                    <ImageView
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginRight="1dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="95dp"
+                        android:background="@drawable/resort1"
+
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Hotel Casa Verde"
+                        android:textColor="#000"
+                        android:textSize="20dp"
+                        android:layout_marginLeft="2dp"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=" São Paulo, Brasil"
+                        android:textSize="15dp"
+                        android:layout_marginLeft="10dp"
+                        android:drawableLeft="@drawable/ic_location_on_black_18dp"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:textSize="13dp"
+                        android:text="Á partir de"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:textSize="18dp"
+                            android:text="R$ 229,00"
+                            android:textColor="#006400"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:textSize="14dp"
+                            android:text="Diária"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:background="@drawable/box_coisas">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:background="@drawable/img_redonda">
+
+                    <ImageView
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginRight="1dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="95dp"
+                        android:background="@drawable/resort3"
+
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Hotel Casa Verde"
+                        android:textColor="#000"
+                        android:textSize="20dp"
+                        android:layout_marginLeft="2dp"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=" São Paulo, Brasil"
+                        android:textSize="15dp"
+                        android:layout_marginLeft="10dp"
+                        android:drawableLeft="@drawable/ic_location_on_black_18dp"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:textSize="13dp"
+                        android:text="Á partir de"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:textSize="18dp"
+                            android:text="R$ 229,00"
+                            android:textColor="#006400"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:textSize="14dp"
+                            android:text="Diária"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

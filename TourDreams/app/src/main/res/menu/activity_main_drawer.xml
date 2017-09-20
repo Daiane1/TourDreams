@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_pginicial"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="Página inicial" />
+        <item
+            android:id="@+id/nav_meuperfil"
+            android:icon="@drawable/ic_account_circle_black_24dp"
+            android:title="Meu Perfil" />
+        <item
+            android:id="@+id/nav_promocoes"
+            android:icon="@drawable/ic_shopping_cart_black_24dp"
+            android:title="Promoções" />
+        <item
+            android:id="@+id/nav_mensagens"
+            android:icon="@drawable/ic_message_black_24dp"
+            android:title="Mensagens" />
+    </group>
+
+    <item android:title="Opções">
+        <menu>
+            <item
+                android:id="@+id/nav_buscar"
+                android:icon="@drawable/ic_search_black_24dp"
+                android:title="Buscar" />
+            <item
+                android:id="@+id/nav_logar"
+                android:icon="@drawable/ic_visibility_black_24dp"
+                android:title="Acessar TourDreams" />
+        </menu>
+    </item>
+
+</menu>

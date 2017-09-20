@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="8dp"
+        android:text="Selecione"
+        android:fontFamily="sans-serif"
+        android:textStyle="bold"
+        android:textColor="#000"
+        android:textSize="18dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="3dp"
+        android:text="Aqui pode ficar alguma coisa"
+        android:textColor="#000"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="45dp"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="0.7"
+            android:fontFamily="sans-serif"
+            android:text="Quartos"
+            android:textColor="#000"
+            android:textSize="22dp" />
+
+        <ImageView
+            android:id="@+id/remover_quartos_image"
+            android:layout_width="20dp"
+            android:layout_height="30dp"
+            android:layout_weight="0.1"
+            android:background="@drawable/fotinha_azul"
+            android:src="@drawable/ic_remove_white_36dp"
+
+            />
+
+        <TextView
+            android:id="@+id/text_quartos_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_weight="0.1"
+            android:foregroundGravity="right"
+            android:text="1"
+            android:textAlignment="center"
+            android:textSize="20dp" />
+
+        <ImageView
+            android:id="@+id/adcionar_quartos_image"
+            android:layout_width="20dp"
+            android:layout_height="30dp"
+            android:layout_weight="0.1"
+            android:background="@drawable/fotinha_azul_direita"
+            android:src="@drawable/ic_add_white_36dp"
+
+            />
+
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="-17dp"
+        android:text="_______________________________"
+        />
+
+    <LinearLayout
+        android:layout_marginTop="45dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dp"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_weight="0.7"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:text="Adultos"
+            android:fontFamily="sans-serif"
+            android:textSize="22dp"
+            android:textColor="#000"
+            />
+
+        <ImageView
+            android:layout_weight="0.1"
+            android:layout_width="20dp"
+            android:layout_height="30dp"
+            android:background="@drawable/fotinha_azul"
+            android:src="@drawable/ic_remove_white_36dp"
+            android:id="@+id/remover_adultos_image"/>
+        <TextView
+            android:layout_weight="0.1"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:text="1"
+            android:foregroundGravity="right"
+            android:id="@+id/text_adultos_dialog"
+
+            />
+
+        <ImageView
+            android:layout_weight="0.1"
+            android:layout_width="20dp"
+            android:layout_height="30dp"
+            android:background="@drawable/fotinha_azul_direita"
+            android:src="@drawable/ic_add_white_36dp"
+            android:id="@+id/adcionar_adultos_image"/>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="-17dp"
+        android:text="_______________________________" />
+
+    <LinearLayout
+        android:layout_marginTop="45dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dp"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_weight="0.7"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:text="Crianças"
+            android:fontFamily="sans-serif"
+            android:textSize="22dp"
+            android:textColor="#000"
+            />
+
+        <ImageView
+            android:layout_weight="0.1"
+            android:layout_width="20dp"
+            android:layout_height="30dp"
+            android:background="@drawable/fotinha_azul"
+            android:src="@drawable/ic_remove_white_36dp"
+            android:id="@+id/remover_criancas_image"/>
+        <TextView
+            android:layout_weight="0.1"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:text="1"
+            android:foregroundGravity="right"
+            android:id="@+id/text_criancas_dialog"
+            />
+
+        <ImageView
+            android:layout_weight="0.1"
+            android:layout_width="20dp"
+            android:layout_height="30dp"
+            android:background="@drawable/fotinha_azul_direita"
+            android:src="@drawable/ic_add_white_36dp"
+            android:id="@+id/adcionar_criancas_image"/>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="-17dp"
+        android:text="_______________________________"
+        />
+
+
+    <LinearLayout
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="15dp"
+            android:text="Aplicar"
+            android:background="#00000000"
+            android:fontFamily="sans-serif"
+            android:textStyle="bold"
+            android:id="@+id/aplicar_selecao"
+             />
+
+        <Button
+            android:layout_marginLeft="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="Cancelar"
+            android:background="#00000000"
+            android:fontFamily="sans-serif"
+            android:textStyle="bold"
+            android:id="@+id/desfazer_selecao"/>
+            <!-- android:onClick="fechar_dialog" -->
+
+
+    </LinearLayout>
+
+</LinearLayout>
