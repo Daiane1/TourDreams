@@ -4,60 +4,84 @@
     android:layout_height="match_parent">
 
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="15dp"
-        android:weightSum="1">
+        android:orientation="vertical"
+        android:layout_marginTop="10dp">
 
-        <ImageView
-            android:id="@+id/img_comentario"
-            android:layout_width="80dp"
-            android:layout_height="80dp" />
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textSize="15dp"
+            android:id="@+id/txt_comentario"
+            android:textColor="#181818"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="horizontal"
+            android:layout_margin="10dp"
+            android:weightSum="1">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:id="@+id/nome_comentario"
-                android:textColor="#000"
+            <ImageView
+                android:id="@+id/img_comentario"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/bolinha"
                 />
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="1">
+                android:orientation="vertical"
+                android:layout_weight="0.8">
 
                 <TextView
-                    android:layout_weight="0.7"
-                    android:layout_width="0dp"
+                    android:id="@+id/nome_comentario"
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:id="@+id/txt_comentario"
+                    android:textStyle="bold"
+                    android:textColor="#404040"
+
                     />
 
                 <TextView
-                    android:layout_weight="0.3"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="#000"
-                    android:id="@+id/data_comentario"
+                    android:text="  Estados Unidos"
+                    android:drawableLeft="@drawable/us_18"
+                    android:layout_marginLeft="10dp"
+
                     />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginLeft="1dp"
+                android:layout_weight="0.2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="@drawable/fotinha_azul_escura"
+                    android:text="4,5"
+                    android:textSize="24dp"
+                    android:paddingTop="8dp"
+                    android:textColor="#fff"
+                    android:textAlignment="center"/>
+
 
             </LinearLayout>
 
-
-
-
         </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>

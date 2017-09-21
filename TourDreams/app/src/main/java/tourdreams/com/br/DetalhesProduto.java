@@ -58,7 +58,15 @@ public class DetalhesProduto extends AppCompatActivity {
 
 
         list_view_comentarios = (ListView)findViewById(R.id.list_view_comentarios);
-        list_comentarios.add(new Comentarios(R.drawable.fotinha_azul, "Nicolas Guarino Santana", "24/07/2000", "ahdiawjdijawdjawd"));
+        list_comentarios.add(new Comentarios(R.drawable.plus, "Nicolas Guarino Santana"
+                , "24/07/2000"
+                , "'Ótimo hotel, um atendimento muito bem qualificado recomendo ele a todos que me perguntarem," +
+                " sensacional o nivel do hotel, Obrigado TourDreams por mais um hotel belo'"));
+
+        list_comentarios.add(new Comentarios(R.drawable.ic_directions_car_black_36dp, "Matheus Silva"
+                , "12/03/2017"
+                , "'Ótimo hotel, um atendimento muito bem qualificado recomendo ele a todos que me perguntarem," +
+                " sensacional o nivel do hotel, Obrigado TourDreams por mais um hotel belo'"));
 
         ComentariosAdapter comentariosAdapter = new ComentariosAdapter(
                 this,R.layout.list_item_comentarios, list_comentarios

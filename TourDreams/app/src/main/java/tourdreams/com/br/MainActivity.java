@@ -131,6 +131,16 @@ public class MainActivity extends AppCompatActivity
         startActivity(intent);
     }
 
+    public void pagina_inicial(MenuItem item) {
+        Intent intent = new Intent (this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    public void pesquisar_produto(MenuItem item) {
+        Intent intent = new Intent(this, PesquisarProduto.class);
+        startActivity(intent);
+    }
+
 
     public static class DatePickerFragment extends DialogFragment
                 implements DatePickerDialog.OnDateSetListener

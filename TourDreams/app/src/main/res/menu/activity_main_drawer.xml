@@ -5,7 +5,8 @@
         <item
             android:id="@+id/nav_pginicial"
             android:icon="@drawable/ic_home_black_24dp"
-            android:title="Página inicial" />
+            android:title="Página inicial"
+            android:onClick="pagina_inicial"/>
         <item
             android:id="@+id/nav_meuperfil"
             android:icon="@drawable/ic_account_circle_black_24dp"
@@ -25,7 +26,8 @@
             <item
                 android:id="@+id/nav_buscar"
                 android:icon="@drawable/ic_search_black_24dp"
-                android:title="Buscar" />
+                android:title="Buscar"
+                android:onClick="pesquisar_produto"/>
             <item
                 android:id="@+id/nav_logar"
                 android:icon="@drawable/ic_visibility_black_24dp"

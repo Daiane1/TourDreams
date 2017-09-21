@@ -39,16 +39,16 @@ public class ComentariosAdapter extends ArrayAdapter<Comentarios> {
 
         if (item != null) {
             ImageView img_comentario = (ImageView) v.findViewById(R.id.img_comentario);
-            TextView txt_comentario = (TextView) v.findViewById(R.id.nome_comentario);
+            TextView txt_comentario = (TextView) v.findViewById(R.id.txt_comentario);
             TextView nome_comentario = (TextView) v.findViewById(R.id.nome_comentario);
-            TextView data_comentario = (TextView) v.findViewById(R.id.data_comentario);
+            //TextView data_comentario = (TextView) v.findViewById(R.id.data_comentario);
 
 
 
             img_comentario.setImageResource(item.getImagem());
             txt_comentario.setText(item.getComentario());
             nome_comentario.setText(item.getNome());
-            data_comentario.setText(item.getData());
+            //data_comentario.setText(item.getData());
         }
 
         return v;
