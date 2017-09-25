@@ -21,13 +21,16 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -37,6 +40,8 @@ public class MainActivity extends AppCompatActivity
     int contagem = 1;
     ImageView adcionar_quartos_image;
     public static TextView text_quartos, text_adultos, text_criancas;
+    ListView list_view_produto;
+    List<ProdutosHome> list_produto = new ArrayList<>();
 
 
     @Override
@@ -64,6 +69,24 @@ public class MainActivity extends AppCompatActivity
         text_quartos = (TextView) findViewById(R.id.text_quartos);
         text_criancas = (TextView) findViewById(R.id.text_criancas);
 
+        list_view_produto = (ListView) findViewById(R.id.list_view_produto);
+        list_produto.add(new ProdutosHome(R.drawable.resort2, "Hotel casa verde", "São Paulo, Brasil", "R$ 339,99" , "Hotel bacana tem varias coisas legal pra caramba" +
+                "faz varias coisas diferentes tem lugares legais, portaria bem legal, hotelzao demais comparado com os demais #TourDreams."));
+
+        list_produto.add(new ProdutosHome(R.drawable.resort1, "Hotel Maradonna", "São Paulo, Brasil", "R$ 339,99" , "Hotel bacana tem varias coisas legal pra caramba" +
+                "faz varias coisas diferentes tem lugares legais, portaria bem legal, hotelzao demais comparado com os demais #TourDreams."));
+
+        list_produto.add(new ProdutosHome(R.drawable.resort3, "Hotel casa da Joana", "São Paulo, Brasil", "R$ 339,99" , "Hotel bacana tem varias coisas legal pra caramba" +
+                "faz varias coisas diferentes tem lugares legais, portaria bem legal, hotelzao demais comparado com os demais #TourDreams."));
+
+        ProdutosHomeAdapter produtosHomeAdapter = new ProdutosHomeAdapter(this, R.layout.list_item_produto, list_produto);
+        list_view_produto.setAdapter(produtosHomeAdapter);
+        list_view_produto.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                startActivity(new Intent(MainActivity.this, DetalhesProduto.class));
+            }
+        });
 
 
 
@@ -140,6 +163,13 @@ public class MainActivity extends AppCompatActivity
         Intent intent = new Intent(this, PesquisarProduto.class);
         startActivity(intent);
     }
+
+    public void login(MenuItem item) {
+        Intent intent = new Intent(this, Login.class);
+        startActivity(intent);
+    }
+
+
 
 
     public static class DatePickerFragment extends DialogFragment

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="tourdreams.com.br.MainActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="15dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Bem-Vindo(a) à"
+        android:textSize="16dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TourDreams"
+        android:textSize="20dp"
+        android:fontFamily="sans-serif"
+        android:textColor="@color/colorPrimary"/>
+
+
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:background="@drawable/logo_tourdreams"
+        />
+
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="CPF"
+            android:id="@+id/edit_cpf"
+            android:inputType="number"
+            />
+
+    </android.support.design.widget.TextInputLayout>
+
+
+
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:id="@+id/edit_senha"
+            android:hint="Senha"
+            />
+
+    </android.support.design.widget.TextInputLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:text="      Entrar"
+            android:background="@color/colorPrimary"
+            android:gravity="center_vertical"
+            android:paddingLeft="15dp"
+            android:drawableLeft="@drawable/ic_input_white_24dp"
+            android:textColor="#FFF"
+            android:layout_marginTop="10dp"
+            android:id="@+id/btn_logar"
+            />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <Button
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:text="      Cadastrar"
+                    android:background="@color/colorPrimary"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="15dp"
+                    android:layout_marginLeft="50dp"
+                    android:drawableLeft="@drawable/ic_mode_edit_white_24dp"
+                    android:textColor="#FFF"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/btn_cadastrar"
+                    />
+            </LinearLayout>
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Esqueci minha senha"
+        android:gravity="left"
+        android:paddingLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:textSize="14sp"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/esqueci_senha"
+        />
+
+</LinearLayout>
