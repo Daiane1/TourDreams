@@ -39,8 +39,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="CPF"
-            android:id="@+id/edit_cpf"
-            android:inputType="number"
+            android:id="@+id/edit_email"
+            android:inputType="text"
             />
 
     </android.support.design.widget.TextInputLayout>
@@ -100,7 +100,7 @@
                     android:drawableLeft="@drawable/ic_mode_edit_white_24dp"
                     android:textColor="#FFF"
                     android:layout_marginTop="10dp"
-                    android:id="@+id/btn_cadastrar"
+                        android:id="@+id/btn_cadastrar"
                     />
             </LinearLayout>
     </LinearLayout>
