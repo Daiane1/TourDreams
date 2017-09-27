@@ -2,6 +2,7 @@ package tourdreams.com.br;
 
 import android.content.Intent;
 import android.preference.Preference;
+import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -33,6 +34,9 @@ public class Login extends AppCompatActivity {
 
     String url = "";
     String parametros = "";
+    TextView nome_cliente_nav, email_cliente_nav;
+    String id_cliente,milhas, nome_cliente, email_cliente, rg_cliente,cpf_cliente,senha_cliente,celular_cliente,foto_cliente;
+
 
     SharedPreferences preferences;
 
@@ -48,7 +52,13 @@ public class Login extends AppCompatActivity {
 
         getAplication();
 
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+
+
     }
+
+
 
 
     private void getAplication() {
@@ -142,6 +152,17 @@ public class Login extends AppCompatActivity {
                 preferences.edit().putString("celular_cliente", dados[8]);
                 preferences.edit().putString("foto_cliente", dados[9]);
 
+                NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+                View nav = navigationView.getHeaderView(0);
+
+                nome_cliente_nav = (TextView) nav.findViewById(R.id.nome_cliente);
+                email_cliente_nav = (TextView) nav.findViewById(R.id.email_cliente);
+
+                nome_cliente = preferences.getString("nome_cliente", "");
+                email_cliente = preferences.getString("email_cliente", "");
+
+                email_cliente_nav.setText(nome_cliente);
+                nome_cliente_nav.setText(email_cliente);
                 startActivity(abreInicio);
 
             }else{

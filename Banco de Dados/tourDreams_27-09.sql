@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.9, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.12, for Win32 (AMD64)
 --
 -- Host: localhost    Database: db_tourdreams
 -- ------------------------------------------------------
--- Server version	5.6.10-log
+-- Server version	5.7.17-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -57,10 +57,11 @@ CREATE TABLE `tbl_administradores` (
   `estado_nascimento` varchar(80) NOT NULL,
   `dt_nasc` date NOT NULL,
   `foto` varchar(200) NOT NULL DEFAULT '',
+  `senha` varchar(45) NOT NULL,
   PRIMARY KEY (`id_administrador`),
   KEY `id_adms_nivelUsuario_idx` (`id_nivel_usuario`),
   CONSTRAINT `id_adms_nivelUsuario` FOREIGN KEY (`id_nivel_usuario`) REFERENCES `tbl_nivel_usuario` (`id_nivel_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,6 +70,7 @@ CREATE TABLE `tbl_administradores` (
 
 LOCK TABLES `tbl_administradores` WRITE;
 /*!40000 ALTER TABLE `tbl_administradores` DISABLE KEYS */;
+INSERT INTO `tbl_administradores` VALUES (1,1,'João Almeida Sampaio','joao123@tourdreams.com.br','Barueri','São Paulo','1985-05-20','2b6de542bdf7094cc107d124040bf562.jpg','123456');
 /*!40000 ALTER TABLE `tbl_administradores` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -256,10 +258,10 @@ CREATE TABLE `tbl_cliente` (
   `email_cliente` varchar(120) NOT NULL,
   `senha_cliente` varchar(45) NOT NULL,
   `celular_cliente` varchar(20) NOT NULL,
-  `foto_cliente` varchar(200) NOT NULL,
+  `foto_cliente` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id_cliente`),
   UNIQUE KEY `cpf_cliente_UNIQUE` (`cpf_cliente`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -268,6 +270,7 @@ CREATE TABLE `tbl_cliente` (
 
 LOCK TABLES `tbl_cliente` WRITE;
 /*!40000 ALTER TABLE `tbl_cliente` DISABLE KEYS */;
+INSERT INTO `tbl_cliente` VALUES (1,500,'Valdeci Campos','39.779.185-9','465.953.468-50','valdeci@tourdreams.com','123456','(11) 97098-7525',NULL);
 /*!40000 ALTER TABLE `tbl_cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -340,7 +343,7 @@ CREATE TABLE `tbl_fale_conosco` (
   `celular` varchar(20) NOT NULL,
   `observacao` text NOT NULL,
   PRIMARY KEY (`id_fale_conosco`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -349,6 +352,7 @@ CREATE TABLE `tbl_fale_conosco` (
 
 LOCK TABLES `tbl_fale_conosco` WRITE;
 /*!40000 ALTER TABLE `tbl_fale_conosco` DISABLE KEYS */;
+INSERT INTO `tbl_fale_conosco` VALUES (8,'Gustavo Rodrigues Silva','gust127_silva@gmail.com','(11) 96658-2212','Melhor portal de viagens no Brasil!!!');
 /*!40000 ALTER TABLE `tbl_fale_conosco` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -415,9 +419,10 @@ DROP TABLE IF EXISTS `tbl_milhas`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tbl_milhas` (
   `id_milhas` int(11) NOT NULL AUTO_INCREMENT,
+  `tipo_milhas` varchar(70) NOT NULL,
   `qtd_milhas` int(11) NOT NULL,
   PRIMARY KEY (`id_milhas`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -426,6 +431,7 @@ CREATE TABLE `tbl_milhas` (
 
 LOCK TABLES `tbl_milhas` WRITE;
 /*!40000 ALTER TABLE `tbl_milhas` DISABLE KEYS */;
+INSERT INTO `tbl_milhas` VALUES (1,'Reserva',30),(2,'Comentário',20),(3,'Avaliação',100);
 /*!40000 ALTER TABLE `tbl_milhas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -440,7 +446,7 @@ CREATE TABLE `tbl_nivel_usuario` (
   `id_nivel_usuario` int(11) NOT NULL AUTO_INCREMENT,
   `nome_nivel` varchar(45) NOT NULL,
   PRIMARY KEY (`id_nivel_usuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -449,6 +455,7 @@ CREATE TABLE `tbl_nivel_usuario` (
 
 LOCK TABLES `tbl_nivel_usuario` WRITE;
 /*!40000 ALTER TABLE `tbl_nivel_usuario` DISABLE KEYS */;
+INSERT INTO `tbl_nivel_usuario` VALUES (1,'Administrador'),(2,'Marketing');
 /*!40000 ALTER TABLE `tbl_nivel_usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -572,8 +579,8 @@ CREATE TABLE `tbl_promocoes` (
   PRIMARY KEY (`id_promocoes`),
   KEY `id_promocao_produto_idx` (`id_produto`),
   KEY `id_promocao_brinde_idx` (`id_brinde`),
-  CONSTRAINT `id_promocao_produto` FOREIGN KEY (`id_produto`) REFERENCES `tbl_produto` (`id_produto`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `id_promocao_brinde` FOREIGN KEY (`id_brinde`) REFERENCES `tbl_brindes` (`id_brinde`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `id_promocao_brinde` FOREIGN KEY (`id_brinde`) REFERENCES `tbl_brindes` (`id_brinde`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `id_promocao_produto` FOREIGN KEY (`id_produto`) REFERENCES `tbl_produto` (`id_produto`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -679,10 +686,10 @@ CREATE TABLE `tbl_reserva` (
   KEY `id_qtd_reserva_adulto_idx` (`id_adulto`),
   KEY `id_qtd_reserva_crianca_idx` (`id_crianca`),
   CONSTRAINT `id_cliente_reserva` FOREIGN KEY (`id_cliente`) REFERENCES `tbl_cliente` (`id_cliente`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `id_reserva_produto` FOREIGN KEY (`id_produto`) REFERENCES `tbl_produto` (`id_produto`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `id_qtd_reserva_quarto` FOREIGN KEY (`id_quarto`) REFERENCES `tbl_qtdquartos` (`id_quarto`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `id_qtd_reserva_adulto` FOREIGN KEY (`id_adulto`) REFERENCES `tbl_qtdadultos` (`id_adulto`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `id_qtd_reserva_crianca` FOREIGN KEY (`id_crianca`) REFERENCES `tbl_qtdcriancas` (`id_crianca`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `id_qtd_reserva_crianca` FOREIGN KEY (`id_crianca`) REFERENCES `tbl_qtdcriancas` (`id_crianca`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `id_qtd_reserva_quarto` FOREIGN KEY (`id_quarto`) REFERENCES `tbl_qtdquartos` (`id_quarto`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `id_reserva_produto` FOREIGN KEY (`id_produto`) REFERENCES `tbl_produto` (`id_produto`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -707,7 +714,7 @@ CREATE TABLE `tbl_sobre` (
   `descricao` text NOT NULL,
   `foto_descricao` varchar(200) NOT NULL,
   PRIMARY KEY (`id_sobre`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -716,6 +723,7 @@ CREATE TABLE `tbl_sobre` (
 
 LOCK TABLES `tbl_sobre` WRITE;
 /*!40000 ALTER TABLE `tbl_sobre` DISABLE KEYS */;
+INSERT INTO `tbl_sobre` VALUES (2,'A TourDreams é maneira!','ba250e28b0a6ffb322bd8deda7ee3e55.png');
 /*!40000 ALTER TABLE `tbl_sobre` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -774,4 +782,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-21 16:31:35
+-- Dump completed on 2017-09-27 11:12:23

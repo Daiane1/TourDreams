@@ -4,7 +4,9 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.view.View;
@@ -43,6 +45,12 @@ public class MainActivity extends AppCompatActivity
     ListView list_view_produto;
     List<ProdutosHome> list_produto = new ArrayList<>();
 
+    TextView nome_cliente_nav, email_cliente_nav;
+
+    String id_cliente,milhas, nome_cliente, email_cliente, rg_cliente,cpf_cliente,senha_cliente,celular_cliente,foto_cliente;
+
+    SharedPreferences preferences;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,8 +66,10 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        View nav = navigationView.getHeaderView(0);
 
         text_checkin = (TextView) findViewById(R.id.text_checkin);
         text_checkout = (TextView) findViewById(R.id.text_checkout);
@@ -68,6 +78,8 @@ public class MainActivity extends AppCompatActivity
         text_adultos = (TextView) findViewById(R.id.text_adultos);
         text_quartos = (TextView) findViewById(R.id.text_quartos);
         text_criancas = (TextView) findViewById(R.id.text_criancas);
+
+
 
         list_view_produto = (ListView) findViewById(R.id.list_view_produto);
         list_produto.add(new ProdutosHome(R.drawable.resort2, "Hotel casa verde", "São Paulo, Brasil", "R$ 339,99" , "Hotel bacana tem varias coisas legal pra caramba" +
@@ -89,8 +101,24 @@ public class MainActivity extends AppCompatActivity
         });
 
 
+        nome_cliente_nav = (TextView) nav.findViewById(R.id.nome_cliente);
+        email_cliente_nav = (TextView) nav.findViewById(R.id.email_cliente);
+
+        email_cliente_nav.setText("O melhor portal de viagens");
+        nome_cliente_nav.setText("TourDreams");
 
     }
+
+
+
+
+
+
+
+
+
+
+
 
     @Override
     public void onBackPressed() {

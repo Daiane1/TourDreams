@@ -12,8 +12,8 @@
 
 	include_once 'conexao.php';
 
-	$email=$_GET['email'];
-	$senha=$_GET['senha'];
+	$email=$_POST['email'];
+	$senha=$_POST['senha'];
 
 	$sql = $dbcon->query("select * from tbl_cliente WHERE email_cliente ='$email' and senha_cliente='$senha';");
 
@@ -23,7 +23,7 @@
 		echo",";
 		while($dados = $sql->fetch_array()){
 
-			if($dados['foto_cliente'] == null){
+			
 				echo utf8_encode ($dados['id_cliente']);
 				echo",";
 				echo utf8_encode ($dados['milhas']);
@@ -41,39 +41,9 @@
 				echo utf8_encode ($dados['celular_cliente']);
 				echo",";
 				echo utf8_encode ($dados['foto_cliente']);
-				echo "http://www.leadsndeals.com/images/bill.png";
-			}else{
-
-        echo utf8_encode ($dados['id_cliente']);
-				echo",";
-				echo utf8_encode ($dados['milhas']);
-				echo",";
-				echo utf8_encode ($dados['nome_cliente']);
-				echo",";
-				echo utf8_encode ($dados['rg_cliente']);
-				echo",";
-				echo utf8_encode ($dados['cpf_cliente']);
-				echo",";
-				echo utf8_encode ($dados['email_cliente']);
-				echo",";
-				echo utf8_encode ($dados['senha_cliente']);
-				echo",";
-				echo utf8_encode ($dados['celular_cliente']);
-				echo",";
-				echo utf8_encode ($dados['foto_cliente']);
-				echo",";
-				echo $dados['foto'];
-			}
-
-
-
 		}
-
-
 	}else{
-
 		echo"login_erro";
-
 	}
 
 

@@ -1,5 +1,5 @@
 <?php
-	$host = "10.107.134.11";
+	$host = "localhost";
 	$usuario = "root";
 	$senha = "bcd127";
 	$banco = "db_tourdreams";
