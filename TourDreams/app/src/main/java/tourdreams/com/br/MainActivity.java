@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity
 
     static TextView text_checkin;
     static TextView text_checkout;
+    Boolean usuariologado = false;
     int contagem = 1;
     ImageView adcionar_quartos_image;
     public static TextView text_quartos, text_adultos, text_criancas;
@@ -104,21 +105,26 @@ public class MainActivity extends AppCompatActivity
         nome_cliente_nav = (TextView) nav.findViewById(R.id.nome_cliente);
         email_cliente_nav = (TextView) nav.findViewById(R.id.email_cliente);
 
-        email_cliente_nav.setText("O melhor portal de viagens");
-        nome_cliente_nav.setText("TourDreams");
+        nome_cliente = preferences.getString("nome_cliente", "");
+        email_cliente = preferences.getString("email_cliente", "");
 
+        if (nome_cliente.isEmpty() && email_cliente.isEmpty()){
+            email_cliente_nav.setText("O melhor portal de viagens");
+            nome_cliente_nav.setText("TourDreams");
+
+
+
+        }else {
+            email_cliente_nav.setText(email_cliente);
+            nome_cliente_nav.setText(nome_cliente);
+
+            usuariologado = true;
+
+            MenuItem n =(MenuItem) navigationView.getMenu().findItem(R.id.nav_logar);
+            n.setTitle("Sair");
+            n.setIcon(R.drawable.ic_sair);
+        }
     }
-
-
-
-
-
-
-
-
-
-
-
 
     @Override
     public void onBackPressed() {
@@ -130,12 +136,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
+
 
 
 
@@ -192,9 +193,29 @@ public class MainActivity extends AppCompatActivity
         startActivity(intent);
     }
 
+
     public void login(MenuItem item) {
-        Intent intent = new Intent(this, Login.class);
-        startActivity(intent);
+
+        if(usuariologado){
+
+            preferences.edit().putString("id_cliente", "").commit();
+            preferences.edit().putString("milhas", "").commit();
+            preferences.edit().putString("nome_cliente", "").commit();
+            preferences.edit().putString("rg_cliente", "").commit();
+            preferences.edit().putString("cpf_cliente", "").commit();
+            preferences.edit().putString("email_cliente", "").commit();
+            preferences.edit().putString("senha_cliente", "").commit();
+            preferences.edit().putString("celular_cliente", "").commit();
+            preferences.edit().putString("foto_cliente", "").commit();
+
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }else {
+            Intent intent = new Intent(this, Login.class);
+            startActivity(intent);
+
+        }
+
     }
 
 

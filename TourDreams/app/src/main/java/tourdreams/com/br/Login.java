@@ -142,27 +142,17 @@ public class Login extends AppCompatActivity {
 
                 Intent abreInicio = new Intent(context, MainActivity.class);
 
-                preferences.edit().putString("id_cliente", dados[1]);
-                preferences.edit().putString("milhas", dados[2]);
-                preferences.edit().putString("nome_cliente", dados[3]);
-                preferences.edit().putString("rg_cliente", dados[4]);
-                preferences.edit().putString("cpf_cliente", dados[5]);
-                preferences.edit().putString("email_cliente", dados[6]);
-                preferences.edit().putString("senha_cliente", dados[7]);
-                preferences.edit().putString("celular_cliente", dados[8]);
-                preferences.edit().putString("foto_cliente", dados[9]);
+                preferences.edit().putString("id_cliente", dados[1]).commit();
+                preferences.edit().putString("milhas", dados[2]).commit();
+                preferences.edit().putString("nome_cliente", dados[3]).commit();
+                preferences.edit().putString("rg_cliente", dados[4]).commit();
+                preferences.edit().putString("cpf_cliente", dados[5]).commit();
+                preferences.edit().putString("email_cliente", dados[6]).commit();
+                preferences.edit().putString("senha_cliente", dados[7]).commit();
+                preferences.edit().putString("celular_cliente", dados[8]).commit();
+                preferences.edit().putString("foto_cliente", dados[9]).commit();
 
-                NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-                View nav = navigationView.getHeaderView(0);
 
-                nome_cliente_nav = (TextView) nav.findViewById(R.id.nome_cliente);
-                email_cliente_nav = (TextView) nav.findViewById(R.id.email_cliente);
-
-                nome_cliente = preferences.getString("nome_cliente", "");
-                email_cliente = preferences.getString("email_cliente", "");
-
-                email_cliente_nav.setText(nome_cliente);
-                nome_cliente_nav.setText(email_cliente);
                 startActivity(abreInicio);
 
             }else{
