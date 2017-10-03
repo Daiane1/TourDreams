@@ -22,7 +22,15 @@
 		echo"login_ok";
 		echo",";
 		while($dados = $sql->fetch_array()){
-
+				$dt_nasc = $dados['dt_nasc'];
+				$dt_nasc_sem_hora = substr($dt_nasc, 0,10);
+				$dt_nasc_volta = explode("-", $dt_nasc_sem_hora );
+				$dia = $dt_nasc_volta[2]; //Posição do DIA que o usuario digitou
+				$mes = $dt_nasc_volta[1];	//Posição do MES que o usuario digitou
+				$ano = $dt_nasc_volta[0];	//Posição do ANO que o usuario digitou
+				
+				// pega o DIA MES e ANO para o padrão do banco de dados
+				$dt_nasc_volta = $dia."/".$mes."/".$ano;
 			
 				echo utf8_encode ($dados['id_cliente']);
 				echo",";
@@ -41,6 +49,9 @@
 				echo utf8_encode ($dados['celular_cliente']);
 				echo",";
 				echo utf8_encode ($dados['foto_cliente']);
+				echo",";
+				echo utf8_encode ($dt_nasc_volta);
+				
 		}
 	}else{
 		echo"login_erro";

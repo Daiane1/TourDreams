@@ -10,7 +10,8 @@
         <item
             android:id="@+id/nav_meuperfil"
             android:icon="@drawable/ic_account_circle_black_24dp"
-            android:title="Meu Perfil" />
+            android:title="Meu Perfil"
+            android:onClick="meu_perfil"/>
         <item
             android:id="@+id/nav_promocoes"
             android:icon="@drawable/ic_shopping_cart_black_24dp"

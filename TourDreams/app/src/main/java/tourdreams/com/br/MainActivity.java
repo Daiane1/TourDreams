@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -112,6 +113,12 @@ public class MainActivity extends AppCompatActivity
             email_cliente_nav.setText("O melhor portal de viagens");
             nome_cliente_nav.setText("TourDreams");
 
+            MenuItem menu_perfil = (MenuItem) navigationView.getMenu().findItem(R.id.nav_meuperfil);
+            menu_perfil.setVisible(false);
+
+            MenuItem menu_mensagens = (MenuItem) navigationView.getMenu().findItem(R.id.nav_mensagens);
+            menu_mensagens.setVisible(false);
+
 
 
         }else {
@@ -123,6 +130,7 @@ public class MainActivity extends AppCompatActivity
             MenuItem n =(MenuItem) navigationView.getMenu().findItem(R.id.nav_logar);
             n.setTitle("Sair");
             n.setIcon(R.drawable.ic_sair);
+
         }
     }
 
@@ -198,19 +206,14 @@ public class MainActivity extends AppCompatActivity
 
         if(usuariologado){
 
-            preferences.edit().putString("id_cliente", "").commit();
-            preferences.edit().putString("milhas", "").commit();
-            preferences.edit().putString("nome_cliente", "").commit();
-            preferences.edit().putString("rg_cliente", "").commit();
-            preferences.edit().putString("cpf_cliente", "").commit();
-            preferences.edit().putString("email_cliente", "").commit();
-            preferences.edit().putString("senha_cliente", "").commit();
-            preferences.edit().putString("celular_cliente", "").commit();
-            preferences.edit().putString("foto_cliente", "").commit();
+
+
 
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }else {
+
+
             Intent intent = new Intent(this, Login.class);
             startActivity(intent);
 
@@ -218,7 +221,15 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    public void meu_perfil(MenuItem item) {
 
+
+
+
+            Intent intent = new Intent(this, MeuPerfil.class);
+            startActivity(intent);
+
+    }
 
 
     public static class DatePickerFragment extends DialogFragment

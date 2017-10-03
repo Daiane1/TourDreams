@@ -151,6 +151,7 @@ public class Login extends AppCompatActivity {
                 preferences.edit().putString("senha_cliente", dados[7]).commit();
                 preferences.edit().putString("celular_cliente", dados[8]).commit();
                 preferences.edit().putString("foto_cliente", dados[9]).commit();
+                preferences.edit().putString("dt_nasc", dados[10]).commit();
 
 
                 startActivity(abreInicio);

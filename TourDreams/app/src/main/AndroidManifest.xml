@@ -41,7 +41,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="tourdreams.com.br.MainActivity" />
         </activity>
-        <activity android:name=".Login"></activity>
+        <activity android:name=".Login" />
+        <activity
+            android:name=".MeuPerfil"
+            android:label="@string/title_activity_meu_perfil"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="tourdreams.com.br.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
