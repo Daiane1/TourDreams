@@ -119,8 +119,6 @@ public class MainActivity extends AppCompatActivity
             MenuItem menu_mensagens = (MenuItem) navigationView.getMenu().findItem(R.id.nav_mensagens);
             menu_mensagens.setVisible(false);
 
-
-
         }else {
             email_cliente_nav.setText(email_cliente);
             nome_cliente_nav.setText(nome_cliente);
@@ -203,32 +201,23 @@ public class MainActivity extends AppCompatActivity
 
 
     public void login(MenuItem item) {
-
         if(usuariologado){
 
-
-
+            preferences.edit().putString("nome_cliente", "").commit();
+            preferences.edit().putString("email_cliente", "").commit();
 
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }else {
 
-
             Intent intent = new Intent(this, Login.class);
             startActivity(intent);
-
         }
-
     }
 
     public void meu_perfil(MenuItem item) {
-
-
-
-
             Intent intent = new Intent(this, MeuPerfil.class);
             startActivity(intent);
-
     }
 
 
