@@ -1,5 +1,6 @@
 package tourdreams.com.br;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -8,6 +9,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -18,6 +20,8 @@ public class MeuPerfil extends AppCompatActivity {
 
     String id_cliente,milhas, nome_cliente, email_cliente, rg_cliente,cpf_cliente,senha_cliente,celular_cliente,foto_cliente, dt_nasc;
     SharedPreferences preferences;
+
+    Button btn_acessar_reservas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +54,8 @@ public class MeuPerfil extends AppCompatActivity {
         email_cliente_header = (TextView) findViewById(R.id.email_cliente_header);
         txt_milhas = (TextView) findViewById(R.id.txt_milhas);
 
+        btn_acessar_reservas = (Button) findViewById(R.id.btn_acessar_reservas);
+
 
 
         nome_cliente_header.setText(nome_cliente);
@@ -60,7 +66,14 @@ public class MeuPerfil extends AppCompatActivity {
         edit_email_cliente.setText(email_cliente);
         edit_dt_nasc_cliente.setText(dt_nasc);
 
+        btn_acessar_reservas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MeuPerfil.this, MinhasReservas.class);
+                startActivity(intent);
+            }
 
+            });
 
 
 

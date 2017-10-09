@@ -11,7 +11,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DetalhesProduto extends AppCompatActivity {
+public class    DetalhesProduto extends AppCompatActivity {
 
     ListView list_view_caracteristicas1, list_view_caracteristicas2, list_view_comentarios;
     List<Caracteristicas> list_caracteristicas = new ArrayList<>();

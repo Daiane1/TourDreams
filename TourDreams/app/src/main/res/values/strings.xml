@@ -30,7 +30,8 @@
     <string name="title_activity_pesquisar_produto">Buscar</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="link">http://10.107.134.30/tour_dreams/</string>
+    <string name="link">http://192.168.56.1/tour_dreams/</string>
     <string name="title_activity_meu_perfil">Meu Perfil</string>
     <string name="title_activity_minhas_reservas">MinhasReservas</string>
+    <string name="title_activity_mensagens">Mensagens</string>
 </resources>

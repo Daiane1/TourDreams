@@ -2,9 +2,13 @@ package tourdreams.com.br;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
@@ -30,13 +34,21 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+
+    Context context;
+    String parametros, url = "";
 
     static TextView text_checkin;
     static TextView text_checkout;
@@ -46,9 +58,12 @@ public class MainActivity extends AppCompatActivity
     public static TextView text_quartos, text_adultos, text_criancas;
     ListView list_view_produto;
     List<ProdutosHome> list_produto = new ArrayList<>();
+    ArrayAdapter<ProdutosHome> adapter;
+
+    String id_produto;
 
     TextView nome_cliente_nav, email_cliente_nav;
-
+    ImageView img_cliente_nav;
     String id_cliente,milhas, nome_cliente, email_cliente, rg_cliente,cpf_cliente,senha_cliente,celular_cliente,foto_cliente;
 
     SharedPreferences preferences;
@@ -68,6 +83,8 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
+        context = this;
+
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -83,21 +100,19 @@ public class MainActivity extends AppCompatActivity
 
 
 
+
+
+
         list_view_produto = (ListView) findViewById(R.id.list_view_produto);
-        list_produto.add(new ProdutosHome(R.drawable.resort2, "Hotel casa verde", "São Paulo, Brasil", "R$ 339,99" , "Hotel bacana tem varias coisas legal pra caramba" +
-                "faz varias coisas diferentes tem lugares legais, portaria bem legal, hotelzao demais comparado com os demais #TourDreams."));
 
-        list_produto.add(new ProdutosHome(R.drawable.resort1, "Hotel Maradonna", "São Paulo, Brasil", "R$ 339,99" , "Hotel bacana tem varias coisas legal pra caramba" +
-                "faz varias coisas diferentes tem lugares legais, portaria bem legal, hotelzao demais comparado com os demais #TourDreams."));
-
-        list_produto.add(new ProdutosHome(R.drawable.resort3, "Hotel casa da Joana", "São Paulo, Brasil", "R$ 339,99" , "Hotel bacana tem varias coisas legal pra caramba" +
-                "faz varias coisas diferentes tem lugares legais, portaria bem legal, hotelzao demais comparado com os demais #TourDreams."));
-
-        ProdutosHomeAdapter produtosHomeAdapter = new ProdutosHomeAdapter(this, R.layout.list_item_produto, list_produto);
-        list_view_produto.setAdapter(produtosHomeAdapter);
         list_view_produto.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                ProdutosHome nome = adapter.getItem(position);
+
+                id_produto = nome.getNome();
+
                 startActivity(new Intent(MainActivity.this, DetalhesProduto.class));
             }
         });
@@ -108,10 +123,13 @@ public class MainActivity extends AppCompatActivity
 
         nome_cliente = preferences.getString("nome_cliente", "");
         email_cliente = preferences.getString("email_cliente", "");
+        foto_cliente = preferences.getString("foto_cliente", "");
 
         if (nome_cliente.isEmpty() && email_cliente.isEmpty()){
             email_cliente_nav.setText("O melhor portal de viagens");
             nome_cliente_nav.setText("TourDreams");
+
+            carregarProdutos();
 
             MenuItem menu_perfil = (MenuItem) navigationView.getMenu().findItem(R.id.nav_meuperfil);
             menu_perfil.setVisible(false);
@@ -123,6 +141,24 @@ public class MainActivity extends AppCompatActivity
             email_cliente_nav.setText(email_cliente);
             nome_cliente_nav.setText(nome_cliente);
 
+
+
+            url = foto_cliente;
+
+            Picasso.with(this)
+                    .load(url)
+                    .resize(120,100)
+                    .centerCrop()
+                    .transform(new CircleTransform())
+                    .into(img_cliente_nav);
+
+            /*img_cliente_nav = ImagemRedonda.class.cast(findViewById(R.id.image_cliente_nav));
+            img_cliente_nav.setBackgroundResource(R.drawable.jailson);
+
+            */
+
+            carregarProdutos();
+
             usuariologado = true;
 
             MenuItem n =(MenuItem) navigationView.getMenu().findItem(R.id.nav_logar);
@@ -131,6 +167,62 @@ public class MainActivity extends AppCompatActivity
 
         }
     }
+
+    private void carregarProdutos() {
+
+        ConnectivityManager connMgr = (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnected()){
+
+            url =  this.getString(R.string.link)+"listar_produtos_home.php";
+
+            parametros ="";
+
+
+            new MainActivity.Preencher_produtos().execute(url);
+
+        }else{
+
+            Toast.makeText(this, "Nenhuma Conexao foi detectada", Toast.LENGTH_LONG).show();
+        }
+
+    }
+
+    private class Preencher_produtos extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... urls){
+
+            return Conexao.postDados(urls[0], parametros);
+
+        }
+
+        // onPostExecute displays the results of the AsyncTask.
+        @Override
+        protected void onPostExecute(String resultado){
+
+            Gson gson = new Gson();
+            ProdutosHome[] produtosHome = gson.fromJson(resultado, ProdutosHome[].class);
+
+
+
+            for(int i = 0; i < produtosHome.length;i++){
+
+                list_produto.add(produtosHome[i]);
+
+            }
+
+            adapter = new ArrayAdapter<ProdutosHome>(
+                    context,
+                    android.R.layout.simple_list_item_1,
+                    list_produto);
+
+
+            list_view_produto.setAdapter(adapter);
+
+        }
+
+    }
+
 
     @Override
     public void onBackPressed() {
@@ -218,6 +310,11 @@ public class MainActivity extends AppCompatActivity
     public void meu_perfil(MenuItem item) {
             Intent intent = new Intent(this, MeuPerfil.class);
             startActivity(intent);
+    }
+
+    public void mensagens(MenuItem item) {
+        Intent intent = new Intent(this, Mensagens.class);
+        startActivity(intent);
     }
 
 

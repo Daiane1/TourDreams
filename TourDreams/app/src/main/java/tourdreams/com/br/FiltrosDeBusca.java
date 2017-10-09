@@ -15,22 +15,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
-public class FiltrosDeBusca extends DialogFragment {
+public class FiltrosDeBusca {
 
 
-    DialogFragment self;
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        getDialog().setTitle("Mais Opções");
-
-        self = this;
-
-        View v = inflater.inflate(R.layout.fragment_filtros_de_busca, null);
-
-
-        return v;
-    }
 
 }

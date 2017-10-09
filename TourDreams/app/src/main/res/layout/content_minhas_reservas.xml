@@ -11,11 +11,9 @@
 
 
     <ExpandableListView
+        android:layout_margin="25dp"
+        android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/list_proximas_reservas">
-
-
-    </ExpandableListView>
+        android:layout_height="match_parent"></ExpandableListView>
 
 </LinearLayout>
