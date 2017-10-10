@@ -48,7 +48,7 @@ public class ProdutosHomeAdapter extends ArrayAdapter<ProdutosHome> {
 
 
 
-            img_produto.setImageResource(item.getImg_produto());
+            //img_produto.setImageResource(item.getImg_produto());
             nome_produto.setText(item.getNome());
             nome_local.setText(item.getLocal());
             descricao_produto.setText(item.getDescricao());

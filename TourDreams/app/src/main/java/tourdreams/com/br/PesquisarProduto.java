@@ -71,6 +71,9 @@ public class PesquisarProduto extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.filtro_busca) {
+
+
+
             //DialogCaixa dialogCaixa = new DialogCaixa();
             //dialogCaixa.show(getFragmentManager(), "dialogCaixa");
         }

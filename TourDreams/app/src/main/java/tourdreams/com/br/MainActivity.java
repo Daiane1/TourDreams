@@ -142,15 +142,14 @@ public class MainActivity extends AppCompatActivity
             nome_cliente_nav.setText(nome_cliente);
 
 
-
-            url = foto_cliente;
+            /*url = foto_cliente;
 
             Picasso.with(this)
                     .load(url)
                     .resize(120,100)
                     .centerCrop()
                     .transform(new CircleTransform())
-                    .into(img_cliente_nav);
+                    .into(img_cliente_nav);*/
 
             /*img_cliente_nav = ImagemRedonda.class.cast(findViewById(R.id.image_cliente_nav));
             img_cliente_nav.setBackgroundResource(R.drawable.jailson);
@@ -211,9 +210,9 @@ public class MainActivity extends AppCompatActivity
 
             }
 
-            adapter = new ArrayAdapter<ProdutosHome>(
+            adapter = new ProdutosHomeAdapter(
                     context,
-                    android.R.layout.simple_list_item_1,
+                    R.layout.list_item_produto,
                     list_produto);
 
 
