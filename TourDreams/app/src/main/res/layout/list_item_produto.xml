@@ -76,6 +76,14 @@
                 android:orientation="horizontal"
                 android:layout_marginLeft="30dp"
                 >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="18dp"
+                    android:textColor="#006400"
+                    android:textAlignment="center"
+                    android:text="R$"/>
 
                 <TextView
                     android:layout_width="wrap_content"

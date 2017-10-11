@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity
 
 
     Context context;
-    String parametros, url = "";
+    String parametros, url_foto = "", url="";
 
     static TextView text_checkin;
     static TextView text_checkout;
@@ -120,6 +120,8 @@ public class MainActivity extends AppCompatActivity
 
         nome_cliente_nav = (TextView) nav.findViewById(R.id.nome_cliente);
         email_cliente_nav = (TextView) nav.findViewById(R.id.email_cliente);
+        img_cliente_nav = (ImageView) nav.findViewById(R.id.image_cliente_nav);
+
 
         nome_cliente = preferences.getString("nome_cliente", "");
         email_cliente = preferences.getString("email_cliente", "");
@@ -128,6 +130,17 @@ public class MainActivity extends AppCompatActivity
         if (nome_cliente.isEmpty() && email_cliente.isEmpty()){
             email_cliente_nav.setText("O melhor portal de viagens");
             nome_cliente_nav.setText("TourDreams");
+
+
+
+            Picasso.with(this)
+                    .load(R.drawable.logo_tourdreams)
+                    .resize(120,100)
+                    .centerCrop()
+                    .transform(new CircleTransform())
+                    .into(img_cliente_nav);
+
+
 
             carregarProdutos();
 
@@ -141,15 +154,16 @@ public class MainActivity extends AppCompatActivity
             email_cliente_nav.setText(email_cliente);
             nome_cliente_nav.setText(nome_cliente);
 
-
-            /*url = foto_cliente;
+            url_foto = foto_cliente;
 
             Picasso.with(this)
-                    .load(url)
+                    .load(url_foto)
                     .resize(120,100)
                     .centerCrop()
                     .transform(new CircleTransform())
-                    .into(img_cliente_nav);*/
+                    .into(img_cliente_nav);
+
+
 
             /*img_cliente_nav = ImagemRedonda.class.cast(findViewById(R.id.image_cliente_nav));
             img_cliente_nav.setBackgroundResource(R.drawable.jailson);

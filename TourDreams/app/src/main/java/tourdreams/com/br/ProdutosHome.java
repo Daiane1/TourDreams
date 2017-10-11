@@ -6,21 +6,38 @@ package tourdreams.com.br;
 
 public class ProdutosHome {
 
-    int img_produto, id_produto;
+    int  id_produto;
     String nome;
     String local;
     String descricao;
     String preco;
+    String img_produto;
 
+    public ProdutosHome(int id_produto, String nome, String local, String descricao, String preco, String img_produto) {
+        this.id_produto = id_produto;
+        this.nome = nome;
+        this.local = local;
+        this.descricao = descricao;
+        this.preco = preco;
+        this.img_produto = img_produto;
+    }
 
-
-    public int getImg_produto() {
+    public String getImg_produto() {
         return img_produto;
     }
 
-    public void setImg_produto(int img_produto) {
+    public void setImg_produto(String img_produto) {
         this.img_produto = img_produto;
     }
+
+    public int getId_produto() {
+        return id_produto;
+    }
+
+    public void setId_produto(int id_produto) {
+        this.id_produto = id_produto;
+    }
+
 
     public String getNome() {
         return nome;

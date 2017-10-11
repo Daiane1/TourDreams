@@ -10,15 +10,20 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 /**
  * Created by 16165886 on 25/09/2017.
  */
 
+
+
 public class ProdutosHomeAdapter extends ArrayAdapter<ProdutosHome> {
 
     int resource;
+    Context context;
     public ProdutosHomeAdapter(Context context, int resource, List<ProdutosHome> objects) {
         super(context, resource, objects);
         this.resource = resource;
@@ -47,8 +52,14 @@ public class ProdutosHomeAdapter extends ArrayAdapter<ProdutosHome> {
             TextView preco_produto = (TextView) v.findViewById(R.id.preco_produto);
 
 
+            String url =  "http://192.168.56.1/tour_dreams/Arquivos/" + item.getImg_produto();
 
-            //img_produto.setImageResource(item.getImg_produto());
+            Picasso.with(getContext())
+                    .load(url)
+                    .into(img_produto);
+
+
+            //img_produto.setImageResource(Picasso.with(getContext()).load(item.getImg_produto()).into(img_produto));
             nome_produto.setText(item.getNome());
             nome_local.setText(item.getLocal());
             descricao_produto.setText(item.getDescricao());
