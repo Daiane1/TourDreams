@@ -66,7 +66,7 @@ if(isset($_POST['btnRegistrar_parceiro']))
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>TourDreams | Home</title>
+        <title>TourDreams | Promoções</title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -259,290 +259,114 @@ if(isset($_POST['btnRegistrar_parceiro']))
     					</div>
     				</div>
     			</div>
-    		</div>
+		</div>
 
 
-
-
-
-        <div class="content-area home-area-1 recent-property" style="background-color: #FCFCFC; padding-bottom: 55px;">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title">
-                        <h2>Promoção</h2>
-                        <p>"Reserve pelo menos um quarto e ganhe 1700 Milhas Travel Fidelidade"</p>
+		<div class="properties-area recent-property" style="background-color: #FFF;">
+			<div class="container">
+				<div class="row">
+				
+					<div class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title">
+                        <h2>Promoções</h2>
+                        <p>"Encontre, Conheça, Reserve e Curta a sua viagem em nosso Portal de Viagens"</p>
                     </div>
-                </div>
 
-                <div class="row">
-                    <div class="proerty-th">
+			<div class="col-md-9  pr0 padding-top-40 properties-page">
+				<div class="col-md-12 clear">
+					<div id="list-type" class="proerty-th">
+					<?php
+					$sql = "select * from view_promocoes";
+					$select = mysql_query($sql);
+					while($rs = mysql_fetch_array($select)){
+						$preco_diaria=$rs['preco_diaria'];
+					?>
+						<div class="col-sm-6 col-md-4 p0">
+								<div class="box-two proerty-item">
+									<div class="item-thumb">
+										<a href="detalhes_produto.php?id_produto=<?php echo $rs['id_produto'];?>"><?php echo "<img src='Parceiro/Arquivos/".$rs['foto_principal']."'>"?></a>
+									</div>
 
-						<div class="col-sm-6 col-md-3 p0">
-                            <div class="box-two proerty-item">
-                                <div class="item-thumb">
-                                    <a href="detalhes_produto.php" ><img src="assets/img/demo/produto1.jpg"></a>
-                                </div>
-                                <div class="item-entry overflow">
-                                    <h5><a href="detalhes_produto.php" >Nome Produto</a></h5>
-                                    <div class="dot-hr"></div>
-                                    <span class="pull-left"><i class="fa fa-binoculars"></i>  <b>Milhas :</b> 1700 </span>
-                                    <span class="proerty-price pull-right">R$300,00</span>
-                                </div>
-								<div class="vote">
-									<label>
-										<input  name="fb" value="1" />
-										<i class="fa"></i>
-									</label>
-									<label>
-										<input name="fb" value="2" />
-										<i class="fa"></i>
-									</label>
-									<label>
-										<input  name="fb" value="3" />
-										<i class="fa"></i>
-									</label>
-									<label>
-										<input  name="fb" value="4" />
-										<i class="fa"></i>
-									</label>
-									<label>
-										<input name="fb" value="5" />
-										<i class="fa"></i>
-									</label>
-							    </div>
-
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-md-3 p0">
-                            <div class="box-two proerty-item">
-                                <div class="item-thumb">
-                                    <a href="detalhes_produto.php" ><img src="assets/img/demo/produto-2.jpg"></a>
-                                </div>
-                                <div class="item-entry overflow">
-                                    <h5><a href="detalhes_produto.php" >Nome Produto</a></h5>
-                                    <div class="dot-hr"></div>
-                                    <span class="pull-left"><i class="fa fa-binoculars"></i>  <b>Milhas :</b> 1700 </span>
-                                    <span class="proerty-price pull-right">R$300,00</span>
-                                </div>
-								<div class="vote">
-									<label>
-										<input  name="fb" value="1" />
-										<i class="fa"></i>
-									</label>
-									<label>
-										<input name="fb" value="2" />
-										<i class="fa"></i>
-									</label>
-									<label>
-										<input  name="fb" value="3" />
-										<i class="fa"></i>
-									</label>
-									<label>
-										<input  name="fb" value="4" />
-										<i class="fa"></i>
-									</label>
-									<label>
-										<input name="fb" value="5" />
-										<i class="fa"></i>
-									</label>
-							    </div>
-
-                            </div>
-                        </div>
-
-
-                        <div class="col-sm-6 col-md-3 p0">
-                            <div class="box-two proerty-item">
-                                <div class="item-thumb">
-                                    <a href="detalhes_produto.php" ><img src="assets/img/demo/produto-3.jpg"></a>
-                                </div>
-                                <div class="item-entry overflow">
-                                    <h5><a href="detalhes_produto.php" >Nome Produto</a></h5>
-                                    <div class="dot-hr"></div>
-									<span class="pull-left"><i class="fa fa-binoculars"></i>  <b>Milhas :</b> 1700 </span>
-                                    <span class="proerty-price pull-right">R$300,00</span>
-                                </div>
-								<div class="vote">
-									<label>
-										<input  name="fb" value="1" />
-										<i class="fa"></i>
-									</label>
-									<label>
-										<input name="fb" value="2" />
-										<i class="fa"></i>
-									</label>
-									<label>
-										<input  name="fb" value="3" />
-										<i class="fa"></i>
-									</label>
-							    </div>
-
-                            </div>
-                        </div>
-
-
-                        <div class="col-sm-6 col-md-3 p0">
-                            <div class="box-two proerty-item">
-                                <div class="item-thumb">
-                                    <a href="detalhes_produto.php" ><img src="assets/img/demo/produto-4.jpg"></a>
-                                </div>
-                                <div class="item-entry overflow">
-                                    <h5><a href="detalhes_produto.php" >Nome Produto</a></h5>
-                                    <div class="dot-hr"></div>
-                                    <span class="pull-left"><i class="fa fa-binoculars"></i>  <b>Milhas :</b> 1700 </span>
-                                    <span class="proerty-price pull-right">R$300,00</span>
-                                </div>
-								<div class="vote">
-									<label>
-										<input  name="fb" value="1" />
-										<i class="fa"></i>
-									</label>
-							    </div>
-
-                            </div>
-                        </div>
-
-
-
-                        <div class="col-sm-6 col-md-3 p0">
-                            <div class="box-two proerty-item">
-                                <div class="item-thumb">
-                                    <a href="detalhes_produto.php" ><img src="assets/img/demo/produto-5.jpg"></a>
-                                </div>
-                                <div class="item-entry overflow">
-                                    <h5><a href="detalhes_produto.php" >Nome Produto</a></h5>
-                                    <div class="dot-hr"></div>
-                                    <span class="pull-left"><i class="fa fa-binoculars"></i>  <b>Milhas :</b> 1700 </span>
-                                    <span class="proerty-price pull-right">R$300,00</span>
-                                </div>
-								<div class="vote">
-									<label>
-										<input  name="fb" value="1" />
-										<i class="fa"></i>
-									</label>
-									<label>
-										<input name="fb" value="2" />
-										<i class="fa"></i>
-									</label>
-									<label>
-										<input  name="fb" value="3" />
-										<i class="fa"></i>
-									</label>
-									<label>
-										<input  name="fb" value="4" />
-										<i class="fa"></i>
-									</label>
-							    </div>
-
-                            </div>
-                        </div>
-
-
-                        <div class="col-sm-6 col-md-3 p0">
-                            <div class="box-two proerty-item">
-                                <div class="item-thumb">
-                                    <a href="detalhes_produto.php" ><img src="assets/img/demo/produto-6.jpg"></a>
-                                </div>
-                                <div class="item-entry overflow">
-                                    <h5><a href="detalhes_produto.php" >Nome Produto</a></h5>
-                                    <div class="dot-hr"></div>
-                                    <span class="pull-left"><i class="fa fa-binoculars"></i>  <b>Milhas :</b> 1700 </span>
-                                    <span class="proerty-price pull-right">R$300,00</span>
-                                </div>
-								<div class="vote">
-									<label>
-										<input  name="fb" value="1" />
-										<i class="fa"></i>
-									</label>
-									<label>
-										<input name="fb" value="2" />
-										<i class="fa"></i>
-									</label>
-									<label>
-										<input  name="fb" value="3" />
-										<i class="fa"></i>
-									</label>
-									<label>
-										<input  name="fb" value="4" />
-										<i class="fa"></i>
-									</label>
-									<label>
-										<input name="fb" value="5" />
-										<i class="fa"></i>
-									</label>
-							    </div>
-
-                            </div>
-                        </div>
-
-
-                        <div class="col-sm-6 col-md-3 p0">
-                            <div class="box-two proerty-item">
-                                <div class="item-thumb">
-                                    <a href="detalhes_produto.php" ><img src="assets/img/demo/produto-7.jpg"></a>
-                                </div>
-                                <div class="item-entry overflow">
-                                    <h5><a href="detalhes_produto.php" >Nome Produto</a></h5>
-                                    <div class="dot-hr"></div>
-									<span class="pull-left"><i class="fa fa-binoculars"></i>  <b>Milhas :</b> 1700 </span>
-                                    <span class="proerty-price pull-right">R$300,00</span>
-                                </div>
-								<div class="vote">
-									<label>
-										<input  name="fb" value="1" />
-										<i class="fa"></i>
-									</label>
-									<label>
-										<input name="fb" value="2" />
-										<i class="fa"></i>
-									</label>
-							    </div>
-
-                            </div>
-                        </div>
-
-
-						<div class="col-sm-6 col-md-3 p0">
-                            <div class="box-two proerty-item">
-                                <div class="item-thumb">
-                                    <a href="detalhes_produto.php" ><img src="assets/img/demo/produto-8.jpg"></a>
-                                </div>
-                                <div class="item-entry overflow">
-                                    <h5><a href="detalhes_produto.php" >Nome Produto</a></h5>
-                                    <div class="dot-hr"></div>
-                                    <span class="pull-left"><i class="fa fa-binoculars"></i>  <b>Milhas :</b> 1700 </span>
-                                    <span class="proerty-price pull-right">R$300,00</span>
-                                </div>
-								<div class="vote">
-									<label>
-										<input  name="fb" value="1" />
-										<i class="fa"></i>
-									</label>
-									<label>
-										<input name="fb" value="2" />
-										<i class="fa"></i>
-									</label>
-									<label>
-										<input  name="fb" value="3" />
-										<i class="fa"></i>
-									</label>
-							    </div>
-
-                            </div>
-                        </div>
+									<div class="item-entry overflow">
+										<h5><a href="detalhes_produto.php?id_produto=<?php echo $rs['id_produto'];?>" ><?php echo($rs['nome_fantasia']);?></a></h5>
+										<div class="dot-hr"></div>
+										<span class="pull-left"><i class="fa fa-binoculars"></i>  <b>Milhas :</b> <?php echo($rs['qtd_milhas']);?> </span>
+										<span class="proerty-price pull-right">R$ <?php echo number_format($preco_diaria, 2, ',', '');?></span>
+									</div>
+									<div class="vote">
+										<label>
+											<input  name="fb" value="1" />
+											<i class="fa"></i>
+										</label>
+										<label>
+											<input name="fb" value="2" />
+											<i class="fa"></i>
+										</label>
+										<label>
+											<input  name="fb" value="3" />
+											<i class="fa"></i>
+										</label>
+										<label>
+											<input  name="fb" value="4" />
+											<i class="fa"></i>
+										</label>
+										<label>
+											<input name="fb" value="5" />
+											<i class="fa"></i>
+										</label>
+									</div>
+									
+									<div class="col-sm-12 text-center">
+										<button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#detalhes_promocao"> <i class="fa fa-eye"></i> Ver mais</button>
+									</div>
+								</div>
+						</div>
+						<?php
+							}
+						?>
+					</div>
+				</div>
+			</div>
+			
+				</div>
+			</div>
+		</div>
+	
 
 
 
 
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
-
+		<div class="modal fade product_view" id="detalhes_promocao">
+			<div class="modal-dialog">
+				
+				<?php
+					$sql = "select * from view_promocoes";
+					$select = mysql_query($sql);
+					while($rs = mysql_fetch_array($select)){
+				
+				?>
+			
+				<div class="modal-content">
+					<div class="modal-header">
+						<a href="#" data-dismiss="modal" class="class pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+						<h3 class="modal-title"><?php echo($rs['nome_brinde']);?></h3>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-md-6 product_img">
+								<?php echo "<img class='img-responsive 'src='CMS/Arquivos/".$rs['foto_brinde']."'>"?>
+							</div>
+							<div class="col-md-6 product_content">
+								<h4>Milhas Necessarias: <span><?php echo($rs['milhas_necessarias']);?></span></h4>
+								<div class="space-ten"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<?php
+					}
+				?>
+			</div>
+		</div>
 
         <!-- Footer area-->
         <div class="footer-area">

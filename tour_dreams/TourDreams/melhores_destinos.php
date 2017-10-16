@@ -260,18 +260,7 @@ if(isset($_POST['btnRegistrar_parceiro']))
     			</div>
     		</div>
 
-		<div class="slider-area">
-            <div class="slider">
-                <div id="bg-slider" class="owl-carousel owl-theme">
 
-                    <div class="item"><img src="assets/img/slide1/slider-image-3.jpeg" alt=" "></div>
-                    <div class="item"><img src="assets/img/slide1/slider-image-1.jpg" alt="   "></div>
-                    <div class="item"><img src="assets/img/slide1/slider-image-2.jpeg" alt=" "></div>
-					<div class="item"><img src="assets/img/slide1/slider-image-4.jpg" alt=" "></div>
-
-                </div>
-            </div>
-        </div>
 
         <div class="properties-area recent-property" style="background-color: #FFF;">
             <div class="container">
@@ -308,85 +297,40 @@ if(isset($_POST['btnRegistrar_parceiro']))
 									</div>
 
 
-
+									
+									
                                     <fieldset class="padding-5">
                                         <div class="row">
+											<?php
+											$sql = "select * from tbl_caracteristicas";
+											$select = mysql_query($sql);
+											while($rs = mysql_fetch_array($select)){	
+											?>
                                             <div class="col-xs-6">
                                                 <div class="checkbox">
-                                                    <label> <input type="checkbox" checked> Wi-Fi</label>
+                                                    <label><input type="checkbox">  <?php echo $rs['nome_caracteristica'];?></label>
                                                 </div>
                                             </div>
-
-                                            <div class="col-xs-6">
-                                                <div class="checkbox">
-                                                    <label> <input type="checkbox"> Restaurante</label>
-                                                </div>
-                                            </div>
+											<?php
+												}
+											?>
                                         </div>
                                     </fieldset>
+									
+									
+                                    
 
-                                    <fieldset class="padding-5">
-                                        <div class="row">
-                                            <div class="col-xs-6">
-                                                <div class="checkbox">
-                                                    <label> <input type="checkbox" checked> Restaurante</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-6">
-                                                <div class="checkbox">
-                                                    <label> <input type="checkbox" checked> Restaurante</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </fieldset>
+                                  
 
-                                    <fieldset class="padding-5">
-                                        <div class="row">
-                                            <div class="col-xs-6">
-                                                <div class="checkbox">
-                                                    <label><input type="checkbox"> Restaurante</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-6">
-                                                <div class="checkbox">
-                                                    <label> <input type="checkbox"> Restaurante</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </fieldset>
+                                   
 
-                                    <fieldset class="padding-5">
-                                        <div class="row">
-                                            <div class="col-xs-6">
-                                                <div class="checkbox">
-                                                    <label>  <input type="checkbox" checked> Restaurante</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-6">
-                                                <div class="checkbox">
-                                                    <label>  <input type="checkbox"> Restaurante</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset class="padding-5">
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <div class="checkbox">
-                                                    <label>  <input type="checkbox"> Restaurante</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </fieldset>
 
 									<div class="panel-heading">
-										<h3 class="panel-title">Preços</h3>
+										<h3 class="panel-title">Preço Desejado</h3>
 									</div>
 
 									<div class="form-group">
 										<select id="basic" class="selectpicker show-tick form-control">
-											<option>Preços</option>
 											<option>R$25,00 - R$100,99</option>
 											<option>R$101,00 - R$150,99</option>
 											<option>R$151,00 - R$200,99</option>
@@ -397,28 +341,57 @@ if(isset($_POST['btnRegistrar_parceiro']))
 
 
 									<div class="panel-heading">
-										<h3 class="panel-title">Estilos</h3>
+										<h3 class="panel-title">Estilo de Viagem</h3>
 									</div>
 
 									<div class="form-group">
 										<select id="basic" class="selectpicker show-tick form-control">
-											<option>Estilos</option>
-											<option>Família</option>
-											<option>Trabalho</option>
-											<option>Casal</option>
+												<?php
+												$sql = "select * from tbl_tipo_viagem a where id_tipo_viagem > 0";
+										
+												if($nome_tipo_viagem != ''){
+													$sql = $sql . " and id_tipo_viagem !=".$id_tipo_viagem;
+													?>
+													<option value="<?php echo($id_tipo_viagem);?>"><?php echo($nome_tipo_viagem);?></option>		
+												<?php }?>
+												
+												
+												<?php
+													$select = mysql_query($sql);
+													while($rs = mysql_fetch_array($select)){
+												?>
+													<option value="<?php echo($rs['id_tipo_viagem']);?>"><?php echo($rs['nome_tipo_viagem']);?></option>														
+												<?php
+													}
+												?>
 										</select>
 									</div>
 
+									
 									<div class="panel-heading">
-										<h3 class="panel-title">Produtos</h3>
+										<h3 class="panel-title">Hospedagem Desejado</h3>
 									</div>
 
 									<div class="form-group">
 										<select id="basic" class="selectpicker show-tick form-control">
-											<option>Produtos</option>
-											<option>Hotel</option>
-											<option>Pousada </option>
-											<option>Resorts</option>
+											<?php
+											$sql = "select * from tbl_estilo_produto where id_estilo_produto > 0";
+									
+											if($nome_estilo_produto != ''){
+												$sql = $sql . " and id_estilo_produto !=".$id_estilo_produto;
+												?>
+												<option value="<?php echo($id_estilo_produto);?>"><?php echo($nome_estilo_produto);?></option>		
+											<?php }?>
+											
+											
+											<?php
+												$select = mysql_query($sql);
+												while($rs = mysql_fetch_array($select)){
+											?>
+												<option value="<?php echo($rs['id_estilo_produto']);?>"><?php echo($rs['nome_estilo_produto']);?></option>														
+											<?php
+												}
+											?>
 										</select>
 									</div>
 
@@ -438,18 +411,24 @@ if(isset($_POST['btnRegistrar_parceiro']))
                 <div class="col-md-9  pr0 padding-top-40 properties-page">
                     <div class="col-md-12 clear">
                         <div id="list-type" class="proerty-th">
+						<?php
+						$sql = "select * from view_produto where status = 'Aprovado'";
+						$select = mysql_query($sql);
+						while($rs = mysql_fetch_array($select)){
+							$preco_diaria=$rs['preco_diaria'];
+						?>
                             <div class="col-sm-6 col-md-4 p0">
                                     <div class="box-two proerty-item">
                                         <div class="item-thumb">
-                                            <a href="detalhes_produto.php" ><img src="assets/img/demo/produto1.jpg"></a>
+                                            <a href="detalhes_produto.php?id_produto=<?php echo $rs['id_produto'];?>"><?php echo "<img src='Parceiro/Arquivos/".$rs['foto_principal']."'>"?></a>
                                         </div>
 
                                         <div class="item-entry overflow">
-                                            <h5><a href="detalhes_produto.php">Hotel Maneiro</a></h5>
-                                            <div class="dot-hr"></div>
-                                            <span class="pull-left"><i class="fa fa-binoculars"></i>  <b>Milhas :</b> 580 </span>
-                                            <span class="proerty-price pull-right">R$300,00</span>
-                                        </div>
+											<h5><a href="detalhes_produto.php?id_produto=<?php echo $rs['id_produto'];?>" ><?php echo($rs['nome_fantasia']);?></a></h5>
+											<div class="dot-hr"></div>
+											<span class="pull-left"><i class="fa fa-binoculars"></i>  <b>Milhas :</b> <?php echo($rs['qtd_milhas']);?> </span>
+											<span class="proerty-price pull-right">R$ <?php echo number_format($preco_diaria, 2, ',', '');?></span>
+										</div>
 
 										<div class="vote">
 											<label>
@@ -475,321 +454,9 @@ if(isset($_POST['btnRegistrar_parceiro']))
 										</div>
                                     </div>
                             </div>
-
-
-							<div class="col-sm-6 col-md-4 p0">
-                                    <div class="box-two proerty-item">
-                                        <div class="item-thumb">
-                                            <a href="detalhes_produto.php" ><img src="assets/img/demo/produto1.jpg"></a>
-                                        </div>
-
-                                        <div class="item-entry overflow">
-                                            <h5><a href="detalhes_produto.php">Hotel Maneiro</a></h5>
-                                            <div class="dot-hr"></div>
-											<span class="pull-left"><i class="fa fa-binoculars"></i>  <b>Milhas :</b> 580 </span>
-                                            <span class="proerty-price pull-right">R$300,00</span>
-                                        </div>
-
-										<div class="vote">
-											<label>
-												<input  name="fb" value="1" />
-												<i class="fa"></i>
-											</label>
-											<label>
-												<input name="fb" value="2" />
-												<i class="fa"></i>
-											</label>
-											<label>
-												<input  name="fb" value="3" />
-												<i class="fa"></i>
-											</label>
-											<label>
-												<input  name="fb" value="4" />
-												<i class="fa"></i>
-											</label>
-											<label>
-												<input name="fb" value="5" />
-												<i class="fa"></i>
-											</label>
-										</div>
-                                    </div>
-                            </div>
-
-
-							<div class="col-sm-6 col-md-4 p0">
-                                    <div class="box-two proerty-item">
-                                        <div class="item-thumb">
-                                            <a href="detalhes_produto.php" ><img src="assets/img/demo/produto1.jpg"></a>
-                                        </div>
-
-                                        <div class="item-entry overflow">
-                                            <h5><a href="detalhes_produto.php">Hotel Maneiro</a></h5>
-                                            <div class="dot-hr"></div>
-                                            <span class="pull-left"><i class="fa fa-binoculars"></i>  <b>Milhas :</b> 580 </span>
-                                            <span class="proerty-price pull-right">R$300,00</span>
-                                        </div>
-
-										<div class="vote">
-											<label>
-												<input  name="fb" value="1" />
-												<i class="fa"></i>
-											</label>
-											<label>
-												<input name="fb" value="2" />
-												<i class="fa"></i>
-											</label>
-											<label>
-												<input  name="fb" value="3" />
-												<i class="fa"></i>
-											</label>
-											<label>
-												<input  name="fb" value="4" />
-												<i class="fa"></i>
-											</label>
-											<label>
-												<input name="fb" value="5" />
-												<i class="fa"></i>
-											</label>
-										</div>
-                                    </div>
-                            </div>
-
-
-							<div class="col-sm-6 col-md-4 p0">
-                                    <div class="box-two proerty-item">
-                                        <div class="item-thumb">
-                                            <a href="detalhes_produto.php" ><img src="assets/img/demo/produto1.jpg"></a>
-                                        </div>
-
-                                        <div class="item-entry overflow">
-                                            <h5><a href="detalhes_produto.php">Hotel Maneiro</a></h5>
-                                            <div class="dot-hr"></div>
-											<span class="pull-left"><i class="fa fa-binoculars"></i>  <b>Milhas :</b> 580 </span>
-                                            <span class="proerty-price pull-right">R$300,00</span>
-                                        </div>
-
-										<div class="vote">
-											<label>
-												<input  name="fb" value="1" />
-												<i class="fa"></i>
-											</label>
-											<label>
-												<input name="fb" value="2" />
-												<i class="fa"></i>
-											</label>
-											<label>
-												<input  name="fb" value="3" />
-												<i class="fa"></i>
-											</label>
-											<label>
-												<input  name="fb" value="4" />
-												<i class="fa"></i>
-											</label>
-											<label>
-												<input name="fb" value="5" />
-												<i class="fa"></i>
-											</label>
-										</div>
-                                    </div>
-                            </div>
-
-
-
-							<div class="col-sm-6 col-md-4 p0">
-                                    <div class="box-two proerty-item">
-                                        <div class="item-thumb">
-                                            <a href="detalhes_produto.php" ><img src="assets/img/demo/produto1.jpg"></a>
-                                        </div>
-
-                                        <div class="item-entry overflow">
-                                            <h5><a href="detalhes_produto.php">Hotel Maneiro</a></h5>
-                                            <div class="dot-hr"></div>
-                                            <span class="pull-left"><i class="fa fa-binoculars"></i>  <b>Milhas :</b> 580 </span>
-                                            <span class="proerty-price pull-right">R$300,00</span>
-                                        </div>
-
-										<div class="vote">
-											<label>
-												<input  name="fb" value="1" />
-												<i class="fa"></i>
-											</label>
-											<label>
-												<input name="fb" value="2" />
-												<i class="fa"></i>
-											</label>
-											<label>
-												<input  name="fb" value="3" />
-												<i class="fa"></i>
-											</label>
-											<label>
-												<input  name="fb" value="4" />
-												<i class="fa"></i>
-											</label>
-											<label>
-												<input name="fb" value="5" />
-												<i class="fa"></i>
-											</label>
-										</div>
-                                    </div>
-                            </div>
-
-
-
-							<div class="col-sm-6 col-md-4 p0">
-                                    <div class="box-two proerty-item">
-                                        <div class="item-thumb">
-                                            <a href="detalhes_produto.php" ><img src="assets/img/demo/produto1.jpg"></a>
-                                        </div>
-
-                                        <div class="item-entry overflow">
-                                            <h5><a href="detalhes_produto.php">Hotel Maneiro</a></h5>
-                                            <div class="dot-hr"></div>
-                                            <span class="pull-left"><i class="fa fa-binoculars"></i>  <b>Milhas :</b> 580 </span>
-                                            <span class="proerty-price pull-right">R$300,00</span>
-                                        </div>
-
-										<div class="vote">
-											<label>
-												<input  name="fb" value="1" />
-												<i class="fa"></i>
-											</label>
-											<label>
-												<input name="fb" value="2" />
-												<i class="fa"></i>
-											</label>
-											<label>
-												<input  name="fb" value="3" />
-												<i class="fa"></i>
-											</label>
-											<label>
-												<input  name="fb" value="4" />
-												<i class="fa"></i>
-											</label>
-											<label>
-												<input name="fb" value="5" />
-												<i class="fa"></i>
-											</label>
-										</div>
-                                    </div>
-                            </div>
-
-
-							<div class="col-sm-6 col-md-4 p0">
-                                    <div class="box-two proerty-item">
-                                        <div class="item-thumb">
-                                            <a href="detalhes_produto.php" ><img src="assets/img/demo/produto1.jpg"></a>
-                                        </div>
-
-                                        <div class="item-entry overflow">
-                                            <h5><a href="detalhes_produto.php">Hotel Maneiro</a></h5>
-                                            <div class="dot-hr"></div>
-                                            <span class="pull-left"><i class="fa fa-binoculars"></i>  <b>Milhas :</b> 580 </span>
-                                            <span class="proerty-price pull-right">R$300,00</span>
-                                        </div>
-
-										<div class="vote">
-											<label>
-												<input  name="fb" value="1" />
-												<i class="fa"></i>
-											</label>
-											<label>
-												<input name="fb" value="2" />
-												<i class="fa"></i>
-											</label>
-											<label>
-												<input  name="fb" value="3" />
-												<i class="fa"></i>
-											</label>
-											<label>
-												<input  name="fb" value="4" />
-												<i class="fa"></i>
-											</label>
-											<label>
-												<input name="fb" value="5" />
-												<i class="fa"></i>
-											</label>
-										</div>
-                                    </div>
-                            </div>
-
-
-							<div class="col-sm-6 col-md-4 p0">
-                                    <div class="box-two proerty-item">
-                                        <div class="item-thumb">
-                                            <a href="detalhes_produto.php" ><img src="assets/img/demo/produto1.jpg"></a>
-                                        </div>
-
-                                        <div class="item-entry overflow">
-                                            <h5><a href="detalhes_produto.php">Hotel Maneiro</a></h5>
-                                            <div class="dot-hr"></div>
-                                            <span class="pull-left"><i class="fa fa-binoculars"></i>  <b>Milhas :</b> 580 </span>
-                                            <span class="proerty-price pull-right">R$300,00</span>
-                                        </div>
-
-										<div class="vote">
-											<label>
-												<input  name="fb" value="1" />
-												<i class="fa"></i>
-											</label>
-											<label>
-												<input name="fb" value="2" />
-												<i class="fa"></i>
-											</label>
-											<label>
-												<input  name="fb" value="3" />
-												<i class="fa"></i>
-											</label>
-											<label>
-												<input  name="fb" value="4" />
-												<i class="fa"></i>
-											</label>
-											<label>
-												<input name="fb" value="5" />
-												<i class="fa"></i>
-											</label>
-										</div>
-                                    </div>
-                            </div>
-
-
-							<div class="col-sm-6 col-md-4 p0">
-                                    <div class="box-two proerty-item">
-                                        <div class="item-thumb">
-                                            <a href="detalhes_produto.php" ><img src="assets/img/demo/produto1.jpg"></a>
-                                        </div>
-
-                                        <div class="item-entry overflow">
-                                            <h5><a href="detalhes_produto.php">Hotel Maneiro</a></h5>
-                                            <div class="dot-hr"></div>
-                                            <span class="pull-left"><i class="fa fa-binoculars"></i>  <b>Milhas :</b> 580 </span>
-                                            <span class="proerty-price pull-right">R$300,00</span>
-                                        </div>
-
-										<div class="vote">
-											<label>
-												<input  name="fb" value="1" />
-												<i class="fa"></i>
-											</label>
-											<label>
-												<input name="fb" value="2" />
-												<i class="fa"></i>
-											</label>
-											<label>
-												<input  name="fb" value="3" />
-												<i class="fa"></i>
-											</label>
-											<label>
-												<input  name="fb" value="4" />
-												<i class="fa"></i>
-											</label>
-											<label>
-												<input name="fb" value="5" />
-												<i class="fa"></i>
-											</label>
-										</div>
-                                    </div>
-                            </div>
-
+							<?php
+								}
+							?>
                         </div>
                     </div>
 

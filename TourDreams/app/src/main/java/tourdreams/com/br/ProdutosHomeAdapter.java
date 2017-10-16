@@ -52,7 +52,10 @@ public class ProdutosHomeAdapter extends ArrayAdapter<ProdutosHome> {
             TextView preco_produto = (TextView) v.findViewById(R.id.preco_produto);
 
 
-            String url =  "http://10.107.134.33/TourDreams/Parceiro/Arquivos/" + item.getImg_produto();
+
+            String url = getContext().getString(R.string.link_imagens) + item.getImg_produto();
+
+
 
             Picasso.with(getContext())
                     .load(url)

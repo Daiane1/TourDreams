@@ -6,21 +6,21 @@ package tourdreams.com.br;
 
 public class Caracteristicas {
 
-    int imagem;
+    String imagem;
     String nome;
 
-    public Caracteristicas(int imagem, String nome) {
+    public Caracteristicas(String imagem, String nome) {
         this.imagem = imagem;
         this.nome = nome;
 
     }
 
 
-    public int getImagem() {
+    public String getImagem() {
         return imagem;
     }
 
-    public void setImagem(int imagem) {
+    public void setImagem(String imagem) {
         this.imagem = imagem;
     }
 

@@ -390,6 +390,8 @@ if(isset($_POST['btnRegistrar_parceiro']))
                             </div>
 
                         </section>
+						
+						
 
 
                     </div>
@@ -425,6 +427,7 @@ if(isset($_POST['btnRegistrar_parceiro']))
                                 </div>
                             </div>
 
+							
 
 
 							<div class="col-sm-6">

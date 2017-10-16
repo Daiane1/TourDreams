@@ -266,76 +266,80 @@ if(isset($_POST['btnRegistrar_parceiro']))
 
 
 
-        <div class="content-area blog-page padding-top-40" style="background-color: #FCFCFC; padding-bottom: 55px;">
-            <div class="container">
-                <div class="row">
-                    <div class="blog-lst col-md-12 pl0">
-                        <section class="post">
-                            <div class="text-center padding-b-50">
-								<br>
-                                <h2  class="wow fadeInLeft animated">Conheça seus destinos</h2>
-								</br>
-                                <div class="title-line wow fadeInRight animated"></div>
-                            </div>
+    
+   
+			<section id="blog-section" >
+			 <div class="container">
+			   <div class="row">
+				 <div class="col-lg-8">
+				   <div class="row">
+					  <div class="col-lg-6 col-md-6">
+					 <aside>
+						<img src="blog.jpg" class="img-responsive">
+						<div class="content-title">
+						<div class="text-center">
+						<h3><a href="#">Hotel Maravilhoso, melhor do Brasil!!!!!</a></h3>
+						</div>
+						</div>
+						<div class="content-footer">
+						<img class="user-small-img" src="blog.jpg">
+						<span style="font-size: 16px;color: #fff;">Maria Silva</span>
+						</div>
+					 </aside>
+					</div>
+				   </div>
+				  </div>
+				   
 
+					<div class="col-lg-4">           
+						 <div class="widget-sidebar">
+						  <h2 class="title-widget-sidebar">Filtrar</h2>
+						  
+							<?php
+								$sql = "select * from tbl_estilo_produto";
+								$select = mysql_query($sql);
+								while($rs = mysql_fetch_array($select)){	
+							?>
+							<button class="categories-btn"><?php echo($rs['nome_estilo_produto']);?></button>
+							<?php
+								}
+							?>
+						 </div>         
+					</div>
+				   </div>
+				 </div>
+			 
+			</section>
+    
+    
+   
+	
+	 <script src="js/jquery-3.1.1.js"></script>
+	 <script src="js/bootstrap.js"></script>
+	 <script>
+         $(document).ready(function(){
+         $('[data-toggle="tooltip"]').tooltip(); 
+         });
+         
+         
+        
+      
+         
+var acc = document.getElementsByClassName("accordion");
+var i;
 
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <p class="author-category">
-                                        Comentário de <a href="#">José Silva</a>
-                                        do <a href="detalhes_produto.html">Hotel Maneiro</a>
-                                    </p>
-                                </div>
-                                <div class="col-sm-6 right" >
-                                    <p class="date-comments">
-                                        <a href="#"><i class="fa fa-calendar-o"></i> 19/09/2017</a>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="image wow fadeInLeft animated">
-                                <a href="#">
-                                    <img src="assets/img/slide1/slider-image-3.jpeg" class="img-responsive" alt=""/>
-                                </a>
-                            </div>
-                            <p class="intro">Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. Se popularizou na década de 60, quando a Letraset lançou decalques contendo passagens de Lorem Ipsum, e mais recentemente quando passou a ser integrado a softwares de editoração eletrônica como Aldus PageMaker.</p>
-                        </section>
-                    </div>
-
-					<div class="blog-lst col-md-12 pl0">
-                        <section class="post">
-                            <div class="text-center padding-b-50">
-								<br>
-								</br>
-                                <div class="title-line wow fadeInRight animated"></div>
-                            </div>
-
-
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <p class="author-category">
-                                        Comentário de <a href="#">José Silva</a>
-                                        do <a href="detalhes_produto.html">Hotel Maneiro</a>
-                                    </p>
-                                </div>
-                                <div class="col-sm-6 right" >
-                                    <p class="date-comments">
-                                        <a href="#"><i class="fa fa-calendar-o"></i> 19/09/2017</a>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="image wow fadeInLeft animated">
-                                <a href="#">
-                                    <img src="assets/img/slide1/slider-image-3.jpeg" class="img-responsive" alt=""/>
-                                </a>
-                            </div>
-                            <p class="intro">Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. Se popularizou na década de 60, quando a Letraset lançou decalques contendo passagens de Lorem Ipsum, e mais recentemente quando passou a ser integrado a softwares de editoração eletrônica como Aldus PageMaker.</p>
-                        </section>
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
+for (i = 0; i < acc.length; i++) {
+  acc[i].onclick = function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight){
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    } 
+  }
+}
+</script>
 
 		<div class="footer-area">
 

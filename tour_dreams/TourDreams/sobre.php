@@ -66,7 +66,7 @@ if(isset($_POST['btnRegistrar_parceiro']))
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>TourDreams | Home</title>
+        <title>TourDreams | Sobre</title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -301,68 +301,75 @@ if(isset($_POST['btnRegistrar_parceiro']))
 
             </div>
         </div>
+		
+			<div class="row">
+				<div class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title">
+					<h2>Comentários dos nossos funcionários  </h2>
+				</div>
+			</div>
 
-        <div class="testimonial-area recent-property" style="background-color: #fff; padding-bottom: 15px;">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title">
-                        <h2>Comentários sobre a TourDreams  </h2>
-                    </div>
-                </div>
+				<div class="container">
+					<div class="row">
+										<div class="col-md-12" data-wow-delay="0.2s">
+											<div class="carousel slide" data-ride="carousel" id="quote-carousel">
+												<!-- Bottom Carousel Indicators -->
+												<ol class="carousel-indicators">
+													<li data-target="#quote-carousel" data-slide-to="0" class="active"><img class="img-responsive " src="blog.jpg" alt="">
+													</li>
+													<li data-target="#quote-carousel" data-slide-to="1"><img class="img-responsive" src="blog.jpg" alt="">
+													</li>
+													<li data-target="#quote-carousel" data-slide-to="2"><img class="img-responsive" src="blog.jpg" alt="">
+													</li>
+												</ol>
 
-                <div class="row">
-                    <div class="row testimonial">
-                        <div class="col-md-12">
-                            <div id="testimonial-slider">
-                                <div class="item">
-                                    <div class="client-text">
-                                        <p>Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI.</p>
-                                        <h4><strong>Carlos Sampaio, </strong><i>Cliente</i></h4>
-                                    </div>
-                                </div>
-								<div class="item">
-                                    <div class="client-text">
-                                        <p>Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI.</p>
-                                        <h4><strong>Carlos Sampaio, </strong><i>Cliente</i></h4>
-                                    </div>
-                                </div>
-								<div class="item">
-                                    <div class="client-text">
-                                        <p>Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI.</p>
-                                        <h4><strong>Carlos Sampaio, </strong><i>Cliente</i></h4>
-                                    </div>
-                                </div>
-								<div class="item">
-                                    <div class="client-text">
-                                        <p>Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI.</p>
-                                        <h4><strong>Carlos Sampaio, </strong><i>Cliente</i></h4>
-                                    </div>
-                                </div>
-								<div class="item">
-                                    <div class="client-text">
-                                        <p>Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI.</p>
-                                        <h4><strong>Carlos Sampaio, </strong><i>Cliente</i></h4>
-                                    </div>
-                                </div>
-								<div class="item">
-                                    <div class="client-text">
-                                        <p>Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI.</p>
-                                        <h4><strong>Carlos Sampaio, </strong><i>Cliente</i></h4>
-                                    </div>
-                                </div>
-								<div class="item">
-                                    <div class="client-text">
-                                        <p>Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI.</p>
-                                        <h4><strong>Carlos Sampaio, </strong><i>Cliente</i></h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+												<!-- Carousel Slides / Quotes -->
+												<div class="carousel-inner text-center">
 
-                </div>
-            </div>
-        </div>
+													<!-- Quote 1 -->
+													<div class="item active">
+														<blockquote>
+															<div class="row">
+																<div class="col-sm-8 col-sm-offset-2">
+
+																	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. !</p>
+																	<small>Funcionaria</small>
+																</div>
+															</div>
+														</blockquote>
+													</div>
+													<!-- Quote 2 -->
+													<div class="item">
+														<blockquote>
+															<div class="row">
+																<div class="col-sm-8 col-sm-offset-2">
+
+																	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
+																	<small>Funcionaria</small>
+																</div>
+															</div>
+														</blockquote>
+													</div>
+													<!-- Quote 3 -->
+													<div class="item">
+														<blockquote>
+															<div class="row">
+																<div class="col-sm-8 col-sm-offset-2">
+
+																	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. .</p>
+																	<small>Funcionaria</small>
+																</div>
+															</div>
+														</blockquote>
+													</div>
+												</div>
+
+												<!-- Carousel Buttons Next/Prev -->
+												<a data-slide="prev" href="#quote-carousel" class="left carousel-control"><i class="fa fa-chevron-left"></i></a>
+												<a data-slide="next" href="#quote-carousel" class="right carousel-control"><i class="fa fa-chevron-right"></i></a>
+											</div>
+										</div>
+					</div>
+				</div>
 
 
 		<div class="count-area">
@@ -469,6 +476,8 @@ if(isset($_POST['btnRegistrar_parceiro']))
 			</div>
 
 		</div>
+		
+		
 
 
 

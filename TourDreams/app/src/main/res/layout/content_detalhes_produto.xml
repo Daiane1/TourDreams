@@ -25,7 +25,7 @@
                android:layout_marginTop="5dp"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
-               android:text="Ilha Bela, Brasil"
+               android:id="@+id/local_produto_selecionado"
                android:textSize="20dp"
                android:textColor="#000"
                android:drawableLeft="@drawable/ic_location_on_black_18dp"
@@ -42,7 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="R$ 339,99"
+                android:id="@+id/preco_produto_selecionado"
                 android:textSize="20dp"
                 android:textColor="#248f24"
                 />
@@ -185,25 +185,17 @@
                 android:orientation="horizontal"
                 android:weightSum="2">
 
-
-                <ListView
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="250dp"
-                    android:id="@+id/list_view_caracteristicas_1">
-
-                </ListView>
+                <GridView
+                    android:id="@+id/grid_view_caracteristicas"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:numColumns="auto_fit">
 
 
-                <ListView
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="250dp"
-                    android:id="@+id/list_view_caracteristicas_2">
+                </GridView>
 
-                </ListView>
 
-            </LinearLayout>
+        </LinearLayout>
 
             <LinearLayout
                 android:layout_marginTop="35dp"

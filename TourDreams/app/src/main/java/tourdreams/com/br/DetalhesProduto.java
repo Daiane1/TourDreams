@@ -2,9 +2,14 @@ package tourdreams.com.br;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -12,12 +17,17 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -29,6 +39,7 @@ public class    DetalhesProduto extends AppCompatActivity {
     List<Caracteristicas> list_caracteristicas = new ArrayList<>();
     List<Caracteristicas> list_caracteristicas2 = new ArrayList<>();
     List<Comentarios> list_comentarios = new ArrayList<>();
+    GridView grid_view_caracteristicas;
 
     String url, parametros;
     Integer id_produto_vem;
@@ -50,36 +61,9 @@ public class    DetalhesProduto extends AppCompatActivity {
         buscarProduto();
 
 
+        grid_view_caracteristicas = (GridView) findViewById(R.id.grid_view_caracteristicas);
+        buscarCaracteristicasProduto();
 
-        list_view_caracteristicas1 = (ListView) findViewById(R.id.list_view_caracteristicas_1);
-
-        list_caracteristicas.add(new Caracteristicas(R.drawable.ic_wifi_black_18dp, "Wi-fi"));
-        list_caracteristicas.add(new Caracteristicas(R.drawable.ic_wifi_black_18dp, "Wi-fi"));
-        list_caracteristicas.add(new Caracteristicas(R.drawable.ic_wifi_black_18dp, "Wi-fi"));
-        list_caracteristicas.add(new Caracteristicas(R.drawable.ic_wifi_black_18dp, "Wi-fi"));
-
-
-
-        // Montar o Adapter
-        CaracteristicasAdapter adapter = new CaracteristicasAdapter(
-                this,
-                R.layout.list_item_caracteristicas,
-                list_caracteristicas);
-
-        list_view_caracteristicas1.setAdapter(adapter);
-
-
-
-        list_view_caracteristicas2 = (ListView) findViewById(R.id.list_view_caracteristicas_2);
-
-        list_caracteristicas2.add(new Caracteristicas(R.drawable.ic_spa_black_36dp, "Spa"));
-        list_caracteristicas2.add(new Caracteristicas(R.drawable.ic_spa_black_36dp, "Spa"));
-        list_caracteristicas2.add(new Caracteristicas(R.drawable.ic_spa_black_36dp, "Spa"));
-        list_caracteristicas2.add(new Caracteristicas(R.drawable.ic_spa_black_36dp, "Spa"));
-
-        CaracteristicasAdapter adapter2 = new CaracteristicasAdapter(
-                this, R.layout.list_item_caracteristicas, list_caracteristicas2);
-        list_view_caracteristicas2.setAdapter(adapter2);
 
 
         list_view_comentarios = (ListView)findViewById(R.id.list_view_comentarios);
@@ -97,6 +81,24 @@ public class    DetalhesProduto extends AppCompatActivity {
                 this,R.layout.list_item_comentarios, list_comentarios
         );
         list_view_comentarios.setAdapter(comentariosAdapter);
+
+    }
+
+    private void buscarCaracteristicasProduto() {
+        ConnectivityManager connMgr = (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnected()){
+
+            url =  this.getString(R.string.link)+"detalhes_produto.php";
+
+            parametros = "id_produto=" + id_produto_vem;
+
+            new DetalhesProduto.preencher_produto().execute(url);
+
+        }else{
+
+            Toast.makeText(this, "Nenhuma Conexao foi detectada", Toast.LENGTH_LONG).show();
+        }
 
     }
 
@@ -136,14 +138,46 @@ public class    DetalhesProduto extends AppCompatActivity {
 
             CollapsingToolbarLayout produto = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
 
-            String image_produto = getString(R.string.link_imagens) + detalhesProduto[0].getImg_produto();
-
-           /* Picasso.with(context)
-                    .load(image_produto)
-                    .into(setBackgroundResource(produto));*/
+            TextView local_produto_selecionado = (TextView) findViewById(R.id.local_produto_selecionado);
+            TextView preco_produto_selecionado = (TextView) findViewById(R.id.preco_produto_selecionado);
 
 
-            String nome_produto = detalhesProduto[0].getNome();
+
+
+
+            try {
+                URL url_foto = new URL("http://10.107.144.5/TourDreams/Parceiro/Arquivos/" +  detalhesProduto[0].getImg_produto());
+                Bitmap image = BitmapFactory.decodeStream(url_foto.openConnection().getInputStream());
+                Drawable d = new BitmapDrawable(getResources(), image);
+
+                if (Build.VERSION.SDK_INT > 16) {
+                    produto.setBackground(d);
+                } else {
+                    Toast.makeText(context, "Fodase seu celular velho", Toast.LENGTH_SHORT).show();
+                }
+
+
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+
+
+            //produto.setBackgroundResource(getString(R.string.link_imagens)+ detalhesProduto[0].getImg_produto());
+            //produto.setBackgroundResource();
+
+            produto.setTitle(detalhesProduto[0].getNome());
+            local_produto_selecionado.setText(detalhesProduto[0].getLocal());
+            preco_produto_selecionado.setText(detalhesProduto[0].getPreco());
+
+
+
+
+
 
 
 

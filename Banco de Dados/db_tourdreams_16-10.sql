@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.9, for Win64 (x86_64)
 --
--- Host: 10.107.134.33    Database: db_tourdreams
+-- Host: 10.107.144.5    Database: db_tourdreams
 -- ------------------------------------------------------
--- Server version	5.7.10-log
+-- Server version	5.6.10-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -162,7 +162,7 @@ CREATE TABLE `tbl_caracteristicas` (
 
 LOCK TABLES `tbl_caracteristicas` WRITE;
 /*!40000 ALTER TABLE `tbl_caracteristicas` DISABLE KEYS */;
-INSERT INTO `tbl_caracteristicas` VALUES (1,'Wi-Fi','fa-wifi fa-2x','ic_wifi_black_24dp.png'),(2,'Spa','fa-bath fa-2x','ic_spa_black_24dp.png'),(3,'Restaurante','fa-cutlery fa-2x','ic_restaurant_black_24dp.png'),(4,'Piscina','fa-tint fa-2x','ic_pool_black_24dp.png'),(5,'Jardim','fa-leaf fa-2x','ic_nature_black_24dp.png'),(6,'Mini Shopping','fa-shopping-bag fa-2x','ic_store_black_24dp.png'),(7,'Salão de Jogos','fa-gamepad fa-2x','ic_games_black_24dp.png'),(8,'Estacionamento','fa-car fa-2x','ic_directions_car_black_24dp.png'),(9,'Quadra',' fa-futbol-o fa-2x','ic_brightness_1_black_24dp.png'),(10,'Bicicletário','fa-bicycle fa-2x','ic_directions_bike_black_24dp.png'),(11,'Acessível para deficientes visuais','fa-low-vision fa-2x','ic_visibility_off_black_24dp.png'),(12,'Acessível para cadeirantes','fa-wheelchai fa-2x','ic_accessible_black_24dp.png'),(13,'Fraldário','fa-child fa-2x','ic_child_care_black_24dp.png'),(14,'Acessível para deficientes auditivos','fa-deaf fa-2x','ic_thumbs_up_down_black_24dp.png'),(15,'Permitido a entrada de pets','fa-paw fa-2x','ic_pets_black_24dp.png'),(16,'Academia','fa-balance-scale fa-2x','ic_fitness_center_black_24dp.png');
+INSERT INTO `tbl_caracteristicas` VALUES (1,'Wi-Fi','fa-wifi fa-2x','ic_wifi_black_24dp.png'),(2,'Spa','fa-bath fa-2x','ic_spa_black_24dp.png'),(3,'Restaurante','fa-cutlery fa-2x','ic_restaurant_black_24dp.png'),(4,'Piscina','fa-tint fa-2x','ic_pool_black_24dp.png'),(5,'Jardim','fa-leaf fa-2x','ic_nature_black_24dp.png'),(6,'Mini Shopping','fa-shopping-bag fa-2x','ic_store_black_24dp.png'),(7,'Salão de Jogos','fa-gamepad fa-2x','ic_games_black_24dp.png'),(8,'Garagem','fa-car fa-2x','ic_directions_car_black_24dp.png'),(9,'Quadra',' fa-futbol-o fa-2x','ic_brightness_1_black_24dp.png'),(10,'Bicicletário','fa-bicycle fa-2x','ic_directions_bike_black_24dp.png'),(12,'Cadeirantes','fa-wheelchai fa-2x','ic_accessible_black_24dp.png'),(13,'Fraldário','fa-child fa-2x','ic_child_care_black_24dp.png'),(15,'Pets','fa-paw fa-2x','ic_pets_black_24dp.png'),(16,'Academia','fa-balance-scale fa-2x','ic_fitness_center_black_24dp.png');
 /*!40000 ALTER TABLE `tbl_caracteristicas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -351,7 +351,7 @@ CREATE TABLE `tbl_estilo_produto` (
   `id_estilo_produto` int(11) NOT NULL AUTO_INCREMENT,
   `nome_estilo_produto` varchar(45) NOT NULL,
   PRIMARY KEY (`id_estilo_produto`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -360,7 +360,7 @@ CREATE TABLE `tbl_estilo_produto` (
 
 LOCK TABLES `tbl_estilo_produto` WRITE;
 /*!40000 ALTER TABLE `tbl_estilo_produto` DISABLE KEYS */;
-INSERT INTO `tbl_estilo_produto` VALUES (1,'Hotel'),(2,'Pousada'),(3,'Resort');
+INSERT INTO `tbl_estilo_produto` VALUES (1,'Hotel'),(2,'Pousada'),(3,'Resort'),(4,'Hostel'),(5,'Lodge');
 /*!40000 ALTER TABLE `tbl_estilo_produto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -672,7 +672,7 @@ CREATE TABLE `tbl_promocoes` (
   KEY `id_promocao_brinde_idx` (`id_brinde`),
   CONSTRAINT `id_promocao_brinde` FOREIGN KEY (`id_brinde`) REFERENCES `tbl_brindes` (`id_brinde`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `id_promocao_produto` FOREIGN KEY (`id_produto`) REFERENCES `tbl_produto` (`id_produto`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -681,6 +681,7 @@ CREATE TABLE `tbl_promocoes` (
 
 LOCK TABLES `tbl_promocoes` WRITE;
 /*!40000 ALTER TABLE `tbl_promocoes` DISABLE KEYS */;
+INSERT INTO `tbl_promocoes` VALUES (4,66,3,1800);
 /*!40000 ALTER TABLE `tbl_promocoes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -903,7 +904,7 @@ SET character_set_client = utf8;
 /*!50001 CREATE VIEW `view_caracteristica` AS SELECT 
  1 AS `id_produto`,
  1 AS `nome_caracteristica`,
- 1 AS `foto_caracteristica`*/;
+ 1 AS `foto_mobile`*/;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -968,6 +969,25 @@ SET character_set_client = utf8;
 SET character_set_client = @saved_cs_client;
 
 --
+-- Temporary view structure for view `view_promocoes`
+--
+
+DROP TABLE IF EXISTS `view_promocoes`;
+/*!50001 DROP VIEW IF EXISTS `view_promocoes`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `view_promocoes` AS SELECT 
+ 1 AS `id_produto`,
+ 1 AS `nome_fantasia`,
+ 1 AS `preco_diaria`,
+ 1 AS `milhas_necessarias`,
+ 1 AS `qtd_milhas`,
+ 1 AS `nome_brinde`,
+ 1 AS `foto_brinde`,
+ 1 AS `foto_principal`*/;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Final view structure for view `view_caracteristica`
 --
 
@@ -980,7 +1000,7 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`%` SQL SECURITY DEFINER */
-/*!50001 VIEW `view_caracteristica` AS select `caracproduto`.`id_produto` AS `id_produto`,`carac`.`nome_caracteristica` AS `nome_caracteristica`,`carac`.`foto_caracteristica` AS `foto_caracteristica` from (`tbl_caracteristicas` `carac` join `tbl_caracteristicas_produto` `caracproduto` on((`caracproduto`.`id_caracteristicas` = `carac`.`id_caracteristicas`))) */;
+/*!50001 VIEW `view_caracteristica` AS select `carac_produto`.`id_produto` AS `id_produto`,`carac`.`nome_caracteristica` AS `nome_caracteristica`,`carac`.`foto_mobile` AS `foto_mobile` from (`tbl_caracteristicas` `carac` join `tbl_caracteristicas_produto` `carac_produto` on((`carac`.`id_caracteristicas` = `carac_produto`.`id_caracteristicas`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -1020,6 +1040,24 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `view_promocoes`
+--
+
+/*!50001 DROP VIEW IF EXISTS `view_promocoes`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`%` SQL SECURITY DEFINER */
+/*!50001 VIEW `view_promocoes` AS select `view`.`id_produto` AS `id_produto`,`view`.`nome_fantasia` AS `nome_fantasia`,`view`.`preco_diaria` AS `preco_diaria`,`promocoes`.`milhas_necessarias` AS `milhas_necessarias`,`view`.`qtd_milhas` AS `qtd_milhas`,`brindes`.`nome_brinde` AS `nome_brinde`,`brindes`.`foto_brinde` AS `foto_brinde`,`view`.`foto_principal` AS `foto_principal` from ((`view_produto` `view` join `tbl_promocoes` `promocoes` on((`promocoes`.`id_produto` = `view`.`id_produto`))) join `tbl_brindes` `brindes` on((`brindes`.`id_brinde` = `promocoes`.`id_brinde`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -1030,4 +1068,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-10-11 16:59:59
+-- Dump completed on 2017-10-16 16:41:06

@@ -9,7 +9,7 @@
 	
 	include_once 'conexao.php';
 	
-	$id_produto = $_GET['id_produto'];
+	$id_produto = $_POST['id_produto'];
 	
 	$sql = $dbcon->query(" select * from view_produto
         where id_produto = $id_produto;");
@@ -27,7 +27,7 @@
       "tipo_viagem" =>$dados['tipo_viagem'],
       "estilo_produto" => $dados['estilo_produto'],
       "qtd_milhas" => $dados['qtd_milhas'],
-	  "preco" => number_format($dados['preco_diaria'], 2, "," , "."),
+	  "preco" => "R$ ". number_format($dados['preco_diaria'], 2, "," , "."),
       "numero_cep" => $dados['numero_cep'],
       "logradouro" => $dados['logradouro'],
       "numero" => $dados['numero'],
