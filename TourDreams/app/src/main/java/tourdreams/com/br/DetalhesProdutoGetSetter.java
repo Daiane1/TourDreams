@@ -4,11 +4,10 @@ package tourdreams.com.br;
  * Created by nicol on 08/10/2017.
  */
 
-public class BuscarProdutos {
-    int id_produto, milhasPorReserva;
-    String nome_fantasia, status, tipo_viagem, estilo_produto, numero_cep, logradouro, numero,
-            complemento, bairro, cidade, uf, descricao_produto, fotoPrincipal;
-
+public class DetalhesProdutoGetSetter {
+    int id_produto, qtd_milhas;
+    String nome, status, tipo_viagem, estilo_produto, preco,  numero_cep, logradouro, numero,
+            complemento, bairro, local, descricao, img_produto;
 
 
     public int getId_produto() {
@@ -19,20 +18,20 @@ public class BuscarProdutos {
         this.id_produto = id_produto;
     }
 
-    public int getMilhasPorReserva() {
-        return milhasPorReserva;
+    public int getQtd_milhas() {
+        return qtd_milhas;
     }
 
-    public void setMilhasPorReserva(int milhasPorReserva) {
-        this.milhasPorReserva = milhasPorReserva;
+    public void setQtd_milhas(int qtd_milhas) {
+        this.qtd_milhas = qtd_milhas;
     }
 
-    public String getNome_fantasia() {
-        return nome_fantasia;
+    public String getNome() {
+        return nome;
     }
 
-    public void setNome_fantasia(String nome_fantasia) {
-        this.nome_fantasia = nome_fantasia;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getStatus() {
@@ -57,6 +56,14 @@ public class BuscarProdutos {
 
     public void setEstilo_produto(String estilo_produto) {
         this.estilo_produto = estilo_produto;
+    }
+
+    public String getPreco() {
+        return preco;
+    }
+
+    public void setPreco(String preco) {
+        this.preco = preco;
     }
 
     public String getNumero_cep() {
@@ -99,35 +106,27 @@ public class BuscarProdutos {
         this.bairro = bairro;
     }
 
-    public String getCidade() {
-        return cidade;
+    public String getLocal() {
+        return local;
     }
 
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
+    public void setLocal(String local) {
+        this.local = local;
     }
 
-    public String getUf() {
-        return uf;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setUf(String uf) {
-        this.uf = uf;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
-    public String getDescricao_produto() {
-        return descricao_produto;
+    public String getImg_produto() {
+        return img_produto;
     }
 
-    public void setDescricao_produto(String descricao_produto) {
-        this.descricao_produto = descricao_produto;
-    }
-
-    public String getFotoPrincipal() {
-        return fotoPrincipal;
-    }
-
-    public void setFotoPrincipal(String fotoPrincipal) {
-        this.fotoPrincipal = fotoPrincipal;
+    public void setImg_produto(String img_produto) {
+        this.img_produto = img_produto;
     }
 }

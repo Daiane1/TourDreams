@@ -6,32 +6,18 @@
 
     <string name="action_settings">Settings</string>
 
-    <string-array name="quartos">
-        <item> 1 </item>
-        <item> 2 </item>
-        <item> 3 </item>
-        <item> 4 </item>
-    </string-array>
 
-    <string-array name="adultos">
-        <item> 1 </item>
-        <item> 2 </item>
-        <item> 3 </item>
-
-    </string-array>
-
-    <string-array name="criancas">
-
-        <item> 1 </item>
-        <item> 2 </item>
-        <item> 3 </item>
-    </string-array>
-    <string name="title_activity_detalhes_produto">Hotel Casa Verde</string>
+    <string name="title_activity_detalhes_produto">  </string>
     <string name="title_activity_pesquisar_produto">Buscar</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="link">http://192.168.56.1/tour_dreams/</string>
-    <string name="link_imagens">http://192.168.56.1/tour_dreams/Arquivos/</string>
+    <string name="link">http://10.107.134.33/TourDreams/Parceiro/tour_dreams/</string>
+    <string name="link_imagens">http://10.107.134.33/tour_dreams/Arquivos/</string>
+
+    <!--<string name="link">http://10.107.134.30/tour_dreams/</string>
+    <string name="link_imagens">>http://10.107.134.30/tour_dreams/Arquivos/</string>-->
+
+
     <string name="title_activity_meu_perfil">Meu Perfil</string>
     <string name="title_activity_minhas_reservas">MinhasReservas</string>
     <string name="title_activity_mensagens">Mensagens</string>

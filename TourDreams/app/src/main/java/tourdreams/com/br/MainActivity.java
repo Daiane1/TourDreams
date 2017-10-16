@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity
     List<ProdutosHome> list_produto = new ArrayList<>();
     ArrayAdapter<ProdutosHome> adapter;
 
-    String id_produto;
+    int id_produto;
 
     TextView nome_cliente_nav, email_cliente_nav;
     ImageView img_cliente_nav;
@@ -109,11 +109,17 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                ProdutosHome nome = adapter.getItem(position);
+                ProdutosHome produtosHome = adapter.getItem(position);
 
-                id_produto = nome.getNome();
+                id_produto = produtosHome.getId_produto();
 
-                startActivity(new Intent(MainActivity.this, DetalhesProduto.class));
+                Intent detalhesProduto =  new Intent(MainActivity.this, DetalhesProduto.class);
+
+                detalhesProduto.putExtra("id_produto", id_produto);
+
+
+                startActivity(detalhesProduto);
+
             }
         });
 
@@ -131,16 +137,7 @@ public class MainActivity extends AppCompatActivity
             email_cliente_nav.setText("O melhor portal de viagens");
             nome_cliente_nav.setText("TourDreams");
 
-
-
-            Picasso.with(this)
-                    .load(R.drawable.logo_tourdreams)
-                    .resize(120,100)
-                    .centerCrop()
-                    .transform(new CircleTransform())
-                    .into(img_cliente_nav);
-
-
+            Picasso.with(this).load(R.drawable.logo_tourdreams).resize(120,100).centerCrop().transform(new CircleTransform()).into(img_cliente_nav);
 
             carregarProdutos();
 
@@ -154,30 +151,20 @@ public class MainActivity extends AppCompatActivity
             email_cliente_nav.setText(email_cliente);
             nome_cliente_nav.setText(nome_cliente);
 
-            url_foto = foto_cliente;
-
-            Picasso.with(this)
-                    .load(url_foto)
-                    .resize(120,100)
-                    .centerCrop()
-                    .transform(new CircleTransform())
-                    .into(img_cliente_nav);
-
-
+            String url_foto = this.getString(R.string.link_imagens) + foto_cliente;
+            Picasso.with(this).load(url_foto).resize(120,100).transform(new CircleTransform()).into(img_cliente_nav);
 
             /*img_cliente_nav = ImagemRedonda.class.cast(findViewById(R.id.image_cliente_nav));
             img_cliente_nav.setBackgroundResource(R.drawable.jailson);
 
             */
-
             carregarProdutos();
-
-            usuariologado = true;
 
             MenuItem n =(MenuItem) navigationView.getMenu().findItem(R.id.nav_logar);
             n.setTitle("Sair");
             n.setIcon(R.drawable.ic_sair);
 
+            usuariologado = true;
         }
     }
 
@@ -331,9 +318,7 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    public static class DatePickerFragment extends DialogFragment
-                implements DatePickerDialog.OnDateSetListener
-        {
+    public static class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
             @NonNull
             @Override
@@ -373,9 +358,7 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    public static class DatePickerFragment_checkout extends DialogFragment
-            implements DatePickerDialog.OnDateSetListener
-    {
+    public static class DatePickerFragment_checkout extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
         @NonNull
         @Override
@@ -403,6 +386,8 @@ public class MainActivity extends AppCompatActivity
 
         }
     }
+
+
 }
 
 

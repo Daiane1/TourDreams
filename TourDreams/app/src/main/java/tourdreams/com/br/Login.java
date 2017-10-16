@@ -86,7 +86,7 @@ public class Login extends AppCompatActivity {
 
                         url =  context.getString(R.string.link)+"login.php";
 
-                        parametros = "email=" + email +"&senha=" + senha;
+                        parametros = "cpf=" + email +"&senha=" + senha;
 
                         new Login.SolicitaDados().execute(url);
 

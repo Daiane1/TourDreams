@@ -1,15 +1,27 @@
 package tourdreams.com.br;
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ForkJoinPool;
 
 public class    DetalhesProduto extends AppCompatActivity {
 
@@ -18,12 +30,25 @@ public class    DetalhesProduto extends AppCompatActivity {
     List<Caracteristicas> list_caracteristicas2 = new ArrayList<>();
     List<Comentarios> list_comentarios = new ArrayList<>();
 
+    String url, parametros;
+    Integer id_produto_vem;
+
+    Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalhes_produto);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        context = this;
+
+        id_produto_vem = getIntent().getExtras().getInt("id_produto");
+
+
+        buscarProduto();
+
 
 
         list_view_caracteristicas1 = (ListView) findViewById(R.id.list_view_caracteristicas_1);
@@ -73,5 +98,59 @@ public class    DetalhesProduto extends AppCompatActivity {
         );
         list_view_comentarios.setAdapter(comentariosAdapter);
 
+    }
+
+    private void buscarProduto() {
+
+        ConnectivityManager connMgr = (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnected()){
+
+             url =  this.getString(R.string.link)+"detalhes_produto.php";
+
+            parametros = "id_produto=" + id_produto_vem;
+
+            new DetalhesProduto.preencher_produto().execute(url);
+
+        }else{
+
+            Toast.makeText(this, "Nenhuma Conexao foi detectada", Toast.LENGTH_LONG).show();
+        }
+
+    }
+
+    private class preencher_produto extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... urls){
+
+
+            return Conexao.postDados(urls[0], parametros);
+
+        }
+
+        // onPostExecute displays the results of the AsyncTask.
+        @Override
+        protected void onPostExecute(String resultado){
+            Gson gson = new Gson();
+            DetalhesProdutoGetSetter[] detalhesProduto = gson.fromJson(resultado, DetalhesProdutoGetSetter[].class);
+
+            CollapsingToolbarLayout produto = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
+
+            String image_produto = getString(R.string.link_imagens) + detalhesProduto[0].getImg_produto();
+
+           /* Picasso.with(context)
+                    .load(image_produto)
+                    .into(setBackgroundResource(produto));*/
+
+
+            String nome_produto = detalhesProduto[0].getNome();
+
+
+
+        }
+
+    }
+
+
 }
-}
+
