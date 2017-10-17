@@ -9,6 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 /**
@@ -38,12 +40,16 @@ public class CaracteristicasAdapter extends ArrayAdapter<Caracteristicas>{
         Caracteristicas item = getItem(position); /*Pegando o item que está sendo carregado naquela posição */
 
         if (item != null) {
-            ImageView img_viagem = (ImageView) v.findViewById(R.id.img_item_caracteristicas);
-            TextView nome_viagem = (TextView) v.findViewById(R.id.nome_item_caracteristicas);
+            ImageView img_carac = (ImageView) v.findViewById(R.id.img_item_caracteristicas);
+            TextView nome_carac = (TextView) v.findViewById(R.id.nome_item_caracteristicas);
 
+            String url_foto_carac = getContext().getString(R.string.link_imagens_carac) + item.getImagem();
 
-            img_viagem.setImageResource(item.getImagem());
-            nome_viagem.setText(item.getNome());
+            Picasso.with(getContext())
+                    .load(url_foto_carac)
+                    .into(img_carac);
+
+            nome_carac.setText(item.getNome());
         }
 
         return v;

@@ -345,7 +345,7 @@ if(isset($_POST['btnRegistrar_parceiro']))
 									</div>
 
 									<div class="form-group">
-										<select id="basic" class="selectpicker show-tick form-control">
+										<select id="basic" class="selectpicker show-tick form-control" name="selectViagem">
 												<?php
 												$sql = "select * from tbl_tipo_viagem a where id_tipo_viagem > 0";
 										
@@ -373,7 +373,7 @@ if(isset($_POST['btnRegistrar_parceiro']))
 									</div>
 
 									<div class="form-group">
-										<select id="basic" class="selectpicker show-tick form-control">
+										<select id="basic" class="selectpicker show-tick form-control" name="selectHospedagem">
 											<?php
 											$sql = "select * from tbl_estilo_produto where id_estilo_produto > 0";
 									
@@ -412,8 +412,18 @@ if(isset($_POST['btnRegistrar_parceiro']))
                     <div class="col-md-12 clear">
                         <div id="list-type" class="proerty-th">
 						<?php
-						$sql = "select * from view_produto where status = 'Aprovado'";
-						$select = mysql_query($sql);
+						if(isset($_GET['estado'])){
+							$estado = (string)$_GET['estado'];
+							$selectViagem = (string)$_GET['selectViagem'];
+							$selectHospedagem = (string)$_GET['selectHospedagem'];
+							$cidade = (string)$_GET['cidade'];
+							$sql = "select * from view_produto where status = 'Aprovado' and estado LIKE'%$estado%' and id_tipo LIKE'%$selectViagem%' and id_estilo LIKE'%$selectHospedagem%' and cidade LIKE '%$cidade%'";
+						}else{
+							$sql = "select * from view_produto where status = 'Aprovado'";
+						}
+
+						$select = mysql_query($sql) or die (mysql_error());
+						
 						while($rs = mysql_fetch_array($select)){
 							$preco_diaria=$rs['preco_diaria'];
 						?>
@@ -456,6 +466,7 @@ if(isset($_POST['btnRegistrar_parceiro']))
                             </div>
 							<?php
 								}
+							
 							?>
                         </div>
                     </div>

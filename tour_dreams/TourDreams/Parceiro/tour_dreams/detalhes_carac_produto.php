@@ -9,7 +9,7 @@
 	
 	include_once 'conexao.php';
 	
-	$id_produto = $_GET['id_produto'];
+	$id_produto = $_POST['id_produto'];
 	
 	$sql = $dbcon->query(" select * from view_caracteristica
         where id_produto = $id_produto;");
@@ -21,7 +21,7 @@
 		
 		while($dados = $sql->fetch_array()){
 			
-			$obj = array("nome_caracteristica" => $dados['nome_caracteristica'], "foto" => $dados['foto_mobile']);
+			$obj = array("nome" => $dados['nome_caracteristica'], "imagem" => $dados['foto_mobile']);
 			$lista[] = $obj;
 		}
 		

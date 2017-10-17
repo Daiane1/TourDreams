@@ -11,6 +11,7 @@
 
 
 	$sql = $dbcon->query("select * from view_produto where status = 'Aprovado'");
+	
 
 	if(mysqli_num_rows($sql) > 0){
 
@@ -31,7 +32,7 @@
       "numero" => $dados['numero'],
       "complemento" => $dados['complemento'],
       "bairro" => $dados['bairro'],
-      "local" => $dados['cidade'] . " - " .$dados['uf'],
+      "local" => $dados['cidade'] . " - " .$dados['estado'],
       //"uf" => $dados['uf'],
       "img_produto" => $dados['foto_principal'],
       "descricao" => $dados['descricao_produto']); 

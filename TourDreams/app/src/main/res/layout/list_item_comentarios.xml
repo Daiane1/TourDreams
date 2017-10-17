@@ -4,78 +4,76 @@
     android:layout_height="match_parent">
 
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
 
         <TextView
+            android:id="@+id/txt_comentario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:textSize="15dp"
-            android:id="@+id/txt_comentario"
             android:textColor="#181818"
-            />
+            android:textSize="15dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_margin="10dp"
+            android:orientation="horizontal"
             android:weightSum="1">
 
-            <ImageView
+            <tourdreams.com.br.ImagemRedonda
                 android:id="@+id/img_comentario"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:background="@drawable/bolinha"
-                />
+                android:background="@drawable/bolinha" />
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_weight="0.8">
+                android:layout_weight="0.8"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/nome_comentario"
-                    android:layout_marginLeft="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
+                    android:layout_marginLeft="5dp"
                     android:textColor="#404040"
+                    android:textStyle="bold"
 
                     />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="  Estados Unidos"
-                    android:drawableLeft="@drawable/us_18"
                     android:layout_marginLeft="10dp"
+                    android:drawableLeft="@drawable/us_18"
+                    android:text="  Estados Unidos"
 
                     />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginLeft="1dp"
-                android:layout_weight="0.2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_weight="0.2"
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/media_cliente"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:background="@drawable/fotinha_azul_escura"
-                    android:text="4,5"
-                    android:textSize="24dp"
                     android:paddingTop="8dp"
+                    android:text="4,5"
+                    android:textAlignment="center"
                     android:textColor="#fff"
-                    android:textAlignment="center"/>
+                    android:textSize="24dp" />
 
 
             </LinearLayout>

@@ -282,35 +282,69 @@ if(isset($_POST['btnRegistrar_parceiro']))
                     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
                         <img src="assets/img/2.png" alt="">
                         <div class="search-form wow pulse" data-wow-delay="0.8s">
-							<form action="" class=" form-inline">
+							<?php
+								if(isset($_GET['btn_pesquisar'])){
+									$estado= $_GET['estado'];		
+									$cidade=$_GET['cidade'];
+									$selectHospedagem=$_GET['selectHospedagem'];
+									$selectViagem=$_GET['selectViagem'];
+								}
+							?>
+							<form method="get" action="melhores_destinos.php" name="pesquisar" class=" form-inline">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="País ou Estado">
+                                    <input type="text" class="form-control" placeholder="Estado" name="estado">
                                 </div>
 
 								<div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Cidade">
+                                    <input type="text" class="form-control" placeholder="Cidade" name="cidade">
                                 </div>
 
                                 <div class="form-group">
-                                    <select id="basic" class="selectpicker show-tick form-control">
-										<option>Produto</option>
-                                        <option>Hotel</option>
-                                        <option>Pousada </option>
-                                        <option>Resorts</option>
-                                    </select>
+									<select id="basic" class="selectpicker show-tick form-control" name="selectHospedagem">
+										<?php
+										$sql = "select * from tbl_estilo_produto where id_estilo_produto > 0 ORDER BY id_estilo_produto DESC";
+								
+										if($nome_estilo_produto != ''){
+											$sql = $sql . " and id_estilo_produto !=".$id_estilo_produto;
+											?>
+											<option value="<?php echo($id_estilo_produto);?>"><?php echo($nome_estilo_produto);?></option>		
+										<?php }?>
+										
+										
+										<?php
+											$select = mysql_query($sql);
+											while($rs = mysql_fetch_array($select)){
+										?>
+											<option value="<?php echo($rs['id_estilo_produto']);?>"><?php echo($rs['nome_estilo_produto']);?></option>														
+										<?php
+											}
+										?>
+									</select>
                                 </div>
 
 								<div class="form-group">
-                                    <select id="basic" class="selectpicker show-tick form-control">
-                                        <option>Viagem</option>
-                                        <option>Família</option>
-                                        <option>Trabalho</option>
-										<option>Casal</option>
-                                    </select>
+									<select id="basic" class="selectpicker show-tick form-control" name="selectViagem">
+										<?php
+										$sql = "select * from tbl_tipo_viagem where id_tipo_viagem > 0 ORDER BY id_tipo_viagem DESC";
+								
+										if($nome_tipo_viagem != ''){
+											$sql = $sql . " and id_tipo_viagem !=".$id_tipo_viagem;
+											?>
+											<option value="<?php echo($id_tipo_viagem);?>"><?php echo($nome_tipo_viagem);?></option>		
+										<?php }?>
+										
+										
+										<?php
+											$select = mysql_query($sql);
+											while($rs = mysql_fetch_array($select)){
+										?>
+											<option value="<?php echo($rs['id_tipo_viagem']);?>"><?php echo($rs['nome_tipo_viagem']);?></option>														
+										<?php
+											}
+										?>
+									</select>
                                 </div>
-
-
-                                <button class="btn search-btn" type="submit"><i class="fa fa-search"></i></button>
+									<button class="btn search-btn" type="submit" name="btn_pesquisar"><i class="fa fa-search"></i></button>
                             </form>
                         </div>
                     </div>

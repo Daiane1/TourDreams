@@ -185,14 +185,14 @@
                 android:orientation="horizontal"
                 android:weightSum="2">
 
-                <GridView
+                <tourdreams.com.br.MyGridView
                     android:id="@+id/grid_view_caracteristicas"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:numColumns="auto_fit">
 
 
-                </GridView>
+                </tourdreams.com.br.MyGridView>
 
 
         </LinearLayout>
@@ -218,18 +218,19 @@
                     android:orientation="horizontal">
 
                     <RatingBar
-                        android:id="@+id/ratingBar"
+                        android:id="@+id/rating_bar"
+                        android:layout_width="242dp"
                         android:layout_height="45dp"
                         android:layout_marginRight="15dp"
-                        android:layout_width="242dp"
-                        android:stepSize="5"
-                        android:numStars="5" />
+                        android:isIndicator="true"
+                        android:numStars="5"
+                        />
 
                     <TextView
+                        android:id="@+id/media_geral"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="28dp"
-                        android:text="5,0"
                         android:textColor="#000"
                         android:textAlignment="center"
                         android:layout_marginTop="10dp"/>
@@ -284,12 +285,13 @@
                         android:text="  Limpeza"
                         android:textSize="16dp"
                         android:textColor="#000"
-                        android:drawableLeft="@drawable/ic_home_black_24dp"
+                        android:drawableLeft="@drawable/vassoura"
                         android:paddingBottom="5dp"
 
                         />
 
                     <TextView
+                        android:id="@+id/nota_limpeza"
                         android:layout_weight="0.4"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -312,15 +314,16 @@
                         android:layout_weight="0.6"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="  Limpeza"
+                        android:text="  Atendimento"
                         android:textSize="16dp"
                         android:textColor="#000"
-                        android:drawableLeft="@drawable/ic_home_black_24dp"
+                        android:drawableLeft="@drawable/ic_group_black_24dp"
                         android:paddingBottom="5dp"
 
                         />
 
                     <TextView
+                        android:id="@+id/nota_atendimento"
                         android:layout_weight="0.4"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -342,15 +345,16 @@
                         android:layout_weight="0.6"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="  Limpeza"
+                        android:text="  Restaurante"
                         android:textSize="16dp"
                         android:textColor="#000"
-                        android:drawableLeft="@drawable/ic_home_black_24dp"
+                        android:drawableLeft="@drawable/ic_restaurant_black_24dp"
                         android:paddingBottom="5dp"
 
                         />
 
                     <TextView
+                        android:id="@+id/nota_restaurante"
                         android:layout_weight="0.4"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -372,15 +376,16 @@
                         android:layout_weight="0.6"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="  Limpeza"
+                        android:text="  Lazer"
                         android:textSize="16dp"
                         android:textColor="#000"
-                        android:drawableLeft="@drawable/ic_home_black_24dp"
+                        android:drawableLeft="@drawable/ic_directions_bike_black_24dp"
                         android:paddingBottom="5dp"
 
                         />
 
                     <TextView
+                        android:id="@+id/nota_lazer"
                         android:layout_weight="0.4"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -390,36 +395,7 @@
                         android:textAlignment="center"/>
 
                 </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="25dp"
-                    android:weightSum="1"
-                    android:background="@drawable/linha_verde">
 
-                    <TextView
-                        android:layout_weight="0.6"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="  Limpeza"
-                        android:textSize="16dp"
-                        android:textColor="#000"
-                        android:drawableLeft="@drawable/ic_home_black_24dp"
-                        android:paddingBottom="5dp"
-
-                        />
-
-                    <TextView
-                        android:layout_weight="0.4"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="5,0"
-                        android:textSize="16dp"
-                        android:textColor="#000"
-                        android:textAlignment="center"/>
-
-                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout

@@ -9,6 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 /**
@@ -42,10 +44,19 @@ public class ComentariosAdapter extends ArrayAdapter<Comentarios> {
             TextView txt_comentario = (TextView) v.findViewById(R.id.txt_comentario);
             TextView nome_comentario = (TextView) v.findViewById(R.id.nome_comentario);
             //TextView data_comentario = (TextView) v.findViewById(R.id.data_comentario);
+            TextView media_cliente = (TextView) v.findViewById(R.id.media_cliente);
+
+            String url = getContext().getString(R.string.link_imagens) + item.getImagem();
 
 
 
-            img_comentario.setImageResource(item.getImagem());
+            Picasso.with(getContext())
+                    .load(url)
+                    .into(img_comentario);
+
+
+            media_cliente.setText(item.getMedia());
+            //img_comentario.setImageResource(item.getImagem());
             txt_comentario.setText(item.getComentario());
             nome_comentario.setText(item.getNome());
             //data_comentario.setText(item.getData());

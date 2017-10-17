@@ -14,7 +14,9 @@
 		$complemento=$_POST['complemento'];
 		$bairro=$_POST['bairro'];
 		$cidade=$_POST['cidade'];
-		$uf=$_POST['uf'];
+		$estado=$_POST['estado'];
+		$pais=$_POST['pais'];
+		
 		
 		$id_estilo_produto=$_POST['selectEstiloViagem'];
 		$id_tipo_viagem=$_POST['selectViagem'];
@@ -25,8 +27,8 @@
 		
 		
 		
-		$sql_code = "INSERT INTO tbl_cep(numero_cep,logradouro,numero,complemento,bairro,cidade,uf)";
-		$sql = $sql_code."values('".$cep."','".$logradouro."','".$numero."','".$complemento."','".$bairro."','".$cidade."','".$uf."')";
+		$sql_code = "INSERT INTO tbl_cep(numero_cep,logradouro,numero,complemento,bairro,cidade,estado,pais)";
+		$sql = $sql_code."values('".$cep."','".$logradouro."','".$numero."','".$complemento."','".$bairro."','".$cidade."','".$estado."','".$pais."')";
 		mysql_query($sql) or die(mysql_error());
 		
 		$id_cep=mysql_insert_id();
@@ -341,11 +343,21 @@
 																	</div>
 																</div>
 																<div class="form-group has-info">
-																	<label for="inputInfo" class="col-xs-12 col-sm-3 control-label no-padding-right">UF</label>
+																	<label for="inputInfo" class="col-xs-12 col-sm-3 control-label no-padding-right">Estado</label>
 
 																	<div class="col-xs-12 col-sm-5">
-																		<span class="block input-icon input-icon-right" style="width:70px;">
-																			<input type="text" id="inputInfo" class="width-100" name="uf"/>
+																		<span class="block input-icon input-icon-right">
+																			<input type="text" id="inputInfo" class="width-100" name="estado"/>
+																		</span>
+																	</div>
+																</div>
+																
+																<div class="form-group has-info">
+																	<label for="inputInfo" class="col-xs-12 col-sm-3 control-label no-padding-right">País</label>
+
+																	<div class="col-xs-12 col-sm-5">
+																		<span class="block input-icon input-icon-right">
+																			<input type="text" id="inputInfo" class="width-100" name="pais"/>
 																		</span>
 																	</div>
 																</div>

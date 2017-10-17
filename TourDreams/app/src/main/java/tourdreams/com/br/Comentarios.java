@@ -5,26 +5,34 @@ package tourdreams.com.br;
  */
 
 public class Comentarios {
-    int imagem;
+    String imagem;
     String nome;
     String data;
     String comentario;
+    String media;
 
 
-    public Comentarios(int imagem, String nome, String data, String comentario) {
+    public Comentarios(String imagem, String nome, String data, String comentario, String media) {
         this.imagem = imagem;
         this.nome = nome;
         this.data = data;
         this.comentario = comentario;
-
+        this.media = media;
     }
 
+    public String getMedia() {
+        return media;
+    }
 
-    public int getImagem() {
+    public void setMedia(String media) {
+        this.media = media;
+    }
+
+    public String getImagem() {
         return imagem;
     }
 
-    public void setImagem(int imagem) {
+    public void setImagem(String imagem) {
         this.imagem = imagem;
     }
 

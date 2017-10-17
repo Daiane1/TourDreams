@@ -17,8 +17,10 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,13 +37,18 @@ import java.util.concurrent.ForkJoinPool;
 
 public class    DetalhesProduto extends AppCompatActivity {
 
-    ListView list_view_caracteristicas1, list_view_caracteristicas2, list_view_comentarios;
-    List<Caracteristicas> list_caracteristicas = new ArrayList<>();
-    List<Caracteristicas> list_caracteristicas2 = new ArrayList<>();
+    ListView list_view_comentarios;
     List<Comentarios> list_comentarios = new ArrayList<>();
+
+    List<Caracteristicas> list_caracteristicas = new ArrayList<>();
+
     GridView grid_view_caracteristicas;
 
-    String url, parametros;
+    ArrayAdapter<Caracteristicas> adapter;
+
+    ArrayAdapter<Comentarios> adapter_coment;
+
+    String url, parametros, parametros_coment;
     Integer id_produto_vem;
 
     Context context;
@@ -63,37 +70,125 @@ public class    DetalhesProduto extends AppCompatActivity {
 
         grid_view_caracteristicas = (GridView) findViewById(R.id.grid_view_caracteristicas);
         buscarCaracteristicasProduto();
+        buscarAvaliacaoProduto();
+
 
 
 
         list_view_comentarios = (ListView)findViewById(R.id.list_view_comentarios);
-        list_comentarios.add(new Comentarios(R.drawable.plus, "Nicolas Guarino Santana"
-                , "24/07/2000"
-                , "'Ótimo hotel, um atendimento muito bem qualificado recomendo ele a todos que me perguntarem," +
-                " sensacional o nivel do hotel, Obrigado TourDreams por mais um hotel belo'"));
-
-        list_comentarios.add(new Comentarios(R.drawable.ic_directions_car_black_36dp, "Matheus Silva"
-                , "12/03/2017"
-                , "'Ótimo hotel, um atendimento muito bem qualificado recomendo ele a todos que me perguntarem," +
-                " sensacional o nivel do hotel, Obrigado TourDreams por mais um hotel belo'"));
-
-        ComentariosAdapter comentariosAdapter = new ComentariosAdapter(
-                this,R.layout.list_item_comentarios, list_comentarios
-        );
-        list_view_comentarios.setAdapter(comentariosAdapter);
+        comentariosProduto();
 
     }
+
+    private void comentariosProduto() {
+        ConnectivityManager connMgr = (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnected()){
+
+            url =  this.getString(R.string.link)+"comentario_produto.php";
+
+            parametros_coment = "id_produto=" + id_produto_vem;
+
+            new DetalhesProduto.preencher_comentarios().execute(url);
+
+        }else{
+
+            Toast.makeText(this, "Nenhuma Conexao foi detectada", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public class preencher_comentarios extends AsyncTask<String , Void, String>{
+
+
+        @Override
+        protected String doInBackground(String... urls) {
+            return  Conexao.postDados(urls[0], parametros_coment);
+        }
+
+        @Override
+        protected void onPostExecute(String resultado_comentario) {
+            Gson gson = new Gson();
+            Comentarios[] comentariosProdutos = gson.fromJson(resultado_comentario, Comentarios[].class);
+
+            for(int i = 0; i < comentariosProdutos.length;i++){
+
+                list_comentarios.add(comentariosProdutos[i]);
+
+            }
+
+            adapter_coment = new ComentariosAdapter(
+                    context,
+                    R.layout.list_item_comentarios,
+                    list_comentarios);
+
+
+            list_view_comentarios.setAdapter(adapter_coment);
+
+        }
+    }
+
+    private void buscarAvaliacaoProduto() {
+        ConnectivityManager connMgr = (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnected()){
+
+            url =  this.getString(R.string.link)+"detalhes_avaliacao_produto.php";
+
+            parametros = "id_produto=" + id_produto_vem;
+
+            new DetalhesProduto.preencher_avaliacoes().execute(url);
+
+        }else{
+
+            Toast.makeText(this, "Nenhuma Conexao foi detectada", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public class preencher_avaliacoes extends  AsyncTask<String, Void, String>{
+
+        @Override
+        protected String doInBackground(String... urls) {
+            return  Conexao.postDados(urls[0], parametros);
+        }
+
+        @Override
+        protected void onPostExecute(String resultado_avaliacao) {
+            Gson gson = new Gson();
+            MediaAvaliacao[] media_detalhes_produto = gson.fromJson(resultado_avaliacao, MediaAvaliacao[].class);
+
+            TextView limpeza = (TextView) findViewById(R.id.nota_limpeza);
+            TextView restaurante = (TextView) findViewById(R.id.nota_restaurante);
+            TextView atendimento = (TextView) findViewById(R.id.nota_atendimento);
+            TextView lazer = (TextView) findViewById(R.id.nota_lazer);
+            TextView media_geral = (TextView) findViewById(R.id.media_geral);
+
+            RatingBar rating_bar = (RatingBar) findViewById(R.id.rating_bar);
+
+
+            rating_bar.setRating(Float.parseFloat(media_detalhes_produto[0].getMedia_geral()));
+
+            //rating_bar.getStepSize(Integer.parseInt(media_detalhes_produto[0].getMedia_geral()));
+            limpeza.setText(media_detalhes_produto[0].getLimpeza());
+            restaurante.setText(media_detalhes_produto[0].getRestaurante());
+            atendimento.setText(media_detalhes_produto[0].getAtendimento());
+            lazer.setText(media_detalhes_produto[0].getLazer());
+            media_geral.setText(media_detalhes_produto[0].getMedia_geral());
+
+
+        }
+    }
+
 
     private void buscarCaracteristicasProduto() {
         ConnectivityManager connMgr = (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected()){
 
-            url =  this.getString(R.string.link)+"detalhes_produto.php";
+            url =  this.getString(R.string.link)+"detalhes_carac_produto.php";
 
             parametros = "id_produto=" + id_produto_vem;
 
-            new DetalhesProduto.preencher_produto().execute(url);
+            new DetalhesProduto.preencher_caracteristicas().execute(url);
 
         }else{
 
@@ -101,6 +196,38 @@ public class    DetalhesProduto extends AppCompatActivity {
         }
 
     }
+
+
+    public class preencher_caracteristicas extends  AsyncTask<String, Void, String>{
+
+        @Override
+        protected String doInBackground(String... urls) {
+            return Conexao.postDados(urls[0], parametros);
+        }
+
+        @Override
+        protected void onPostExecute(String resultado_caracteristica) {
+            Gson gson = new Gson();
+            Caracteristicas[] carac_detalhes_produto = gson.fromJson(resultado_caracteristica, Caracteristicas[].class);
+
+            for(int i = 0; i < carac_detalhes_produto.length;i++){
+
+                list_caracteristicas.add(carac_detalhes_produto[i]);
+
+            }
+
+            adapter = new CaracteristicasAdapter(
+                    context,
+                    R.layout.list_item_caracteristicas,
+                    list_caracteristicas);
+
+
+            grid_view_caracteristicas.setAdapter(adapter);
+
+
+        }
+    }
+
 
     private void buscarProduto() {
 
@@ -146,7 +273,7 @@ public class    DetalhesProduto extends AppCompatActivity {
 
 
             try {
-                URL url_foto = new URL("http://10.107.144.5/TourDreams/Parceiro/Arquivos/" +  detalhesProduto[0].getImg_produto());
+                URL url_foto = new URL("http://10.107.134.11/TourDreams/Parceiro/Arquivos/" +  detalhesProduto[0].getImg_produto());
                 Bitmap image = BitmapFactory.decodeStream(url_foto.openConnection().getInputStream());
                 Drawable d = new BitmapDrawable(getResources(), image);
 
@@ -184,6 +311,7 @@ public class    DetalhesProduto extends AppCompatActivity {
         }
 
     }
+
 
 
 }
