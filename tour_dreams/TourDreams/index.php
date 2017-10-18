@@ -269,12 +269,15 @@ if(isset($_POST['btnRegistrar_parceiro']))
         <div class="slider-area">
             <div class="slider">
                 <div id="bg-slider" class="owl-carousel owl-theme">
-
-                    <div class="item"><img src="assets/img/slide1/slider-image-3.jpeg" alt=" "></div>
-                    <div class="item"><img src="assets/img/slide1/slider-image-1.jpg" alt="   "></div>
-                    <div class="item"><img src="assets/img/slide1/slider-image-2.jpeg" alt=" "></div>
-					<div class="item"><img src="assets/img/slide1/slider-image-4.jpg" alt=" "></div>
-
+				<?php
+					$sql = "select * from tbl_slide where aprovacao ='1'";
+					$select = mysql_query($sql);
+					while($rs = mysql_fetch_array($select)){		
+					?>	
+                    <div class="item"> <?php echo "<img src='CMS/Fotos_Slides/".$rs['imagem_slide']."'>"?></div>
+                    <?php
+						}
+					?>
                 </div>
             </div>
             <div class="slider-content">
@@ -302,7 +305,7 @@ if(isset($_POST['btnRegistrar_parceiro']))
                                 <div class="form-group">
 									<select id="basic" class="selectpicker show-tick form-control" name="selectHospedagem">
 										<?php
-										$sql = "select * from tbl_estilo_produto where id_estilo_produto > 0 ORDER BY id_estilo_produto DESC";
+										$sql = "select * from tbl_estilo_produto where id_estilo_produto > 0";
 								
 										if($nome_estilo_produto != ''){
 											$sql = $sql . " and id_estilo_produto !=".$id_estilo_produto;

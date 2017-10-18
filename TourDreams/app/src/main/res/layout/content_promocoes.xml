@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="tourdreams.com.br.Promocoes"
+    tools:showIn="@layout/activity_promocoes"
+    android:orientation="vertical"
+    android:background="#ececec">
+
+
+    <TextView
+        android:layout_margin="15dp"
+        android:background="@drawable/box_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:paddingTop="6dp"
+        android:paddingLeft="10dp"
+        android:text="Utilize sua milhas para ganhar premios:"
+        android:textSize="18dp"
+        android:textColor="#363636"
+        android:textStyle="bold"/>
+
+    <tourdreams.com.br.MyListView
+        android:layout_margin="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:id="@+id/list_promocoes">
+
+
+    </tourdreams.com.br.MyListView>
+
+</LinearLayout>

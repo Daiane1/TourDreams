@@ -302,13 +302,19 @@ if(isset($_POST['btnRegistrar_parceiro']))
                                     <fieldset class="padding-5">
                                         <div class="row">
 											<?php
-											$sql = "select * from tbl_caracteristicas";
-											$select = mysql_query($sql);
-											while($rs = mysql_fetch_array($select)){	
+
+											$sql = "select * from tbl_caracteristicas where id_caracteristicas > 0";
+											$select = mysql_query($sql) or die (mysql_error());
+											while($rs = mysql_fetch_array($select)){
+												$sql = '';
+												foreach ($array as $key => $value) {
+													$sql .= !$sql ? " WHERE $table.$key " : " AND $table.$key";
+													$sql .= ' IN ("' . implode('","', $value) . '")';
+												}
 											?>
                                             <div class="col-xs-6">
                                                 <div class="checkbox">
-                                                    <label><input type="checkbox">  <?php echo $rs['nome_caracteristica'];?></label>
+                                                    <label><input type="checkbox" value="<?php echo $rs['id_caracteristicas'];?>"> <?php echo $rs['nome_caracteristica'];?></label>
                                                 </div>
                                             </div>
 											<?php
@@ -411,18 +417,34 @@ if(isset($_POST['btnRegistrar_parceiro']))
                 <div class="col-md-9  pr0 padding-top-40 properties-page">
                     <div class="col-md-12 clear">
                         <div id="list-type" class="proerty-th">
+						
 						<?php
-						if(isset($_GET['estado'])){
-							$estado = (string)$_GET['estado'];
-							$selectViagem = (string)$_GET['selectViagem'];
-							$selectHospedagem = (string)$_GET['selectHospedagem'];
-							$cidade = (string)$_GET['cidade'];
-							$sql = "select * from view_produto where status = 'Aprovado' and estado LIKE'%$estado%' and id_tipo LIKE'%$selectViagem%' and id_estilo LIKE'%$selectHospedagem%' and cidade LIKE '%$cidade%'";
-						}else{
-							$sql = "select * from view_produto where status = 'Aprovado'";
+						@$estado = (string)$_GET['estado'];
+						@$cidade = (string)$_GET['cidade'];
+						@$selectHospedagem = (int)$_GET['selectHospedagem'];
+						@$selectViagem = (int)$_GET['selectViagem'];
+						
+						$sql = "select * from view_produto where status = 'Aprovado'";
+						
+						if($estado !=''){
+							$sql = $sql . "and estado LIKE'%$estado%'";
 						}
-
+						
+						if($cidade !=''){
+							$sql = $sql . "and cidade LIKE'%$cidade%'";
+						}
+						
+						if($selectHospedagem !=''){
+							$sql = $sql . "and id_estilo LIKE '%$selectHospedagem%'";
+						}
+						
+						if($selectViagem !=''){
+							$sql = $sql . "and id_tipo LIKE '%$selectViagem%'";
+						}
+						
 						$select = mysql_query($sql) or die (mysql_error());
+						
+					
 						
 						while($rs = mysql_fetch_array($select)){
 							$preco_diaria=$rs['preco_diaria'];

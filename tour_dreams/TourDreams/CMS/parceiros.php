@@ -21,7 +21,6 @@
 		if ($modo=='ativarProduto'){
 		    $preco_diaria = $_SESSION['preco_diaria'];		
 			$nome_administrador=$_GET['nome_administrador'];	
-			$id_fale_conosco=$_GET['id_fale_conosco'];
 			$sql="update tbl_produto set id_status = 2 where id_produto=".$_SESSION['id_produto'];
 			mysql_query($sql);
 			header("location:parceiros.php?nome_administrador=".$nome_administrador."&id_administrador=".$id_administrador."");
@@ -249,6 +248,43 @@
 
 						<b class="arrow"></b>
 					</li>
+					
+					<li class="">
+						<a href="admCaracteristicas.php?nome_administrador=<?php echo$_GET['nome_administrador'];?>&id_administrador=<?php echo$_GET['id_administrador'];?>">
+							<i class="menu-icon fa fa-copyright"></i>
+							<span class="menu-text"> Características </span>
+						</a>
+
+						<b class="arrow"></b>
+					</li>
+					
+					<li class="">
+						<a href="admSlide.php?nome_administrador=<?php echo$_GET['nome_administrador'];?>&id_administrador=<?php echo$_GET['id_administrador'];?>">
+							<i class="menu-icon fa fa-picture-o"></i>
+							<span class="menu-text"> Slider </span>
+						</a>
+
+						<b class="arrow"></b>
+					</li>
+					
+					<li class="">
+						<a href="estilo_viagem.php?nome_administrador=<?php echo$_GET['nome_administrador'];?>&id_administrador=<?php echo$_GET['id_administrador'];?>">
+							<i class="menu-icon fa fa-paper-plane"></i>
+							<span class="menu-text"> Estilos Viagens </span>
+						</a>
+
+						<b class="arrow"></b>
+					</li>
+					
+					<li class="">
+						<a href="hospedagens.php?nome_administrador=<?php echo$_GET['nome_administrador'];?>&id_administrador=<?php echo$_GET['id_administrador'];?>">
+							<i class="menu-icon fa fa-building-o"></i>
+							<span class="menu-text"> Hospedagens </span>
+						</a>
+
+						<b class="arrow"></b>
+					</li>
+
 
 					
 				</ul>

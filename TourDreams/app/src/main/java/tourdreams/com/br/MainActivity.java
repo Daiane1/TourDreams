@@ -188,6 +188,8 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+
+
     private class Preencher_produtos extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... urls){
@@ -317,6 +319,11 @@ public class MainActivity extends AppCompatActivity
         startActivity(intent);
     }
 
+    public void promocoes(MenuItem item) {
+        Intent intent = new Intent(this, Promocoes.class);
+        startActivity(intent);
+    }
+
 
     public static class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
@@ -386,6 +393,7 @@ public class MainActivity extends AppCompatActivity
 
         }
     }
+
 
 
 }

@@ -294,6 +294,43 @@
 
 						<b class="arrow"></b>
 					</li>
+					
+					<li class="">
+						<a href="admCaracteristicas.php?nome_administrador=<?php echo$_GET['nome_administrador'];?>&id_administrador=<?php echo$_GET['id_administrador'];?>">
+							<i class="menu-icon fa fa-copyright"></i>
+							<span class="menu-text"> Características </span>
+						</a>
+
+						<b class="arrow"></b>
+					</li>
+					
+					<li class="">
+						<a href="admSlide.php?nome_administrador=<?php echo$_GET['nome_administrador'];?>&id_administrador=<?php echo$_GET['id_administrador'];?>">
+							<i class="menu-icon fa fa-picture-o"></i>
+							<span class="menu-text"> Slider </span>
+						</a>
+
+						<b class="arrow"></b>
+					</li>
+					
+					<li class="">
+						<a href="estilo_viagem.php?nome_administrador=<?php echo$_GET['nome_administrador'];?>&id_administrador=<?php echo$_GET['id_administrador'];?>">
+							<i class="menu-icon fa fa-paper-plane"></i>
+							<span class="menu-text"> Estilos Viagens </span>
+						</a>
+
+						<b class="arrow"></b>
+					</li>
+					
+					<li class="">
+						<a href="hospedagens.php?nome_administrador=<?php echo$_GET['nome_administrador'];?>&id_administrador=<?php echo$_GET['id_administrador'];?>">
+							<i class="menu-icon fa fa-building-o"></i>
+							<span class="menu-text"> Hospedagens </span>
+						</a>
+
+						<b class="arrow"></b>
+					</li>
+
 
 					
 				</ul>
@@ -625,7 +662,7 @@
 
 				$('#id-input-file-3').ace_file_input({
 					style: 'well',
-					btn_choose: 'Foto Destaque da página Sobre',
+					btn_choose: 'Foto do brinde promocional',
 					btn_change: null,
 					no_icon: 'ace-icon fa fa-cloud-upload',
 					droppable: true,

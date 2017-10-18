@@ -2,30 +2,49 @@
 
 	session_start();
 
+	$descritivo="";
+	$foto_sobre="";
+
+	$botao="Cadastrar Conteúdo";
 
 	include("conexao_banco.php");
-	
-	$nome_caracteristica="";
-	
-	
+
 	@$id_administrador = $_GET['id_administrador'];
 	@$nome_administrador = $_GET['nome_administrador'];
 
-	
-	if(isset($_POST['btn_cadastro_caracteristica'])){
-		
-		$id_caracteristicas = $_POST['selectCaracteristicas'];
-		
-			if ($error == UPLOAD_ERR_OK) {
-				$tmp_name = $_FILES["foto_caracteristica"]["tmp_name"];
-				$name = $_FILES["foto_caracteristica"]["name"];
-				move_uploaded_file($tmp_name, "Fotos_Mobile/$name");
-				$sql_code = "update tbl_caracteristicas set foto_mobile='".$name."' where id_caracteristicas=".$id_caracteristicas;
-				mysql_query($sql_code) or die(mysql_error());
-				header("location:admCaracteristicas.php?nome_administrador=".$nome_administrador."&id_administrador=".$id_administrador."");
+
+
+	if(isset($_POST['btn_slide'])){
+			foreach ($_FILES["foto_slide"]["error"] as $key => $error) {
+				if ($error == UPLOAD_ERR_OK) {
+					$tmp_name = $_FILES["foto_slide"]["tmp_name"][$key];
+					$name = $_FILES["foto_slide"]["name"][$key];
+					move_uploaded_file($tmp_name, "Fotos_Slides/$name");
+				
+					if($_POST['btn_slide'] =='Cadastrar Conteúdo'){
+						$sql_code = "INSERT INTO tbl_slide(imagem_slide,aprovacao)";
+						$sql = $sql_code."values('".$name."','0')";
+						mysql_query($sql) or die(mysql_error());
+					}
+				}
 			}
 	}
-
+	
+	if(isset($_GET['modo'])){
+		$modo=$_GET['modo'];
+		if ($modo=='ativarSlide'){
+			$nome_administrador=$_GET['nome_administrador'];	
+			$id_slide=$_GET['id_slide'];	
+			$sql="update tbl_slide set aprovacao = 1 where id_slide=".$id_slide;
+			mysql_query($sql);
+			header("location:admSlide.php?nome_administrador=".$nome_administrador."&id_administrador=".$id_administrador."");
+		}elseif($modo=='desativarSlide'){
+			$id_slide=$_GET['id_slide'];
+			$sql="update tbl_slide set aprovacao = 0 where id_slide=".$id_slide;
+			$select = mysql_query($sql);
+			header("location:admSlide.php?nome_administrador=".$nome_administrador."&id_administrador=".$id_administrador."");
+		}
+	}
 	
 
 
@@ -44,7 +63,7 @@
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
-		<title> TourDreams - Sobre a Empresa</title>
+		<title> TourDreams - Administração do Slider</title>
 
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
@@ -316,58 +335,82 @@
 					<div class="page-content">
 						<div class="page-header">
 							<h1>
-								Controle de Caracteristicas Mobile
+								Controle do Slider Principal
 								<small>
 									<i class="ace-icon fa fa-angle-double-right"></i>
-									Administração de Caracteristicas
+									Administração do Site
 								</small>
 							</h1>
 						</div>
 
 						<div class="row">
 							<div class="col-xs-12">
-								<form class="form-horizontal" role="form" action="admCaracteristicas.php?nome_administrador=<?php echo($nome_administrador);?>&id_administrador=<?php echo($id_administrador);?>"  name="frmCaracteristica" method="post" enctype="multipart/form-data">
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-1">  Caracteristicas </label>
-										
-									<select name ="selectCaracteristicas">
-											<?php
-											$sql = "select * from tbl_caracteristicas where id_caracteristicas > 0";
-																	
-											if($nome_caracteristica != ''){
-												$sql = $sql . " and id_caracteristicas !=".$id_caracteristicas;
-												?>
-												<option value="<?php echo($id_caracteristicas);?>"><?php echo($nome_caracteristica);?></option>		
-											<?php }?>
-											
-											
-											<?php
-												$select = mysql_query($sql);
-												while($rs = mysql_fetch_array($select)){
-											?>
-												<option value="<?php echo($rs['id_caracteristicas']);?>"><?php echo($rs['nome_caracteristica']);?></option>														
-											<?php
-												}
-											?>
-									</select>
-										
-									</div>
+								<form class="form-horizontal" role="form" action="admSlide.php?nome_administrador=<?php echo($nome_administrador);?>&id_administrador=<?php echo($id_administrador);?>"  name="frmSlide" method="post" enctype="multipart/form-data">
+									<div class="form-group has-info">
+										<div class="col-xs-12 col-sm-5">
+											<div class="panel panel-default">
+												<div class="panel-heading">
+													<a href="#faq-1-1" data-parent="#faq-list-1" data-toggle="collapse" class="accordion-toggle collapsed">
+														<i class="ace-icon fa fa-chevron-left pull-right" data-icon-hide="ace-icon fa fa-chevron-down" data-icon-show="ace-icon fa fa-chevron-left"></i>
 
+														<i class="ace-icon fa fa-camera"></i>
+														&nbsp; Imagens Slider
+													</a>
+												</div>
 
-
-									<div class="space-4"></div>
-
-
-									<div class="form-group">
-										<div class="col-xs-12">
-											<input multiple="" type="file" id="id-input-file-3" name="foto_caracteristica"/>
+												<div class="panel-collapse collapse" id="faq-1-1">
+													<div class="panel-body">
+														<div class="form-group">
+															<div class="col-xs-12 col-sm-5">
+																<input multiple="" type="file" id="id-input-file-2" name="foto_slide[]"/>
+															</div>
+															
+															<div class="col-xs-12 col-sm-5">
+																<input multiple="" type="file" id="id-input-file-2" name="foto_slide[]"/>
+															</div>
+															
+															<div class="col-xs-12 col-sm-5">
+																<input multiple="" type="file" id="id-input-file-2" name="foto_slide[]"/>
+															</div>
+															
+															<div class="col-xs-12 col-sm-5">
+																<input multiple="" type="file" id="id-input-file-2" name="foto_slide[]"/>
+															</div>
+															
+															<div class="col-xs-12 col-sm-5">
+																<input multiple="" type="file" id="id-input-file-2" name="foto_slide[]"/>
+															</div>
+															
+															<div class="col-xs-12 col-sm-5">
+																<input multiple="" type="file" id="id-input-file-2" name="foto_slide[]"/>
+															</div>
+															
+															<div class="col-xs-12 col-sm-5">
+																<input multiple="" type="file" id="id-input-file-2" name="foto_slide[]"/>
+															</div>
+															
+															<div class="col-xs-12 col-sm-5">
+																<input multiple="" type="file" id="id-input-file-2" name="foto_slide[]"/>
+															</div>
+															
+															<div class="col-xs-12 col-sm-5">
+																<input multiple="" type="file" id="id-input-file-2" name="foto_slide[]"/>
+															</div>
+															
+															<div class="col-xs-12 col-sm-5">
+																<input multiple="" type="file" id="id-input-file-2" name="foto_slide[]"/>
+															</div>
+														</div>	
+													</div>
+													
+												</div>
+												
+											</div>
 										</div>
-									</div>
-
-
-									<div class="clearfix form-actions">
-										<div class="col-md-offset-3 col-md-9">
-											<input class="btn btn-info" type="submit" name="btn_cadastro_caracteristica" value="Cadastro Caracteristica">
+										<div class="clearfix form-actions">
+											<div class="col-md-offset-3 col-md-9">
+												<input class="btn btn-info" type="submit" name="btn_slide" value="<?php echo($botao)?>">
+											</div>
 										</div>
 									</div>
 								</form>
@@ -402,25 +445,40 @@
 												<thead>
 													<tr>
 
-														<th>Caracteristicas</th>
+														
 														<th>Imagem</th>
+														<th>Status</th>
 													</tr>
 												</thead>
 
 												<?php
-												$sql = "select * from tbl_caracteristicas";
+												$sql = "select * from tbl_slide";
 												$select = mysql_query($sql);
 												while($rs = mysql_fetch_array($select)){
+													
 												?>
 
 												<tbody>
 													<tr>
 
 
+													
+														<td><?php echo "<img class = 'imagem_tbl' src='Fotos_Slides/".$rs['imagem_slide']."'>"?></td>
+
+
+
+														
 														<td>
-															<?php echo($rs['nome_caracteristica']);?>
+															<div class="hidden-sm hidden-xs action-buttons">
+																<a class="green" href="admSlide.php?modo=ativarSlide&id_slide=<?php echo($rs['id_slide']);?>&nome_administrador=<?php echo($_GET['nome_administrador']);?>&id_administrador=<?php echo($_GET['id_administrador']);?>">
+																	<i class="ace-icon fa fa-thumbs-up"></i>
+																</a>
+																
+																<a class="red" href="admSlide.php?modo=desativarSlide&id_slide=<?php echo($rs['id_slide']);?>&nome_administrador=<?php echo($_GET['nome_administrador']);?>&id_administrador=<?php echo($_GET['id_administrador']);?>">
+																	<i class="ace-icon fa fa-thumbs-down"></i>
+																</a>
+															</div>
 														</td>
-														<td><?php echo "<img class = 'imagem_tbl' src='Fotos_Mobile/".$rs['foto_mobile']."'>"?></td>
 													</tr>
 													<?php
 														}
@@ -619,8 +677,8 @@
 
 
 				$('#id-input-file-1 , #id-input-file-2').ace_file_input({
-					no_file:'No File ...',
-					btn_choose:'Choose',
+					no_file:'Nenhuma Imagem...',
+					btn_choose:'Enviar',
 					btn_change:'Change',
 					droppable:false,
 					onchange:null,
@@ -636,7 +694,7 @@
 
 				$('#id-input-file-3').ace_file_input({
 					style: 'well',
-					btn_choose: 'Foto Mobile',
+					btn_choose: 'Foto Destaque da página Sobre',
 					btn_change: null,
 					no_icon: 'ace-icon fa fa-cloud-upload',
 					droppable: true,

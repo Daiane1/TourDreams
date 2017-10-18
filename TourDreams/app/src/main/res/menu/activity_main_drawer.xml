@@ -15,7 +15,8 @@
         <item
             android:id="@+id/nav_promocoes"
             android:icon="@drawable/ic_shopping_cart_black_24dp"
-            android:title="Promoções" />
+            android:title="Promoções"
+            android:onClick="promocoes"/>
         <item
             android:id="@+id/nav_mensagens"
             android:icon="@drawable/ic_message_black_24dp"
