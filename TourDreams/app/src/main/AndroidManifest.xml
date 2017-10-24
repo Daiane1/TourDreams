@@ -79,6 +79,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="tourdreams.com.br.MainActivity" />
         </activity>
+        <activity
+            android:name=".FiltroDeBusca"
+            android:label="@string/title_activity_filtro_de_busca"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

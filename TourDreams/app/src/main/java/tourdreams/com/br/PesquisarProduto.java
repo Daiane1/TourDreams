@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 
 import java.util.ArrayList;
@@ -28,8 +29,9 @@ import java.util.zip.Inflater;
 public class PesquisarProduto extends AppCompatActivity {
 
     Context context;
+    Integer codigo_tela_filtro = 1;
 
-    MenuItem menu;
+    MenuItem menuItem;
 
     ListView list_view_produto_busca;
     List<ProdutosBusca> list_produto_busca = new ArrayList<>();
@@ -37,6 +39,7 @@ public class PesquisarProduto extends AppCompatActivity {
         @Override
         public boolean onQueryTextSubmit(String query) {
 
+            menuItem.setVisible(true);
             return false;
         }
 
@@ -67,6 +70,8 @@ public class PesquisarProduto extends AppCompatActivity {
         ProdutosBuscaAdapter produtosBuscaAdapter = new ProdutosBuscaAdapter(this, R.layout.list_item_resultado_busca, list_produto_busca);
         list_view_produto_busca.setAdapter(produtosBuscaAdapter);
 
+
+
     }
 
 
@@ -82,6 +87,7 @@ public class PesquisarProduto extends AppCompatActivity {
 
         searchView.setQueryHint("Pesquisar");
         searchView.setOnQueryTextListener(listennerBusca);
+        searchView.requestFocus();
 
 
 
@@ -93,7 +99,8 @@ public class PesquisarProduto extends AppCompatActivity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
 
-        menu.findItem(R.id.filtro_busca).setVisible(true);
+        menuItem = menu.findItem(R.id.filtro_busca);
+        menuItem.setVisible(false);
 
 
         return super.onPrepareOptionsMenu(menu);
@@ -104,10 +111,20 @@ public class PesquisarProduto extends AppCompatActivity {
         if (item.getItemId() == R.id.filtro_busca) {
             //DialogCaixa dialogCaixa = new DialogCaixa();
             //dialogCaixa.show(getFragmentManager(), "dialogCaixa");
+            Intent intent =  new Intent(this, FiltroDeBusca.class);
+
+            startActivityForResult(intent, codigo_tela_filtro);
         }
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == codigo_tela_filtro && resultCode == RESULT_OK){
+            String teste = data.getStringExtra("teste");
+            Toast.makeText(context, teste, Toast.LENGTH_SHORT).show();
+        }
 
-
+    }
 }

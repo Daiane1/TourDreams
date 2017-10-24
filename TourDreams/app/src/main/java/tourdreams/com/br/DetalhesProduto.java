@@ -164,8 +164,12 @@ public class    DetalhesProduto extends AppCompatActivity {
 
             RatingBar rating_bar = (RatingBar) findViewById(R.id.rating_bar);
 
+            if (media_detalhes_produto[0].getMedia_geral().equals("N/A")){
+                rating_bar.setRating(0);
+            }else {
+                rating_bar.setRating(Float.parseFloat(media_detalhes_produto[0].getMedia_geral()));
+            }
 
-            rating_bar.setRating(Float.parseFloat(media_detalhes_produto[0].getMedia_geral()));
 
             //rating_bar.getStepSize(Integer.parseInt(media_detalhes_produto[0].getMedia_geral()));
             limpeza.setText(media_detalhes_produto[0].getLimpeza());
@@ -209,6 +213,7 @@ public class    DetalhesProduto extends AppCompatActivity {
         protected void onPostExecute(String resultado_caracteristica) {
             Gson gson = new Gson();
             Caracteristicas[] carac_detalhes_produto = gson.fromJson(resultado_caracteristica, Caracteristicas[].class);
+
 
             for(int i = 0; i < carac_detalhes_produto.length;i++){
 
@@ -273,14 +278,15 @@ public class    DetalhesProduto extends AppCompatActivity {
 
 
             try {
-                URL url_foto = new URL("http://www.site.tourdreams.com/Parceiro/Arquivos/" +  detalhesProduto[0].getImg_produto());
+                //URL url_foto = new URL("http://www.site.tourdreams.com/Parceiro/Arquivos/" +  detalhesProduto[0].getImg_produto());
+                URL url_foto = new URL("http://10.107.134.11/TourDreams/Parceiro/Arquivos/" +  detalhesProduto[0].getImg_produto());
                 Bitmap image = BitmapFactory.decodeStream(url_foto.openConnection().getInputStream());
                 Drawable d = new BitmapDrawable(getResources(), image);
 
                 if (Build.VERSION.SDK_INT > 16) {
                     produto.setBackground(d);
                 } else {
-                    Toast.makeText(context, "Fodase seu celular velho", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Arruma um celular melhor", Toast.LENGTH_SHORT).show();
                 }
 
 
