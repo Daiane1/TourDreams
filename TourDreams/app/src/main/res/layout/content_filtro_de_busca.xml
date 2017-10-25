@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:rsb="http://com.yahoo.mobile.client.android.util.rangeseekbar:rangeseekbar-library:0.1.0"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="tourdreams.com.br.FiltroDeBusca"
     tools:showIn="@layout/activity_filtro_de_busca"
@@ -30,9 +31,104 @@
             android:background="@drawable/bolinha_nova"
             android:paddingBottom="2dp"
             />
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="25dp"
+        android:weightSum="1">
 
+        <TextView
+            android:layout_weight="0.425"
+            android:layout_width="0dp"
+            android:layout_marginTop="-8dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/linha_bottom_branca"/>
+
+        <TextView
+
+            android:layout_weight="0.15"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Preço"
+            android:textColor="#fff"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:layout_weight="0.425"
+            android:layout_width="0dp"
+            android:layout_marginTop="-8dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/linha_bottom_branca"/>
 
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+
+        <com.yahoo.mobile.client.android.util.rangeseekbar.RangeSeekBar
+            android:id="@+id/rangeSeekbar"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:adjustViewBounds="true"
+            android:cropToPadding="true"
+            android:visibility="visible"
+            rsb:absoluteMaxValue="999"
+            rsb:absoluteMinValue="0" />
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="35dp"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_weight="0.35"
+            android:layout_width="0dp"
+            android:layout_marginTop="-8dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/linha_bottom_branca"/>
+
+        <TextView
+
+            android:layout_weight="0.30"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Comodidades"
+            android:textColor="#fff"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:layout_weight="0.35"
+            android:layout_width="0dp"
+            android:layout_marginTop="-8dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/linha_bottom_branca"/>
+
+    </LinearLayout>
+
+
+    <tourdreams.com.br.MyGridView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/grid_filtro_caracteristicas"
+        android:layout_margin="15dp"
+        android:numColumns="4">
+
+
+    </tourdreams.com.br.MyGridView>
+
 
 </LinearLayout>

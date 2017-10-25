@@ -279,7 +279,7 @@ public class    DetalhesProduto extends AppCompatActivity {
 
             try {
                 //URL url_foto = new URL("http://www.site.tourdreams.com/Parceiro/Arquivos/" +  detalhesProduto[0].getImg_produto());
-                URL url_foto = new URL("http://10.107.134.11/TourDreams/Parceiro/Arquivos/" +  detalhesProduto[0].getImg_produto());
+                URL url_foto = new URL("http://10.107.134.33/TourDreams/Parceiro/Arquivos/" +  detalhesProduto[0].getImg_produto());
                 Bitmap image = BitmapFactory.decodeStream(url_foto.openConnection().getInputStream());
                 Drawable d = new BitmapDrawable(getResources(), image);
 

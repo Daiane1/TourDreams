@@ -11,16 +11,16 @@
     <string name="title_activity_pesquisar_produto">Buscar</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="link">http://www.site.tourdreams.com/Parceiro/tour_dreams/</string>
+    <!--<string name="link">http://www.site.tourdreams.com/Parceiro/tour_dreams/</string>
     <string name="link_imagens">http://www.site.tourdreams.com/Parceiro/Arquivos/</string>
     <string name="link_imagens_carac">http://www.site.tourdreams.com/CMS/Fotos_Mobile/</string>
-    <string name="link_imagem_brinde">http://www.site.tourdreams.com/CMS/Arquivos/</string>
+    <string name="link_imagem_brinde">http://www.site.tourdreams.com/CMS/Arquivos/</string>-->
 
 
-    <!--<string name="link">http://10.107.134.33/TourDreams/Parceiro/tour_dreams/</string>
+    <string name="link">http://10.107.134.33/TourDreams/Parceiro/tour_dreams/</string>
     <string name="link_imagens">http://10.107.134.33/TourDreams/Parceiro/Arquivos/</string>
     <string name="link_imagens_carac">http://10.107.134.33/TourDreams/CMS/Fotos_Mobile/</string>
-    <string name="link_imagem_brinde">http://10.107.134.33/TourDreams/CMS/Arquivos/</string>-->
+    <string name="link_imagem_brinde">http://10.107.134.33/TourDreams/CMS/Arquivos/</string>
 
     <!--<string name="link">http://10.107.134.11/TourDreams/Parceiro/tour_dreams/</string>
     <string name="link_imagens">http://10.107.134.11/TourDreams/Parceiro/Arquivos/</string>
@@ -34,3 +34,5 @@
     <string name="title_activity_promocoes">Promocoes</string>
     <string name="title_activity_filtro_de_busca">Filtro De Busca</string>
 </resources>
+
+

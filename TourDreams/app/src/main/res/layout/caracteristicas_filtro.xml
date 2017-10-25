@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginRight="15dp">
+
+    <ImageView
+        android:id="@+id/imagem_caracteristica_filtro"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/bolinha"/>
+
+    <TextView
+        android:id="@+id/texto_caracteristica_filtro"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:text="wi-fi"
+        android:textAlignment="center"
+        android:textColor="#000"
+        android:textSize="14dp"/>
+
+</LinearLayout>
