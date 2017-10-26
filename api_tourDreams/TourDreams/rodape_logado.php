@@ -23,7 +23,7 @@
                         <div class="footer-title-line"></div>
                         <div class="social pull-right">
                             <ul>
-            <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.1s"><i class="fa fa-facebook"></i></a></li>
+								<li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.1s"><i class="fa fa-facebook"></i></a></li>
                                 <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s"><i class="fa fa-twitter"></i></a></li>
                                 <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.3s"><i class="fa fa-linkedin"></i></a></li>
                                 <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.4s"><i class="fa fa-instagram"></i></a></li>

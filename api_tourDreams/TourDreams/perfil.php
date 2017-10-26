@@ -3,6 +3,9 @@
 session_start();
 
  include("conexao_banco.php");
+ 
+$id_cliente=$_GET['id_cliente'];
+$nome_cliente=$_GET['nome_cliente'];
 
 ?>
 
@@ -21,11 +24,15 @@ session_start();
 		if(isset($_GET['id_cliente'])){
 			$id_cliente = (int)$_GET['id_cliente'];
 			$descricao_blog = $_POST ['comentario'];
-			$diretorio="Arquivos_Conheca_Destino/";
-			move_uploaded_file($_FILES['foto_blog']['tmp_name'], $diretorio.$foto_blog);	
+			
+			$extensao = strtolower(substr($_FILES['foto_blog']['name'], -4));
+			$foto_blog = md5(time()).$extensao;
+			$diretorio = "Arquivos_Conheca_Destino/";
+			move_uploaded_file($_FILES['foto_blog']['tmp_name'], $diretorio.$foto_blog);
 		
 			$sql="insert into tbl_blog(id_cliente, foto_blog, descricao_blog, data_publicacao, id_reserva)";
-			$sql=$sql."values(".$id_cliente.",'".$foto_blog."', '".$descricao_blog."', 'now()','2')";
+			$sql=$sql."values(".$id_cliente.",'".$foto_blog."', '".$descricao_blog."', now(),'2')";
+
 			
 			mysql_query ($sql);
 			
@@ -180,13 +187,8 @@ session_start();
 							
 							<td colspan="12" class="hiddenRow">
 							
-								<?php
-									$sql="select tbl_blog.id_cliente, tbl_cliente from tbl_blog INNER JOIN tbl_cliente ON tbl_cliente.id_cliente = tbl_blog.id_cliente;";
-									
-									
-			
-								?>
-								<form action="perfil.php" method="post">
+								
+							<form action="perfil.php?id_cliente=<?php echo($id_cliente);?>&nome_cliente=<?php echo($nome_cliente);?>" method="post" name="frm_blog" enctype="multipart/form-data"> 
 								<div class="accordian-body collapse" id="demo1">
 								  <table class="table table-striped">
 									  <span>Obs: Essas publicações serão visíveis para outros clientes.</span>
@@ -200,7 +202,7 @@ session_start();
 												<input type="text" name='comentario'  placeholder='Comentario' class="form-control"/>
 												</td>
 												<td>
-												<input type="file" class="form-control"/>
+												<input type="file" class="form-control" name="foto_blog"/>
 												</td>
 											</tr>
 											<tr id='addr1'></tr>

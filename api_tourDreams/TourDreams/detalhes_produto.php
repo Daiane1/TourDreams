@@ -74,6 +74,8 @@ if(isset($_POST['btnRegistrar_parceiro']))
 		}
 ?>
 
+
+
 <!DOCTYPE html>
 <html class="no-js">
     <head>
@@ -365,7 +367,7 @@ if(isset($_POST['btnRegistrar_parceiro']))
 							<div class="col-sm-6">
                                 <div class="form-group">
 									<i class="fa fa-calendar"></i>   <label>Entrada</label>
-                                    <input type="date" class="form-control">
+                                    <input type="date" name="entrada" class="form-control">
                                 </div>
                             </div>
 
@@ -373,25 +375,36 @@ if(isset($_POST['btnRegistrar_parceiro']))
 							<div class="col-sm-6">
                                 <div class="form-group">
 									<i class="fa fa-calendar"></i>   <label>Saída</label>
-                                    <input type="date" class="form-control">
+                                    <input type="date" name="saida" class="form-control">
                                 </div>
                             </div>
+							<?php
+								if(isset($_GET['btn_enviar_mensagem'])){				
+									$entrada=$_GET['entrada'];
+									$saida=$_GET['saida'];
+									
+									
+									$sql = "SELECT * FROM tbl_reserva where dt_entrada LIKE'%$entrada%' and dt_saida LIKE'%$saida%'";
+									$select = mysql_query($sql);
+								}
+									
+									while($rs = mysql_fetch_array($select)){
+						
+							?>
+							
+								<div class="col-sm-12 text-center">
+									<form method="get" action="detalhes_produto.php?id=<?php echo($rs['id_reserva']);?>">
+										<button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane" name="btn_enviar_mensagem"></i>  Reservar</button>
+									</form>
+								</div>
+							<?php
+								}
+									
+							?>
+				
 
-
-							<div class="col-sm-12 text-center">
-							<a href="reserva.php">
-                                <button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane" name="btn_enviar_mensagem"></i>  Reservar</button>
-							</a>
-                            </div>
-
-
-                        </aside>
+                        </aside>		
                 </div>
-
-
-
-
-
 			</div>
             </div>
         </div>

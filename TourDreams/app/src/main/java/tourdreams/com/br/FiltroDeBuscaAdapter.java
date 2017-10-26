@@ -9,6 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 /**
@@ -21,6 +23,27 @@ public class FiltroDeBuscaAdapter extends ArrayAdapter<CaracteristicasFiltro> {
         super(context, resource, objects);
         this.resource = resource;
     }
+
+
+    View.OnClickListener click_img = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            ImageView img =(ImageView) v;
+            boolean ativo = (boolean) img.getTag();
+
+            if (!ativo){
+                img.setBackgroundResource(R.drawable.jailson);
+                img.setTag(true);
+            }else {
+                img.setBackgroundResource(R.drawable.bolinha_filtro);
+                img.setTag(false);
+
+            }
+
+
+        }
+    };
 
     @NonNull
     @Override
@@ -42,10 +65,16 @@ public class FiltroDeBuscaAdapter extends ArrayAdapter<CaracteristicasFiltro> {
             TextView nome_carac_filtro = (TextView) v.findViewById(R.id.texto_caracteristica_filtro);
 
 
+            String url =  "http://10.107.144.5/TourDreams/CMS/Fotos_Mobile/" + item.getFoto_caracteristica();
 
+            Picasso.with(getContext())
+                    .load(url)
+                    .into(img_carac_filtro);
 
-            img_carac_filtro.setImageResource(item.getImagem());
-            nome_carac_filtro.setText(item.getNome());
+            nome_carac_filtro.setText(item.getNome_caracteristica());
+
+            img_carac_filtro.setOnClickListener(click_img);
+            img_carac_filtro.setTag(false);
 
         }
 

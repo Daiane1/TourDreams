@@ -249,10 +249,8 @@ if(isset($_POST['btnRegistrar_parceiro']))
                 </div>
             </div>
         </div>
-
-
-
-
+		
+	
 
 
 

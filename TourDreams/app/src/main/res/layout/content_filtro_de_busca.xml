@@ -82,7 +82,8 @@
             android:cropToPadding="true"
             android:visibility="visible"
             rsb:absoluteMaxValue="999"
-            rsb:absoluteMinValue="0" />
+            rsb:absoluteMinValue="0"
+            rsb:real="R$ " />
     </LinearLayout>
 
 
@@ -124,8 +125,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/grid_filtro_caracteristicas"
-        android:layout_margin="15dp"
-        android:numColumns="4">
+        android:layout_margin="25dp"
+        android:numColumns="3">
 
 
     </tourdreams.com.br.MyGridView>

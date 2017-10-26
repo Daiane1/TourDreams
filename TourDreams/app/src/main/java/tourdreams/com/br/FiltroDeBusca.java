@@ -1,6 +1,10 @@
 package tourdreams.com.br;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -18,6 +22,7 @@ import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.yahoo.mobile.client.android.util.rangeseekbar.RangeSeekBar;
 
 import java.util.ArrayList;
@@ -28,10 +33,15 @@ public class FiltroDeBusca extends AppCompatActivity {
     String abc = "asdawd";
     MenuItem menuItem;
     Boolean imagem = false;
+    String url, parametros;
 
     GridView grid_filtro_caracteristicas;
-    List<CaracteristicasFiltro> list_caracteristicas_filtro = new ArrayList<>();
+    //List<CaracteristicasFiltro> list_caracteristicas_filtro = new ArrayList<>();
     ArrayAdapter<CaracteristicasFiltro> adapter;
+    List<CaracteristicasFiltro> list_filtros = new ArrayList<>();
+    String o_que_o_cara_digitou;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +49,11 @@ public class FiltroDeBusca extends AppCompatActivity {
         setContentView(R.layout.activity_filtro_de_busca);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         context = this;
 
+        o_que_o_cara_digitou = getIntent().getExtras().getString("o_que_o_cara_digitou");
 
+        buscarFiltros();
 
         RangeSeekBar<Integer> seekBar = new RangeSeekBar<Integer>(this);
         seekBar = (RangeSeekBar<Integer>) findViewById(R.id.rangeSeekbar);
@@ -51,20 +62,13 @@ public class FiltroDeBusca extends AppCompatActivity {
 
         grid_filtro_caracteristicas = (GridView) findViewById(R.id.grid_filtro_caracteristicas);
 
-
-        list_caracteristicas_filtro.add (new CaracteristicasFiltro(R.drawable.ic_attach_money_black_24dp, "Money Money"));
-        list_caracteristicas_filtro.add (new CaracteristicasFiltro(R.drawable.ic_attach_money_black_24dp, "Money Money"));
-        list_caracteristicas_filtro.add (new CaracteristicasFiltro(R.drawable.ic_attach_money_black_24dp, "Money Money"));
-        list_caracteristicas_filtro.add (new CaracteristicasFiltro(R.drawable.ic_attach_money_black_24dp, "Money Money"));
-
-        FiltroDeBuscaAdapter filtroDeBuscaAdapter = new FiltroDeBuscaAdapter(this, R.layout.caracteristicas_filtro, list_caracteristicas_filtro);
-        grid_filtro_caracteristicas.setAdapter(filtroDeBuscaAdapter);
-
-
         grid_filtro_caracteristicas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 CaracteristicasFiltro caracteristicasFiltro = adapter.getItem(position);
+
+
+
             }
         });
 
@@ -86,6 +90,68 @@ public class FiltroDeBusca extends AppCompatActivity {
 
 
     }
+
+
+    private void buscarFiltros() {
+        ConnectivityManager connMgr = (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnected()){
+
+            url =  this.getString(R.string.link)+"filtros.php";
+
+            parametros = "filtro_basico=" + o_que_o_cara_digitou;
+
+
+            new FiltroDeBusca.Preencher_filtros().execute(url);
+
+        }else{
+
+            Toast.makeText(this, "Nenhuma Conexao foi detectada", Toast.LENGTH_LONG).show();
+        }
+
+
+    }
+
+
+    public class Preencher_filtros extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... urls) {
+            return Conexao.postDados(urls[0], parametros);
+        }
+
+        @Override
+        protected void onPostExecute(String resultado) {
+            Gson gson = new Gson();
+            CaracteristicasFiltro[] filtros = gson.fromJson(resultado, CaracteristicasFiltro[].class);
+
+
+
+            for(int i = 0; i < filtros.length;i++){
+
+                list_filtros.add(filtros[i]);
+
+            }
+
+
+            adapter = new FiltroDeBuscaAdapter(
+                    context,
+                    R.layout.caracteristicas_filtro,
+                    list_filtros);
+
+
+            grid_filtro_caracteristicas.setAdapter(adapter);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -118,5 +184,6 @@ public class FiltroDeBusca extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 
 }

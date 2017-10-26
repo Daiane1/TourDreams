@@ -32,12 +32,15 @@ public class PesquisarProduto extends AppCompatActivity {
     Integer codigo_tela_filtro = 1;
 
     MenuItem menuItem;
+    String resultado_listener;
 
     ListView list_view_produto_busca;
     List<ProdutosBusca> list_produto_busca = new ArrayList<>();
     SearchView.OnQueryTextListener listennerBusca= new SearchView.OnQueryTextListener() {
         @Override
         public boolean onQueryTextSubmit(String query) {
+
+             resultado_listener = query;
 
             menuItem.setVisible(true);
             return false;
@@ -113,6 +116,7 @@ public class PesquisarProduto extends AppCompatActivity {
             //dialogCaixa.show(getFragmentManager(), "dialogCaixa");
             Intent intent =  new Intent(this, FiltroDeBusca.class);
 
+            intent.putExtra("o_que_o_cara_digitou", resultado_listener);
             startActivityForResult(intent, codigo_tela_filtro);
         }
         return super.onOptionsItemSelected(item);

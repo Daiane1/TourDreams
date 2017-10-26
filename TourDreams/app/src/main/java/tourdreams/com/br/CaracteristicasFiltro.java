@@ -6,28 +6,27 @@ package tourdreams.com.br;
 
 class CaracteristicasFiltro {
 
-    int imagem;
-    String nome;
+    String nome_caracteristica;
+    String foto_caracteristica;
 
-    public CaracteristicasFiltro(int imagem, String nome) {
-        this.imagem = imagem;
-        this.nome = nome;
+    public CaracteristicasFiltro(String nome_caracteristica, String foto_caracteristica) {
+        this.nome_caracteristica = nome_caracteristica;
+        this.foto_caracteristica = foto_caracteristica;
     }
 
-    public int getImagem() {
-        return imagem;
+    public String getNome_caracteristica() {
+        return nome_caracteristica;
     }
 
-    public void setImagem(int imagem) {
-        this.imagem = imagem;
+    public void setNome_caracteristica(String nome_caracteristica) {
+        this.nome_caracteristica = nome_caracteristica;
     }
 
-    public String getNome() {
-        return nome;
+    public String getFoto_caracteristica() {
+        return foto_caracteristica;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setFoto_caracteristica(String foto_caracteristica) {
+        this.foto_caracteristica = foto_caracteristica;
     }
-
 }

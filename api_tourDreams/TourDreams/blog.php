@@ -163,24 +163,43 @@ if(isset($_POST['btnRegistrar_parceiro']))
 			<section id="blog-section" >
 			 <div class="container">
 			   <div class="row">
-				 <div class="col-lg-8">
-				   <div class="row">
-					  <div class="col-lg-6 col-md-6">
-					 <aside>
-						<img src="blog.jpg" class="img-responsive">
-						<div class="content-title">
-						<div class="text-center">
-						<h3><a href="#">Hotel Maravilhoso, melhor do Brasil!!!!!</a></h3>
+				<div class="col-lg-8">
+					<div class="row">
+						<?php
+							$sql="select b.foto_blog, b.descricao_blog, c.nome_cliente, pa.nome_fantasia,e.nome_estilo_produto from tbl_blog as b inner join tbl_cliente as c on b.id_cliente = c.id_cliente inner join tbl_reserva as r on r.id_cliente = c.id_cliente inner join tbl_quartos as q on q.id_quarto = r.id_quarto inner join tbl_produto as p on p.id_produto = q.id_produto inner join tbl_parceiros as pa on pa.id_parceiro  = p.id_parceiro inner join tbl_estilo_produto as e on e.id_estilo_produto = p.id_estilo_produto where b.id_conheca_destino = 3 and r.id_cliente = 1 and r.id_reserva=2 ";							
+							if(isset($_GET['btn_pesquisa_blog'])){
+								$nome_estilo_produto=$_GET['btn_pesquisa_blog'];
+								$sql = $sql . "and nome_estilo_produto LIKE'%$nome_estilo_produto%'";
+							}
+							$select = mysql_query($sql) or die (mysql_error());
+							
+							while($rs = mysql_fetch_array($select)){
+							
+						?>	
+					
+						<div class="col-lg-6 col-md-6">
+						<aside>
+							<?php echo "<img class = 'img-responsive' src='Arquivos_Conheca_Destino/".$rs['foto_blog']."'>"?>
+							<div class="content-title">
+							<div class="text-center">
+							<h3><a href="#"><?php echo $rs['descricao_blog']?></a></h3>
+							</div>
+							</div>
+							<div class="content-footer">
+							<?php echo "<img class = 'user-small-img' src='Arquivos_Conheca_Destino/".$rs['foto_blog']."'>"?>
+							<span style="font-size: 16px;color: #fff;"><?php echo $rs['nome_cliente']?></span>
+							</div>
+						</aside>
+						
 						</div>
-						</div>
-						<div class="content-footer">
-						<img class="user-small-img" src="blog.jpg">
-						<span style="font-size: 16px;color: #fff;">Maria Silva</span>
-						</div>
-					 </aside>
+						<?php
+							}
+						?>
 					</div>
-				   </div>
-				  </div>
+				</div>
+				  
+				  
+				  
 
 
 					<div class="col-lg-4">
@@ -191,8 +210,11 @@ if(isset($_POST['btnRegistrar_parceiro']))
 								$sql = "select * from tbl_estilo_produto";
 								$select = mysql_query($sql);
 								while($rs = mysql_fetch_array($select)){
+								
 							?>
-							<button class="categories-btn"><?php echo($rs['nome_estilo_produto']);?></button>
+							<form method="get" action="blog.php?id=<?php echo($rs['id_estilo_produto']);?>">
+								<button class="categories-btn" name="btn_pesquisa_blog" type="submit" value="<?php echo($rs['nome_estilo_produto']);?>"><?php echo($rs['nome_estilo_produto']);?></button>
+							</form>
 							<?php
 								}
 							?>
