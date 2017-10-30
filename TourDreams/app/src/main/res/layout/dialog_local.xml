@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="8dp"
+            android:text="Selecione"
+            android:fontFamily="sans-serif"
+            android:textStyle="bold"
+            android:textColor="#000"
+            android:textSize="18dp"/>
+
+        <tourdreams.com.br.MyListView
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/list_local_filtro"
+            android:choiceMode="singleChoice">
+        </tourdreams.com.br.MyListView>
+
+
+    </LinearLayout>
+
+
+
+
+</ScrollView>

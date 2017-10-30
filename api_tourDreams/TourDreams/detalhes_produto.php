@@ -74,8 +74,6 @@ if(isset($_POST['btnRegistrar_parceiro']))
 		}
 ?>
 
-
-
 <!DOCTYPE html>
 <html class="no-js">
     <head>
@@ -145,14 +143,9 @@ if(isset($_POST['btnRegistrar_parceiro']))
         </div>
 
 
-        <?php
-        @$id_cliente = $_GET['id_cliente'];
-
-      	 if ($id_cliente) {
-      	   include('menu_logado.php');
-      	 }else {
-           include('menu_nLogado.php');
-         }
+       
+        <?php      	
+      	   include('menu.php');
         ?>
 
 
@@ -300,7 +293,7 @@ if(isset($_POST['btnRegistrar_parceiro']))
 											$_SESSION['id_quarto'] = $id_quarto;
 								?>
 								<div class="col-md-4">
-									<div class="thumbnail">
+									<div class="thumbnail" id="quartos">
 										<?php echo "<img class= 'img-responsive' src='Parceiro/Arquivos/".$rs['foto_quarto']."'>"?>
 										<div class="caption">
 											<h4><?php echo($rs['descricao_quarto']);?></h4>
@@ -361,13 +354,24 @@ if(isset($_POST['btnRegistrar_parceiro']))
                                 </div>
                             </div>
 
+						<?php
+						if(isset($_POST['btn_verificar'])){
+								$entrada = $_POST['entrada'];
+								$saida = $_POST['saida'];
+							if($saida < $entrada){
+								echo "<script type='text/javascript'>
+								window.alert('Datas Inválidas')
+								</script>";
+							}
+						}
+						
+						?>
 
-
-
+						<form action="detalhes_produto.php?id_produto=<?php echo $_GET['id_produto']?>&id_cliente=<?php echo $_GET['id_cliente']?>&nome_cliente=<?php echo $_GET['nome_cliente']?>#quartos" method="post">
 							<div class="col-sm-6">
                                 <div class="form-group">
 									<i class="fa fa-calendar"></i>   <label>Entrada</label>
-                                    <input type="date" name="entrada" class="form-control">
+                                    <input type="date" class="form-control" name="entrada">
                                 </div>
                             </div>
 
@@ -375,51 +379,34 @@ if(isset($_POST['btnRegistrar_parceiro']))
 							<div class="col-sm-6">
                                 <div class="form-group">
 									<i class="fa fa-calendar"></i>   <label>Saída</label>
-                                    <input type="date" name="saida" class="form-control">
+                                    <input type="date" class="form-control" name="saida">
                                 </div>
                             </div>
-							<?php
-								if(isset($_GET['btn_enviar_mensagem'])){				
-									$entrada=$_GET['entrada'];
-									$saida=$_GET['saida'];
-									
-									
-									$sql = "SELECT * FROM tbl_reserva where dt_entrada LIKE'%$entrada%' and dt_saida LIKE'%$saida%'";
-									$select = mysql_query($sql);
-								}
-									
-									while($rs = mysql_fetch_array($select)){
+
 						
-							?>
 							
 								<div class="col-sm-12 text-center">
-									<form method="get" action="detalhes_produto.php?id=<?php echo($rs['id_reserva']);?>">
-										<button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane" name="btn_enviar_mensagem"></i>  Reservar</button>
-									</form>
+									<a href="">
+										<button class="btn btn-primary"><i class="fa fa-paper-plane" name="btn_verificar"></i>  Verificar</button>
+									</a>
 								</div>
-							<?php
-								}
-									
-							?>
-				
+						</form>
 
-                        </aside>		
+                        </aside>
                 </div>
+
+
+
+
+
 			</div>
             </div>
         </div>
 
-        <!-- Footer area-->
-        <?php
-          @$id_cliente = $_GET['id_cliente'];
-
-           if ($id_cliente) {
-             include('rodape_logado.php');
-           }else {
-             include('rodape_nLogado.php');
-           }
+      
+        <?php      	
+      	   include('rodape.php');
         ?>
-
         <script src="assets/js/vendor/modernizr-2.6.2.min.js"></script>
         <script src="assets/js/jquery-1.10.2.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>

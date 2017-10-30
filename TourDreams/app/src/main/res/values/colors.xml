@@ -7,4 +7,7 @@
     <color name="fundo_pesquisa">#F0E68C</color>
     <color name="cor_azul">#265478</color>
     <color name="cor_verde">#2e8b57 </color>
+    <color name="cor_clara">#ccff6a00</color>
+
+    ccff6a00
 </resources>

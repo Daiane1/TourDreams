@@ -146,14 +146,8 @@ if(isset($_POST['btnRegistrar_parceiro']))
 
 
 
-        <?php
-        @$id_cliente = $_GET['id_cliente'];
-
-      	 if ($id_cliente) {
-      	   include('menu_logado.php');
-      	 }else {
-           include('menu_nLogado.php');
-         }
+        <?php      	
+      	   include('menu.php');
         ?>
 
 
@@ -166,7 +160,7 @@ if(isset($_POST['btnRegistrar_parceiro']))
 				<div class="col-lg-8">
 					<div class="row">
 						<?php
-							$sql="select b.foto_blog, b.descricao_blog, c.nome_cliente, pa.nome_fantasia,e.nome_estilo_produto from tbl_blog as b inner join tbl_cliente as c on b.id_cliente = c.id_cliente inner join tbl_reserva as r on r.id_cliente = c.id_cliente inner join tbl_quartos as q on q.id_quarto = r.id_quarto inner join tbl_produto as p on p.id_produto = q.id_produto inner join tbl_parceiros as pa on pa.id_parceiro  = p.id_parceiro inner join tbl_estilo_produto as e on e.id_estilo_produto = p.id_estilo_produto where b.id_conheca_destino = 3 and r.id_cliente = 1 and r.id_reserva=2 ";							
+							$sql="select b.foto_blog, b.descricao_blog, c.nome_cliente, pa.nome_fantasia,e.nome_estilo_produto from tbl_blog as b inner join tbl_cliente as c on b.id_cliente = c.id_cliente inner join tbl_reserva as r on r.id_cliente = c.id_cliente inner join tbl_quartos as q on q.id_quarto = r.id_quarto inner join tbl_produto as p on p.id_produto = q.id_produto inner join tbl_parceiros as pa on pa.id_parceiro  = p.id_parceiro inner join tbl_estilo_produto as e on e.id_estilo_produto = p.id_estilo_produto where b.id_conheca_destino = 2 and r.id_cliente = 1 and r.id_reserva=2 ";							
 							if(isset($_GET['btn_pesquisa_blog'])){
 								$nome_estilo_produto=$_GET['btn_pesquisa_blog'];
 								$sql = $sql . "and nome_estilo_produto LIKE'%$nome_estilo_produto%'";
@@ -212,7 +206,7 @@ if(isset($_POST['btnRegistrar_parceiro']))
 								while($rs = mysql_fetch_array($select)){
 								
 							?>
-							<form method="get" action="blog.php?id=<?php echo($rs['id_estilo_produto']);?>">
+							<form method="get" action="blog.php?id=<?php echo($rs['id_estilo_produto'])?>&id_cliente=<?php echo($_GET['id_cliente'])?>&nome_cliente="<?php echo($_GET['nome_cliente'])?>>
 								<button class="categories-btn" name="btn_pesquisa_blog" type="submit" value="<?php echo($rs['nome_estilo_produto']);?>"><?php echo($rs['nome_estilo_produto']);?></button>
 							</form>
 							<?php
@@ -226,6 +220,10 @@ if(isset($_POST['btnRegistrar_parceiro']))
 			</section>
 
 
+			
+        <?php      	
+      	   include('rodape.php');
+        ?>
 
 
 	 <script src="js/jquery-3.1.1.js"></script>
@@ -255,19 +253,7 @@ for (i = 0; i < acc.length; i++) {
 }
 </script>
 
-<?php
-  @$id_cliente = $_GET['id_cliente'];
-
-   if ($id_cliente) {
-     include('rodape_logado.php');
-   }else {
-     include('rodape_nLogado.php');
-   }
-?>
-
-
-
-        </div>
+		
 
         <script src="assets/js/modernizr-2.6.2.min.js"></script>
 

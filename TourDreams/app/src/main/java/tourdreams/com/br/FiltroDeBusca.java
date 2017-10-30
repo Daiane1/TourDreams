@@ -113,6 +113,7 @@ public class FiltroDeBusca extends AppCompatActivity {
     }
 
 
+
     public class Preencher_filtros extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... urls) {
@@ -184,6 +185,16 @@ public class FiltroDeBusca extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
+
+
+    public void abrir_localizacao_filtro(View view) {
+
+        DialogLocal dialogLocal = new DialogLocal();
+        dialogLocal.show(getFragmentManager(), "dialogLocal");
+    }
+
 
 
 }

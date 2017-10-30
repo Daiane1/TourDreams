@@ -143,14 +143,8 @@ if(isset($_POST['btnRegistrar_parceiro']))
         </div>
 
 
-        <?php
-        @$id_cliente = $_GET['id_cliente'];
-
-         if ($id_cliente) {
-           include('menu_logado.php');
-         }else {
-           include('menu_nLogado.php');
-         }
+        <?php      	
+      	   include('menu.php');
         ?>
 
 
@@ -260,15 +254,9 @@ if(isset($_POST['btnRegistrar_parceiro']))
 			</div>
 		</div>
 
-        <!-- Footer area-->
-        <?php
-        @$id_cliente = $_GET['id_cliente'];
-
-      	 if ($id_cliente) {
-      	   include('rodape_logado.php');
-      	 }else {
-           include('rodape_nLogado.php');
-         }
+        
+        <?php      	
+      	   include('rodape.php');
         ?>
 
         <script src="assets/js/modernizr-2.6.2.min.js"></script>

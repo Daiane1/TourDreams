@@ -143,14 +143,9 @@ if(isset($_POST['btnRegistrar_parceiro']))
         </div>
 
 
-        <?php
-        @$id_cliente = $_GET['id_cliente'];
-
-      	 if ($id_cliente) {
-      	   include('menu_logado.php');
-      	 }else {
-           include('menu_nLogado.php');
-         }
+        
+        <?php      	
+      	   include('menu.php');
         ?>
 
 
@@ -161,7 +156,7 @@ if(isset($_POST['btnRegistrar_parceiro']))
             <div class="container">
                 <div class="row">
                     <div class="proerty-th">
-						
+
 						<div class="col-sm-6 col-md-3 p0">
                             <div class="box-two proerty-item">
                                 <div class="item-thumb">
@@ -251,7 +246,7 @@ if(isset($_POST['btnRegistrar_parceiro']))
                                         </div>
 
 										<div class="text-center">
-											<button type="submit" name="btnVisualizar_reserva" class="btn btn-default">Reservar </button>
+											<button type="submit" class="btn btn-default"> Reservar</button>
 										</div>
 									</form>
 									<br>
@@ -287,7 +282,6 @@ if(isset($_POST['btnRegistrar_parceiro']))
 
 
                     </div>
-				
                 </div>
             </div>
         </div>
@@ -303,15 +297,9 @@ if(isset($_POST['btnRegistrar_parceiro']))
 
 
 
-        <!-- Footer area-->
-        <?php
-          @$id_cliente = $_GET['id_cliente'];
-
-           if ($id_cliente) {
-             include('rodape_logado.php');
-           }else {
-             include('rodape_nLogado.php');
-           }
+        
+        <?php      	
+      	   include('rodape.php');
         ?>
 
         <script src="assets/js/modernizr-2.6.2.min.js"></script>

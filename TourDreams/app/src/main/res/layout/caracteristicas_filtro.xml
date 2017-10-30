@@ -16,6 +16,7 @@
             android:id="@+id/imagem_caracteristica_filtro"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:padding="15dp"
             android:background="@drawable/bolinha_filtro"/>
 
         <TextView

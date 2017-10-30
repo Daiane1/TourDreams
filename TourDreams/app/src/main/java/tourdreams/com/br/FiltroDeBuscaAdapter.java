@@ -5,6 +5,8 @@ import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -33,10 +35,15 @@ public class FiltroDeBuscaAdapter extends ArrayAdapter<CaracteristicasFiltro> {
             boolean ativo = (boolean) img.getTag();
 
             if (!ativo){
-                img.setBackgroundResource(R.drawable.jailson);
+                Animation animation = AnimationUtils.loadAnimation(getContext().getApplicationContext(), R.anim.fade_in);
+                img.setBackgroundResource(R.drawable.bolinha_verde);
+                img.startAnimation(animation);
                 img.setTag(true);
             }else {
+                Animation animation_out = AnimationUtils.loadAnimation(getContext().getApplicationContext(), R.anim.fade_out);
+                img.startAnimation(animation_out);
                 img.setBackgroundResource(R.drawable.bolinha_filtro);
+
                 img.setTag(false);
 
             }
@@ -65,7 +72,7 @@ public class FiltroDeBuscaAdapter extends ArrayAdapter<CaracteristicasFiltro> {
             TextView nome_carac_filtro = (TextView) v.findViewById(R.id.texto_caracteristica_filtro);
 
 
-            String url =  "http://10.107.144.5/TourDreams/CMS/Fotos_Mobile/" + item.getFoto_caracteristica();
+            String url = "http://10.107.144.5/TourDreams/CMS/Fotos_Mobile/" + item.getFoto_caracteristica();
 
             Picasso.with(getContext())
                     .load(url)

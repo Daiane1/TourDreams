@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -14,122 +14,137 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="25dp"
-        android:gravity="center"
-        >
+        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="120dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Localização"
-            android:textColor="#fff"
-            android:paddingTop="3dp"
-            android:textAlignment="center"
-            android:paddingLeft="5dp"
-            android:drawableLeft="@drawable/ic_location_on_white_24dp"
-            android:background="@drawable/bolinha_nova"
-            android:paddingBottom="2dp"
-            />
+            android:orientation="horizontal"
+            android:layout_marginTop="25dp"
+            android:gravity="center"
+
+            >
+
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="Localização"
+                android:textColor="#fff"
+                android:paddingTop="3dp"
+                android:textAlignment="center"
+                android:paddingLeft="5dp"
+                android:drawableLeft="@drawable/ic_location_on_white_24dp"
+                android:background="@drawable/bolinha_nova"
+                android:paddingBottom="2dp"
+                android:onClick="abrir_localizacao_filtro"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="25dp"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_weight="0.425"
+                android:layout_width="0dp"
+                android:layout_marginTop="-8dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/linha_bottom_branca"/>
+
+            <TextView
+
+                android:layout_weight="0.15"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Preço"
+                android:textColor="#fff"
+                android:textAlignment="center"/>
+
+            <TextView
+                android:layout_weight="0.425"
+                android:layout_width="0dp"
+                android:layout_marginTop="-8dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/linha_bottom_branca"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+
+            <com.yahoo.mobile.client.android.util.rangeseekbar.RangeSeekBar
+                android:id="@+id/rangeSeekbar"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:adjustViewBounds="true"
+                android:cropToPadding="true"
+                android:visibility="visible"
+                rsb:absoluteMaxValue="999"
+                rsb:absoluteMinValue="0"
+                rsb:real="R$ " />
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="35dp"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_weight="0.35"
+                android:layout_width="0dp"
+                android:layout_marginTop="-8dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/linha_bottom_branca"/>
+
+            <TextView
+
+                android:layout_weight="0.30"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Comodidades"
+                android:textColor="#fff"
+                android:textAlignment="center"/>
+
+            <TextView
+                android:layout_weight="0.35"
+                android:layout_width="0dp"
+                android:layout_marginTop="-8dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/linha_bottom_branca"/>
+
+        </LinearLayout>
+
+
+        <tourdreams.com.br.MyGridView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/grid_filtro_caracteristicas"
+            android:layout_margin="25dp"
+            android:numColumns="3">
+
+
+        </tourdreams.com.br.MyGridView>
+
+
+
+
+
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="25dp"
-        android:weightSum="1">
-
-        <TextView
-            android:layout_weight="0.425"
-            android:layout_width="0dp"
-            android:layout_marginTop="-8dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/linha_bottom_branca"/>
-
-        <TextView
-
-            android:layout_weight="0.15"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Preço"
-            android:textColor="#fff"
-            android:textAlignment="center"/>
-
-        <TextView
-            android:layout_weight="0.425"
-            android:layout_width="0dp"
-            android:layout_marginTop="-8dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/linha_bottom_branca"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="1">
-
-
-        <com.yahoo.mobile.client.android.util.rangeseekbar.RangeSeekBar
-            android:id="@+id/rangeSeekbar"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:adjustViewBounds="true"
-            android:cropToPadding="true"
-            android:visibility="visible"
-            rsb:absoluteMaxValue="999"
-            rsb:absoluteMinValue="0"
-            rsb:real="R$ " />
-    </LinearLayout>
 
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="35dp"
-        android:weightSum="1">
-
-        <TextView
-            android:layout_weight="0.35"
-            android:layout_width="0dp"
-            android:layout_marginTop="-8dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/linha_bottom_branca"/>
-
-        <TextView
-
-            android:layout_weight="0.30"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Comodidades"
-            android:textColor="#fff"
-            android:textAlignment="center"/>
-
-        <TextView
-            android:layout_weight="0.35"
-            android:layout_width="0dp"
-            android:layout_marginTop="-8dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/linha_bottom_branca"/>
-
-    </LinearLayout>
-
-
-    <tourdreams.com.br.MyGridView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/grid_filtro_caracteristicas"
-        android:layout_margin="25dp"
-        android:numColumns="3">
-
-
-    </tourdreams.com.br.MyGridView>
-
-
-</LinearLayout>
+</ScrollView>
