@@ -55,9 +55,9 @@ public class FiltroDeBusca extends AppCompatActivity {
 
         buscarFiltros();
 
-        RangeSeekBar<Integer> seekBar = new RangeSeekBar<Integer>(this);
-        seekBar = (RangeSeekBar<Integer>) findViewById(R.id.rangeSeekbar);
-        seekBar.setRangeValues(1 , 999);
+        RangeSeekBar<Float> seekBar = new RangeSeekBar<Float>(this);
+        seekBar = (RangeSeekBar<Float>) findViewById(R.id.rangeSeekbar);
+        seekBar.setRangeValues(1.5f , 250.50f);
 
 
         grid_filtro_caracteristicas = (GridView) findViewById(R.id.grid_filtro_caracteristicas);
@@ -72,14 +72,9 @@ public class FiltroDeBusca extends AppCompatActivity {
             }
         });
 
-
-
-
-
-
-        seekBar.setOnRangeSeekBarChangeListener(new RangeSeekBar.OnRangeSeekBarChangeListener<Integer>() {
+        seekBar.setOnRangeSeekBarChangeListener(new RangeSeekBar.OnRangeSeekBarChangeListener<Float>() {
             @Override
-            public void onRangeSeekBarValuesChanged(RangeSeekBar<?> bar, Integer minValue, Integer maxValue) {
+            public void onRangeSeekBarValuesChanged(RangeSeekBar<?> bar, Float minValue, Float maxValue) {
 
             }
 

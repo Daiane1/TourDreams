@@ -19,9 +19,7 @@
 
         <div class="collapse navbar-collapse yamm" id="navigation">
             <div class="button navbar-right">
-                 <a class="" href="perfil.php?id_cliente=<?php echo$_GET['id_cliente'];?>&nome_cliente=<?php echo$_GET['nome_cliente'];?>"><button class="navbar-btn nav-button wow bounceInRight login" data-wow-delay="0.45s">Meu Perfil</button></a>
-			</div>
-			<div>
+                <a class="" href="perfil.php?id_cliente=<?php echo$_GET['id_cliente'];?>&nome_cliente=<?php echo$_GET['nome_cliente'];?>"><button class="navbar-btn nav-button wow bounceInRight login" data-wow-delay="0.45s">Meu Perfil</button></a>
 				<a class="" href="index.php"><button class="navbar-btn nav-button wow bounceInRight login" data-wow-delay="0.45s">Logout</button></a>
 			</div>
             <ul class="main-nav nav navbar-nav navbar-right">

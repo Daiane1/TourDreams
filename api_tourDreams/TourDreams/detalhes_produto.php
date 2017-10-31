@@ -355,19 +355,25 @@ if(isset($_POST['btnRegistrar_parceiro']))
                             </div>
 
 						<?php
+						$id_cliente = $_GET['id_cliente'];
+						$id_produto = $_GET['id_produto'];
+						$nome_cliente = $_GET['nome_cliente'];
 						if(isset($_POST['btn_verificar'])){
-								$entrada = $_POST['entrada'];
-								$saida = $_POST['saida'];
-							if($saida < $entrada){
+							$entrada = $_POST['entrada'];
+							$saida = $_POST['saida'];
+							if(strtotime($saida) <= strtotime($entrada)){
+								@header("location:detalhes_produto.php?id_produto=".$id_produto."&id_cliente=".$id_cliente."&nome_cliente=".$nome_cliente."");
 								echo "<script type='text/javascript'>
 								window.alert('Datas Inválidas')
 								</script>";
+							}else{
+								@header("location:detalhes_produto.php?id_produto=".$id_produto."&id_cliente=".$id_cliente."&nome_cliente=".$nome_cliente."#quartos");
 							}
 						}
 						
 						?>
 
-						<form action="detalhes_produto.php?id_produto=<?php echo $_GET['id_produto']?>&id_cliente=<?php echo $_GET['id_cliente']?>&nome_cliente=<?php echo $_GET['nome_cliente']?>#quartos" method="post">
+						<form method="post">
 							<div class="col-sm-6">
                                 <div class="form-group">
 									<i class="fa fa-calendar"></i>   <label>Entrada</label>
@@ -387,7 +393,7 @@ if(isset($_POST['btnRegistrar_parceiro']))
 							
 								<div class="col-sm-12 text-center">
 									<a href="">
-										<button class="btn btn-primary"><i class="fa fa-paper-plane" name="btn_verificar"></i>  Verificar</button>
+										<button class="btn btn-primary" name="btn_verificar" type="submit"><i class="fa fa-paper-plane"></i>  Verificar</button>
 									</a>
 								</div>
 						</form>

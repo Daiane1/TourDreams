@@ -8,6 +8,9 @@ class CaracteristicasFiltro {
 
     String nome_caracteristica;
     String foto_caracteristica;
+    String localizacao;
+    String preco_minimo;
+    String preco_maximo;
 
     public CaracteristicasFiltro(String nome_caracteristica, String foto_caracteristica) {
         this.nome_caracteristica = nome_caracteristica;
