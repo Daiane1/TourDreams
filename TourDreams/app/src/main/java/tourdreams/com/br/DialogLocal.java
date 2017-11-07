@@ -79,8 +79,8 @@ class DialogLocal extends DialogFragment{
         list_local_filtro.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                position =  list_local_filtro.getCheckedItemPosition();
 
+                FiltroDeBusca.txt_localizacao.setText(data.get(position));
                 dismiss();
             }
         });

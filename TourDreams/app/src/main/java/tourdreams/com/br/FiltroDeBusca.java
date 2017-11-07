@@ -20,6 +20,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -29,7 +30,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FiltroDeBusca extends AppCompatActivity {
+
+
+
+    public static TextView txt_localizacao;
     FiltroDeBusca context;
+
+
     String abc = "asdawd";
     MenuItem menuItem;
     Boolean imagem = false;
@@ -40,6 +47,9 @@ public class FiltroDeBusca extends AppCompatActivity {
     ArrayAdapter<CaracteristicasFiltro> adapter;
     List<CaracteristicasFiltro> list_filtros = new ArrayList<>();
     String o_que_o_cara_digitou;
+    String localizacao;
+
+
 
 
 
@@ -52,6 +62,8 @@ public class FiltroDeBusca extends AppCompatActivity {
         context = this;
 
         o_que_o_cara_digitou = getIntent().getExtras().getString("o_que_o_cara_digitou");
+        txt_localizacao = (TextView) findViewById(R.id.txt_localizacao);
+
 
         buscarFiltros();
 
@@ -172,8 +184,10 @@ public class FiltroDeBusca extends AppCompatActivity {
         if (item.getItemId() == R.id.aceitar) {
 
             Intent intent =  new Intent();
-            intent.putExtra("teste", "TESTE");
-            intent.putExtra("teste2", abc);
+            intent.putExtra("localizacao", txt_localizacao.getText());
+            /*intent.putExtra("preco_minimo", seekBar.getSelectedMinValue());
+            intent.putExtra("preco_maximo", seekBar.getSelectedMaxValue());*/
+            intent.putExtra("caracteristicas", "");
             context.setResult(RESULT_OK,intent);
             context.finish();
 

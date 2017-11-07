@@ -254,19 +254,38 @@ public class    DetalhesProduto extends AppCompatActivity {
     }
 
     private class preencher_produto extends AsyncTask<String, Void, String> {
+
+        Drawable d;
+
+        DetalhesProdutoGetSetter[] detalhesProduto;
+
         @Override
         protected String doInBackground(String... urls){
+            String retorno = Conexao.postDados(urls[0], parametros);
+            Gson gson = new Gson();
+           detalhesProduto = gson.fromJson(retorno, DetalhesProdutoGetSetter[].class);
 
+            try {
+                //URL url_foto = new URL("http://www.site.tourdreams.com/Parceiro/Arquivos/" +  detalhesProduto[0].getImg_produto());
+                URL url_foto = new URL(getString(R.string.link_imagens) +  detalhesProduto[0].getImg_produto());
+                Bitmap image = BitmapFactory.decodeStream(url_foto.openConnection().getInputStream());
+                 d = new BitmapDrawable(getResources(), image);
 
-            return Conexao.postDados(urls[0], parametros);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return  retorno;
+
 
         }
 
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String resultado){
-            Gson gson = new Gson();
-            DetalhesProdutoGetSetter[] detalhesProduto = gson.fromJson(resultado, DetalhesProdutoGetSetter[].class);
+
 
             CollapsingToolbarLayout produto = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
 
@@ -277,26 +296,12 @@ public class    DetalhesProduto extends AppCompatActivity {
 
 
 
-            try {
-                //URL url_foto = new URL("http://www.site.tourdreams.com/Parceiro/Arquivos/" +  detalhesProduto[0].getImg_produto());
-                URL url_foto = new URL("http://10.107.144.5/TourDreams/Parceiro/Arquivos/" +  detalhesProduto[0].getImg_produto());
-                Bitmap image = BitmapFactory.decodeStream(url_foto.openConnection().getInputStream());
-                Drawable d = new BitmapDrawable(getResources(), image);
 
                 if (Build.VERSION.SDK_INT > 16) {
                     produto.setBackground(d);
                 } else {
                     Toast.makeText(context, "Arruma um celular melhor", Toast.LENGTH_SHORT).show();
                 }
-
-
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
 
 
 

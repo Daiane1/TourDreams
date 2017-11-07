@@ -2,7 +2,10 @@ package tourdreams.com.br;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.nfc.Tag;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
@@ -18,9 +21,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +39,9 @@ public class PesquisarProduto extends AppCompatActivity {
 
     MenuItem menuItem;
     String resultado_listener;
+    String url, parametros;
+
+    ArrayAdapter<ProdutosBusca> adapter;
 
     ListView list_view_produto_busca;
     List<ProdutosBusca> list_produto_busca = new ArrayList<>();
@@ -40,7 +49,30 @@ public class PesquisarProduto extends AppCompatActivity {
         @Override
         public boolean onQueryTextSubmit(String query) {
 
-             resultado_listener = query;
+            resultado_listener = query;
+
+            list_view_produto_busca = (ListView) findViewById(R.id.list_resultado_busca);
+
+       
+
+            ConnectivityManager connMgr = (ConnectivityManager)getApplication().getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+            if (networkInfo != null && networkInfo.isConnected()){
+
+                url =  getApplication().getString(R.string.link)+"busca_basica.php";
+
+                parametros = "busca_basica=" + resultado_listener;
+
+
+                new PesquisarProduto.Preencher_busca().execute(url);
+
+            }else{
+
+                Toast.makeText(getApplicationContext(), "Nenhuma Conexao foi detectada", Toast.LENGTH_LONG).show();
+            }
+
+        
+
 
             menuItem.setVisible(true);
             return false;
@@ -52,6 +84,38 @@ public class PesquisarProduto extends AppCompatActivity {
         }
     };
 
+    private class Preencher_busca extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... strings) {
+            return Conexao.postDados(strings[0], parametros);
+        }
+
+        @Override
+        protected void onPostExecute(String resultado) {
+            Gson gson = new Gson();
+            ProdutosBusca[] produtosBusca = gson.fromJson(resultado, ProdutosBusca[].class);
+
+
+
+
+            for(int i = 0; i < produtosBusca.length;i++){
+
+                list_produto_busca.add(produtosBusca[i]);
+
+            }
+
+            adapter = new ProdutosBuscaAdapter(
+                    context,
+                    R.layout.list_item_resultado_busca,
+                    list_produto_busca);
+
+
+            list_view_produto_busca.setAdapter(adapter);
+
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,19 +125,6 @@ public class PesquisarProduto extends AppCompatActivity {
 
 
         context = this;
-
-        list_view_produto_busca = (ListView) findViewById(R.id.list_resultado_busca);
-
-        list_produto_busca.add (new ProdutosBusca(R.drawable.alguma, "Olympia Residence", "Vila Olímpia, São Paulo - 7,3 km do centro", "4,5", "R$ 397,95"));
-        list_produto_busca.add (new ProdutosBusca(R.drawable.sheraton, "Sheraton WTC Hotel", "Brooklin Novo, São Paulo - 9,1 km do centro", "4,0", "R$ 450,95"));
-        list_produto_busca.add (new ProdutosBusca(R.drawable.hilton, "Hilton Morumbi", "Brooklin Novo, São Paulo - 9,3 km do centro", "4,7", "R$ 475,95"));
-        list_produto_busca.add (new ProdutosBusca(R.drawable.gran, "Gran Estanplaza Berrini", "Brooklin Novo, São Paulo - 9,2 km do centro", "4,5", "R$ 350,95"));
-        list_produto_busca.add (new ProdutosBusca(R.drawable.bourbon, "Bourbon Convention", "Moema, São Paulo - 7,3 km do centro", "4,9", "R$ 268,80"));
-
-        ProdutosBuscaAdapter produtosBuscaAdapter = new ProdutosBuscaAdapter(this, R.layout.list_item_resultado_busca, list_produto_busca);
-        list_view_produto_busca.setAdapter(produtosBuscaAdapter);
-
-
 
     }
 

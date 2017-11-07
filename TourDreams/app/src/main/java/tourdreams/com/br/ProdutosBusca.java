@@ -6,22 +6,32 @@ package tourdreams.com.br;
 
 public class ProdutosBusca  {
 
-    int img_produto_busca;
+    String img_produto_busca;
+    int id_produto;
     String nome_produto_busca, local_produto_busca, nota_produto_busca, preco_produto_busca;
 
-    public ProdutosBusca(int img_produto_busca, String nome_produto_busca, String local_produto_busca, String nota_produto_busca, String preco_produto_busca) {
+    public ProdutosBusca(String img_produto_busca, int id_produto, String nome_produto_busca, String local_produto_busca, String nota_produto_busca, String preco_produto_busca) {
         this.img_produto_busca = img_produto_busca;
+        this.id_produto = id_produto;
         this.nome_produto_busca = nome_produto_busca;
         this.local_produto_busca = local_produto_busca;
         this.nota_produto_busca = nota_produto_busca;
         this.preco_produto_busca = preco_produto_busca;
     }
 
-    public int getImg_produto_busca() {
+    public int getId_produto() {
+        return id_produto;
+    }
+
+    public void setId_produto(int id_produto) {
+        this.id_produto = id_produto;
+    }
+
+    public String getImg_produto_busca() {
         return img_produto_busca;
     }
 
-    public void setImg_produto_busca(int img_produto_busca) {
+    public void setImg_produto_busca(String img_produto_busca) {
         this.img_produto_busca = img_produto_busca;
     }
 

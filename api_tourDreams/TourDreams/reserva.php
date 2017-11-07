@@ -1,72 +1,8 @@
 <?php
-
-session_start();
-
-include("conexao_banco.php");
-
-if(isset($_POST['btnRegistrar_parceiro']))
-{
-  $empresa = $_POST['empresa'];
-  $nome_parceiro = $_POST['nome_parceiro'];
-  $cnpj = $_POST['cnpj'];
-  $senha = $_POST['senha'];
-  $gerente = $_POST['gerente'];
-  $telefone = $_POST['telefone'];
-  $celular = $_POST['celular'];
-  $email = $_POST['email'];
-
-
-
-  $sql="insert into tbl_parceiros(nome_empresa, nome_fantasia, cnpj, senha, nome_gerente, telefone, celular, email)";
-  $sql=$sql."values('".$empresa."', '".$nome_parceiro."', '".$cnpj."', '".$senha."', '".$gerente."', '".$celular."', '".$telefone."', '".$email."')";
-  mysql_query($sql);
-
-	$id_parceiro=mysql_insert_id();
-
-	$sql = "SELECT * FROM tbl_parceiros where id_parceiro='".$id_parceiro."'";
-	$sqlResult = mysql_query($sql);
-
-  if($consulta=mysql_fetch_array($sqlResult)){
-		$id = $consulta['id_parceiro'];
-		$nome_empresa = $consulta['nome_empresa'];
-		header("location:Parceiro/cadastro_parceiro.php?nome_empresa=".$nome_empresa."&id_parceiro=".$id);
-	}
-}
-
- ?>
-
-<?php
-
-
-
-	if(isset($_POST['btn_logar_parceiro']))
-	{
-		$cnpj=$_POST['cnpj'];
-		$senha=$_POST['senha'];
-
+		 session_start();
 
 		include("conexao_banco.php");
 
-		$sql = "SELECT * FROM tbl_parceiros where cnpj = '".$cnpj."' AND senha= '".$senha."'";
-		$sqlResult = mysql_query($sql);
-
-		if(mysql_num_rows ($sqlResult) > 0){
-			$_SESSION['cnpj'] = $cnpj;
-			$_SESSION['senha'] = $senha;
-
-			if($consulta=mysql_fetch_array($sqlResult)){
-				header("location:Parceiro/index.php");
-			}
-
-		}else{
-			echo "<script type='text/javascript'>
-			window.alert('Login ou Senha inválidos')
-			</script>";
-		}
-	}
-?>
-
-<?php
 		$cor = "#fff";
 		$sql = "select * from tbl_cores";
 		$select = mysql_query($sql);
@@ -80,7 +16,7 @@ if(isset($_POST['btnRegistrar_parceiro']))
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>TourDreams | Home</title>
+        <title>TourDreams | Reserva</title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -156,43 +92,52 @@ if(isset($_POST['btnRegistrar_parceiro']))
             <div class="container">
                 <div class="row">
                     <div class="proerty-th">
-
-						<div class="col-sm-6 col-md-3 p0">
-                            <div class="box-two proerty-item">
-                                <div class="item-thumb">
-                                    <a href="detalhes_produto.php" ><img src="assets/img/demo/produto1.jpg"></a>
-                                </div>
-                                <div class="item-entry overflow">
-                                    <h5><a href="detalhes_produto.php" >Nome Produto</a></h5>
-                                    <div class="dot-hr"></div>
-                                    <span class="pull-left"><i class="fa fa-binoculars"></i>  <b>Milhas :</b> 580 </span>
-                                    <span class="proerty-price pull-right">R$300,00</span>
-                                </div>
-								<div class="vote">
-									<label>
-										<input  name="fb" value="1" />
-										<i class="fa"></i>
-									</label>
-									<label>
-										<input name="fb" value="2" />
-										<i class="fa"></i>
-									</label>
-									<label>
-										<input  name="fb" value="3" />
-										<i class="fa"></i>
-									</label>
-									<label>
-										<input  name="fb" value="4" />
-										<i class="fa"></i>
-									</label>
-									<label>
-										<input name="fb" value="5" />
-										<i class="fa"></i>
-									</label>
-							    </div>
-
-                            </div>
-                        </div>
+							<ul class="thumbnails">
+								<?php
+									if (isset ($_SESSION['id_quarto'])) {
+										$sql = "select * from view_quartos where id_quarto =".$_SESSION['id_quarto'];
+										$select = mysql_query($sql);
+										while($rs = mysql_fetch_array($select)){
+											$preco_diaria=$rs['preco_diaria'];
+											$id_quarto=$rs['id_quarto'];
+											$_SESSION['id_quarto'] = $id_quarto;
+								?>
+								<div class="col-md-4">
+									<div class="thumbnail" id="quartos">
+										<?php echo "<img class= 'img-responsive' src='Parceiro/Arquivos/".$rs['foto_quarto']."'>"?>
+										<div class="caption">
+											<h4><?php echo($rs['descricao_quarto']);?></h4>
+										<div class="property-meta entry-meta clearfix ">
+											<?php
+												$id_cliente = $_GET['id_cliente'];
+												$id_produto = $_GET['id_produto'];
+												$nome_cliente = $_GET['nome_cliente'];
+												$sql = "select * from view_carac_quartos where id_quarto =".$_SESSION['id_quarto'];
+												$select = mysql_query($sql);
+												while($rs_consulta = mysql_fetch_array($select)){
+											?>
+											<div class="col-xs-3 col-sm-3 col-md-3 p-b-15">
+												<span class="property-info-icon icon-garage">
+													<i class="fa <?php echo($rs_consulta['foto_caracteristica_quarto']);?>"></i>
+												</span>
+												<span class="property-info-entry">
+													<span class="property-info-label"><?php echo($rs_consulta['caracteristica_quarto']);?></span>
+												</span>
+											</div>
+											<?php
+												}
+											?>
+										</div>
+											<h4 align="center">R$ <?php echo number_format($preco_diaria, 2, ',', '');?></h4>
+										</div>
+									</div>
+								</div>
+								<?php
+									}
+								}
+								?>
+							</ul>
+						
 
 						<div class="col-md-6">
 							<div class="box-for overflow">
@@ -214,14 +159,6 @@ if(isset($_POST['btnRegistrar_parceiro']))
 										<div class="form-group">
 											<label>Email</label>
 											<input type="email" class="form-control" placeholder="Digite seu email" name="">
-										</div>
-										<div class="form-group">
-											<label>Quartos</label>
-											<select id="basic" class="selectpicker show-tick form-control">
-												<option>1</option>
-												<option>2</option>
-												<option>3</option>
-											</select>
 										</div>
 										<div class="form-group">
 											<label>Adultos</label>
@@ -254,33 +191,6 @@ if(isset($_POST['btnRegistrar_parceiro']))
 
 							</div>
 						</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                     </div>
                 </div>
             </div>

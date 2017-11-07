@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,6 +22,12 @@ import java.util.List;
 public class FiltroDeBuscaAdapter extends ArrayAdapter<CaracteristicasFiltro> {
 
     int resource;
+
+    ImageView img_carac_filtro;
+    TextView nome_carac_filtro;
+
+    List<String> nome_carac_filtros = new ArrayList<>();
+
     public FiltroDeBuscaAdapter(Context context, int resource, List<CaracteristicasFiltro> objects) {
         super(context, resource, objects);
         this.resource = resource;
@@ -39,6 +46,8 @@ public class FiltroDeBuscaAdapter extends ArrayAdapter<CaracteristicasFiltro> {
                 img.setBackgroundResource(R.drawable.bolinha_verde);
                 img.startAnimation(animation);
                 img.setTag(true);
+
+
             }else {
                 Animation animation_out = AnimationUtils.loadAnimation(getContext().getApplicationContext(), R.anim.fade_out);
                 img.startAnimation(animation_out);
@@ -68,11 +77,11 @@ public class FiltroDeBuscaAdapter extends ArrayAdapter<CaracteristicasFiltro> {
 
         if (item != null) {
 
-            ImageView img_carac_filtro = (ImageView) v.findViewById(R.id.imagem_caracteristica_filtro);
-            TextView nome_carac_filtro = (TextView) v.findViewById(R.id.texto_caracteristica_filtro);
+            img_carac_filtro = (ImageView) v.findViewById(R.id.imagem_caracteristica_filtro);
+            nome_carac_filtro = (TextView) v.findViewById(R.id.texto_caracteristica_filtro);
 
 
-            String url = "http://10.107.144.5/TourDreams/CMS/Fotos_Mobile/" + item.getFoto_caracteristica();
+            String url = "http://10.107.134.11/TourDreams/CMS/Fotos_Mobile/" + item.getFoto_caracteristica();
 
             Picasso.with(getContext())
                     .load(url)

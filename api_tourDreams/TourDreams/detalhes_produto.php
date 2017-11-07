@@ -87,7 +87,7 @@ if(isset($_POST['btnRegistrar_parceiro']))
         <link rel='stylesheet' type='text/css'>
 
 
-
+		
         <link rel="stylesheet" href="assets/css/normalize.css">
         <link rel="stylesheet" href="assets/css/font-awesome.min.css">
         <link rel="stylesheet" href="assets/css/fontello.css">
@@ -104,13 +104,47 @@ if(isset($_POST['btnRegistrar_parceiro']))
         <link rel="stylesheet" href="assets/css/lightslider.min.css">
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/css/responsive.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 
 		<style type="text/css">
 			.header-connect{
 				padding-top: 10px;
 				background-color:<?php switch ($cores) {case "": echo $cor;break; default: echo $cores;break;}?>;
 			}
+			
+			
+			
+			
 		</style>
+		
+		
+		<script>
+             $(document).ready(function() {
+					
+					var $doc = $('html, body');
+					$('#ancora').click(function() {
+						$doc.animate({
+							//scrollTop: $( $.attr(this, 'href') ).offset().top
+							scrollTop: $('#quartos').offset().top
+							
+						}, 1000);
+						return false;
+					});
+					
+					
+                });		
+		</script>
+		
+		<script>
+			function Mudarestado(el) {
+				var display = document.getElementById(el).style.display;
+				if(display == "none")
+					document.getElementById(el).style.display = 'block';
+				else
+					document.getElementById(el).style.display = 'none';
+			}
+		</script>
+		
 
     </head>
     <body>
@@ -276,18 +310,25 @@ if(isset($_POST['btnRegistrar_parceiro']))
 
                         </section>
 
-					<div class="container">
+					<div class="container" style="display:none;" id="quartos_disponiveis">
 
 
-						<h4 class="text-uppercase wow fadeInLeft animated">Quartos disponíveis</h4>
+						<h4 class="text-uppercase wow fadeInLeft animated">Quarto(s) disponível(s)</h4>
 						<div class="row">
 							<ul class="thumbnails">
 								<?php
-									if (isset ($_GET['id_produto'])) {
-										$id_produto = (int)$_GET['id_produto'];
-										$sql = "select * from view_quartos where id_produto =".$id_produto;
+								
+									if (isset ($_GET['id_produto'])){
+										$sql = "select quartos.id_quarto, quartos.id_produto, quartos.descricao_quarto,
+										(quartos.preco_diaria +((quartos.preco_diaria * 10) / 100)) as preco_diaria, ft_quarto.foto_quarto from tbl_quartos as quartos
+										inner join tbl_fotos_quartos as ft_quarto
+										on quartos.id_quarto =  ft_quarto.id_quarto 
+										where id_produto = '$id_produto'  and quartos.id_quarto not in(
+											select id_quarto from tbl_reserva where('$entrada_banco' between dt_entrada and dt_saida) or ('$saida_banco' between dt_entrada and dt_saida)
+										);";
+										echo($sql);
 										$select = mysql_query($sql);
-										while($rs = mysql_fetch_array($select)){
+									while($rs = mysql_fetch_array($select)){
 											$preco_diaria=$rs['preco_diaria'];
 											$id_quarto=$rs['id_quarto'];
 											$_SESSION['id_quarto'] = $id_quarto;
@@ -299,6 +340,9 @@ if(isset($_POST['btnRegistrar_parceiro']))
 											<h4><?php echo($rs['descricao_quarto']);?></h4>
 										<div class="property-meta entry-meta clearfix ">
 											<?php
+												$id_cliente = $_GET['id_cliente'];
+												$id_produto = $_GET['id_produto'];
+												$nome_cliente = $_GET['nome_cliente'];
 												$sql = "select * from view_carac_quartos where id_quarto =".$_SESSION['id_quarto'];
 												$select = mysql_query($sql);
 												while($rs_consulta = mysql_fetch_array($select)){
@@ -318,10 +362,15 @@ if(isset($_POST['btnRegistrar_parceiro']))
 											<h4 align="center">R$ <?php echo number_format($preco_diaria, 2, ',', '');?></h4>
 										</div>
 									</div>
+									<div class="botao_reservar">
+										<a href="reserva.php?id_produto=<?php echo $id_produto?>&id_cliente=<?php echo $id_cliente?>&nome_cliente=<?php echo $nome_cliente?>">
+											<button class="btn btn-primary" type="submit"><i class="fa fa-check-circle"></i>  Reservar</button>
+										</a>
+									</div>
 								</div>
 								<?php
 									}
-								}
+								    }
 								?>
 							</ul>
 						</div>
@@ -357,23 +406,38 @@ if(isset($_POST['btnRegistrar_parceiro']))
 						<?php
 						$id_cliente = $_GET['id_cliente'];
 						$id_produto = $_GET['id_produto'];
-						$nome_cliente = $_GET['nome_cliente'];
+						$nome_cliente = $_GET['nome_cliente'];	
 						if(isset($_POST['btn_verificar'])){
 							$entrada = $_POST['entrada'];
 							$saida = $_POST['saida'];
 							if(strtotime($saida) <= strtotime($entrada)){
-								@header("location:detalhes_produto.php?id_produto=".$id_produto."&id_cliente=".$id_cliente."&nome_cliente=".$nome_cliente."");
 								echo "<script type='text/javascript'>
 								window.alert('Datas Inválidas')
 								</script>";
 							}else{
-								@header("location:detalhes_produto.php?id_produto=".$id_produto."&id_cliente=".$id_cliente."&nome_cliente=".$nome_cliente."#quartos");
+								$entrada_banco = implode("-",array_reverse(explode("/",$entrada)));	
+								$saida_banco = implode("-",array_reverse(explode("/",$saida)));
+								$sql_code_select_disponivel="select * from tbl_quartos where id_produto = '$id_produto'  and id_quarto not in(
+								select id_quarto from tbl_reserva where('$entrada_banco' between dt_entrada and dt_saida) or ('$saida_banco' between dt_entrada and dt_saida)
+								);";
+								$select_result = mysql_query($sql_code_select_disponivel) or die (mysql_error());
+								if(mysql_num_rows($select_result) > 0){
+									echo "<script type='text/javascript'>
+									location.hash='#quartos';
+									</script>";
+								}else{
+									echo "<script type='text/javascript'>
+									window.alert('Todos os quartos já foram alugados nessas datas')
+									</script>";
+								}
+								
 							}
+							
 						}
 						
 						?>
 
-						<form method="post">
+						<form method="get">
 							<div class="col-sm-6">
                                 <div class="form-group">
 									<i class="fa fa-calendar"></i>   <label>Entrada</label>
@@ -388,14 +452,11 @@ if(isset($_POST['btnRegistrar_parceiro']))
                                     <input type="date" class="form-control" name="saida">
                                 </div>
                             </div>
-
-						
 							
-								<div class="col-sm-12 text-center">
-									<a href="">
-										<button class="btn btn-primary" name="btn_verificar" type="submit"><i class="fa fa-paper-plane"></i>  Verificar</button>
-									</a>
-								</div>
+							<div class="col-sm-12 text-center">
+								<input type="submit" name="btn_verificar" class="btn btn-primary" id = "ancora" onclick="Mudarestado('quartos_disponiveis')">
+								<!--<button type="submit" class="btn btn-primary" name="btn_verificar" id = "ancora"  onclick="Mudarestado('quartos_disponiveis')"> <i class="fa fa-pencil-square-o"></i>  Verificar</button>-->
+							</div>
 						</form>
 
                         </aside>
@@ -426,23 +487,30 @@ if(isset($_POST['btnRegistrar_parceiro']))
         <script src="assets/js/price-range.js"></script>
         <script type="text/javascript" src="assets/js/lightslider.min.js"></script>
         <script src="assets/js/main.js"></script>
+		
+		
+		
+		
 
+	
+		
+		
         <script>
-                            $(document).ready(function () {
+			$(document).ready(function () {
 
-                                $('#image-gallery').lightSlider({
-                                    gallery: true,
-                                    item: 1,
-                                    thumbItem: 9,
-                                    slideMargin: 0,
-                                    speed: 500,
-                                    auto: true,
-                                    loop: true,
-                                    onSliderLoad: function () {
-                                        $('#image-gallery').removeClass('cS-hidden');
-                                    }
-                                });
-                            });
+				$('#image-gallery').lightSlider({
+					gallery: true,
+					item: 1,
+					thumbItem: 9,
+					slideMargin: 0,
+					speed: 500,
+					auto: true,
+					loop: true,
+					onSliderLoad: function () {
+						$('#image-gallery').removeClass('cS-hidden');
+					}
+				});
+			});
         </script>
 
         <script>

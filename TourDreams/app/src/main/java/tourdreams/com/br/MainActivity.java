@@ -201,9 +201,9 @@ public class MainActivity extends AppCompatActivity
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String resultado){
-
             Gson gson = new Gson();
             ProdutosHome[] produtosHome = gson.fromJson(resultado, ProdutosHome[].class);
+
 
 
 
@@ -222,6 +222,7 @@ public class MainActivity extends AppCompatActivity
             list_view_produto.setAdapter(adapter);
 
         }
+
 
     }
 

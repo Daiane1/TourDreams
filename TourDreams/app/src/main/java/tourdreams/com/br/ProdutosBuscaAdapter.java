@@ -9,6 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 /**
@@ -45,9 +47,12 @@ public class ProdutosBuscaAdapter extends ArrayAdapter<ProdutosBusca> {
             TextView nota_produto = (TextView) v.findViewById(R.id.nota_produto_busca);
             TextView preco_produto = (TextView) v.findViewById(R.id.preco_produto_busca);
 
+            String url = getContext().getString(R.string.link_imagens) + item.getImg_produto_busca() ;
 
+            Picasso.with(getContext())
+                    .load(url)
+                    .into(img_produto);
 
-            img_produto.setImageResource(item.getImg_produto_busca());
             nome_produto.setText(item.getNome_produto_busca());
             nome_local.setText(item.getLocal_produto_busca());
             nota_produto.setText(item.getNota_produto_busca());
