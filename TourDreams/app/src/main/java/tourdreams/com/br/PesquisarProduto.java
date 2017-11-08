@@ -29,6 +29,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.zip.Inflater;
 
@@ -51,7 +52,6 @@ public class PesquisarProduto extends AppCompatActivity {
 
             resultado_listener = query;
 
-            list_view_produto_busca = (ListView) findViewById(R.id.list_resultado_busca);
 
        
 
@@ -97,21 +97,11 @@ public class PesquisarProduto extends AppCompatActivity {
             ProdutosBusca[] produtosBusca = gson.fromJson(resultado, ProdutosBusca[].class);
 
 
+            adapter.clear();
+            adapter.addAll(Arrays.asList(produtosBusca));
 
 
-            for(int i = 0; i < produtosBusca.length;i++){
 
-                list_produto_busca.add(produtosBusca[i]);
-
-            }
-
-            adapter = new ProdutosBuscaAdapter(
-                    context,
-                    R.layout.list_item_resultado_busca,
-                    list_produto_busca);
-
-
-            list_view_produto_busca.setAdapter(adapter);
 
         }
     }
@@ -123,8 +113,19 @@ public class PesquisarProduto extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        list_view_produto_busca = (ListView) findViewById(R.id.list_resultado_busca);
+
 
         context = this;
+
+        adapter = new ProdutosBuscaAdapter(
+                context,
+                R.layout.list_item_resultado_busca,
+                new ArrayList<ProdutosBusca>());
+
+
+        list_view_produto_busca.setAdapter(adapter);
+
 
     }
 
@@ -178,7 +179,8 @@ public class PesquisarProduto extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == codigo_tela_filtro && resultCode == RESULT_OK){
             String teste = data.getStringExtra("teste");
-            Toast.makeText(context, teste, Toast.LENGTH_SHORT).show();
+            String teste2 = data.getStringExtra("min_value");
+            Toast.makeText(context, teste2, Toast.LENGTH_SHORT).show();
         }
 
     }

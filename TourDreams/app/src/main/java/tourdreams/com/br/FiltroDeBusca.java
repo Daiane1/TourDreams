@@ -49,6 +49,8 @@ public class FiltroDeBusca extends AppCompatActivity {
     String o_que_o_cara_digitou;
     String localizacao;
 
+    String teste;
+
 
 
 
@@ -71,6 +73,9 @@ public class FiltroDeBusca extends AppCompatActivity {
         seekBar = (RangeSeekBar<Float>) findViewById(R.id.rangeSeekbar);
         seekBar.setRangeValues(1.5f , 250.50f);
 
+        teste = seekBar.getAbsoluteMinValue().toString();
+        teste = seekBar.getSelectedMinValue().toString();
+
 
         grid_filtro_caracteristicas = (GridView) findViewById(R.id.grid_filtro_caracteristicas);
 
@@ -78,9 +83,6 @@ public class FiltroDeBusca extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 CaracteristicasFiltro caracteristicasFiltro = adapter.getItem(position);
-
-
-
             }
         });
 
@@ -188,6 +190,9 @@ public class FiltroDeBusca extends AppCompatActivity {
             /*intent.putExtra("preco_minimo", seekBar.getSelectedMinValue());
             intent.putExtra("preco_maximo", seekBar.getSelectedMaxValue());*/
             intent.putExtra("caracteristicas", "");
+            intent.putExtra("min_value" , teste);
+
+
             context.setResult(RESULT_OK,intent);
             context.finish();
 

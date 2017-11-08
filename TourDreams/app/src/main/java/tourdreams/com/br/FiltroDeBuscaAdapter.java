@@ -81,7 +81,7 @@ public class FiltroDeBuscaAdapter extends ArrayAdapter<CaracteristicasFiltro> {
             nome_carac_filtro = (TextView) v.findViewById(R.id.texto_caracteristica_filtro);
 
 
-            String url = "http://10.107.134.11/TourDreams/CMS/Fotos_Mobile/" + item.getFoto_caracteristica();
+            String url = getContext().getString(R.string.link_imagens_carac) + item.getFoto_caracteristica();
 
             Picasso.with(getContext())
                     .load(url)
