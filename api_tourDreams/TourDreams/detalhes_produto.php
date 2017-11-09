@@ -74,6 +74,10 @@ if(isset($_POST['btnRegistrar_parceiro']))
 		}
 ?>
 
+
+
+
+
 <!DOCTYPE html>
 <html class="no-js">
     <head>
@@ -104,7 +108,7 @@ if(isset($_POST['btnRegistrar_parceiro']))
         <link rel="stylesheet" href="assets/css/lightslider.min.css">
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/css/responsive.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+		
 
 		<style type="text/css">
 			.header-connect{
@@ -118,32 +122,44 @@ if(isset($_POST['btnRegistrar_parceiro']))
 		</style>
 		
 		
+	
+		
+		<script type="text/javascript" src="jquery.js"></script>
+		
 		<script>
-             $(document).ready(function() {
-					
-					var $doc = $('html, body');
-					$('#ancora').click(function() {
+		
+		function Nome(id_produto){
+             $("#form_reserva").submit(function(event){
+				 
+				 
+                 event.preventDefault();
+                 
+                $.ajax({
+                    type: "POST",
+			        url: "quartos.php?id_produto=" + id_produto,
+                    data: new FormData($("#form_reserva")[0]),
+                    cache:false,
+                    contentType:false,
+                    processData:false,
+                    async:true,
+                    success: function(dados){
+                         $('.reserva_disponivel').html(dados);
+						
+						var $doc = $('html, body');
 						$doc.animate({
 							//scrollTop: $( $.attr(this, 'href') ).offset().top
 							scrollTop: $('#quartos').offset().top
 							
 						}, 1000);
 						return false;
-					});
-					
-					
-                });		
-		</script>
+                        
+                    }
+                });
+                 
+             });
+		}; 		
+        </script>
 		
-		<script>
-			function Mudarestado(el) {
-				var display = document.getElementById(el).style.display;
-				if(display == "none")
-					document.getElementById(el).style.display = 'block';
-				else
-					document.getElementById(el).style.display = 'none';
-			}
-		</script>
 		
 
     </head>
@@ -310,71 +326,12 @@ if(isset($_POST['btnRegistrar_parceiro']))
 
                         </section>
 
-					<div class="container" style="display:none;" id="quartos_disponiveis">
-
-
-						<h4 class="text-uppercase wow fadeInLeft animated">Quarto(s) disponível(s)</h4>
-						<div class="row">
-							<ul class="thumbnails">
-								<?php
-								
-									if (isset ($_GET['id_produto'])){
-										$sql = "select quartos.id_quarto, quartos.id_produto, quartos.descricao_quarto,
-										(quartos.preco_diaria +((quartos.preco_diaria * 10) / 100)) as preco_diaria, ft_quarto.foto_quarto from tbl_quartos as quartos
-										inner join tbl_fotos_quartos as ft_quarto
-										on quartos.id_quarto =  ft_quarto.id_quarto 
-										where id_produto = '$id_produto'  and quartos.id_quarto not in(
-											select id_quarto from tbl_reserva where('$entrada_banco' between dt_entrada and dt_saida) or ('$saida_banco' between dt_entrada and dt_saida)
-										);";
-										echo($sql);
-										$select = mysql_query($sql);
-									while($rs = mysql_fetch_array($select)){
-											$preco_diaria=$rs['preco_diaria'];
-											$id_quarto=$rs['id_quarto'];
-											$_SESSION['id_quarto'] = $id_quarto;
-								?>
-								<div class="col-md-4">
-									<div class="thumbnail" id="quartos">
-										<?php echo "<img class= 'img-responsive' src='Parceiro/Arquivos/".$rs['foto_quarto']."'>"?>
-										<div class="caption">
-											<h4><?php echo($rs['descricao_quarto']);?></h4>
-										<div class="property-meta entry-meta clearfix ">
-											<?php
-												$id_cliente = $_GET['id_cliente'];
-												$id_produto = $_GET['id_produto'];
-												$nome_cliente = $_GET['nome_cliente'];
-												$sql = "select * from view_carac_quartos where id_quarto =".$_SESSION['id_quarto'];
-												$select = mysql_query($sql);
-												while($rs_consulta = mysql_fetch_array($select)){
-											?>
-											<div class="col-xs-3 col-sm-3 col-md-3 p-b-15">
-												<span class="property-info-icon icon-garage">
-													<i class="fa <?php echo($rs_consulta['foto_caracteristica_quarto']);?>"></i>
-												</span>
-												<span class="property-info-entry">
-													<span class="property-info-label"><?php echo($rs_consulta['caracteristica_quarto']);?></span>
-												</span>
-											</div>
-											<?php
-												}
-											?>
-										</div>
-											<h4 align="center">R$ <?php echo number_format($preco_diaria, 2, ',', '');?></h4>
-										</div>
-									</div>
-									<div class="botao_reservar">
-										<a href="reserva.php?id_produto=<?php echo $id_produto?>&id_cliente=<?php echo $id_cliente?>&nome_cliente=<?php echo $nome_cliente?>">
-											<button class="btn btn-primary" type="submit"><i class="fa fa-check-circle"></i>  Reservar</button>
-										</a>
-									</div>
-								</div>
-								<?php
-									}
-								    }
-								?>
-							</ul>
+					
+						<div class="reserva_disponivel" id="quartos">
+						
 						</div>
-					</div>
+						
+						
                     </div>
                 </div>
 
@@ -406,7 +363,10 @@ if(isset($_POST['btnRegistrar_parceiro']))
 						<?php
 						$id_cliente = $_GET['id_cliente'];
 						$id_produto = $_GET['id_produto'];
-						$nome_cliente = $_GET['nome_cliente'];	
+						$nome_cliente = $_GET['nome_cliente'];
+
+						
+						
 						if(isset($_POST['btn_verificar'])){
 							$entrada = $_POST['entrada'];
 							$saida = $_POST['saida'];
@@ -437,7 +397,7 @@ if(isset($_POST['btnRegistrar_parceiro']))
 						
 						?>
 
-						<form method="get">
+						<form method="post" id="form_reserva" action="">
 							<div class="col-sm-6">
                                 <div class="form-group">
 									<i class="fa fa-calendar"></i>   <label>Entrada</label>
@@ -454,8 +414,7 @@ if(isset($_POST['btnRegistrar_parceiro']))
                             </div>
 							
 							<div class="col-sm-12 text-center">
-								<input type="submit" name="btn_verificar" class="btn btn-primary" id = "ancora" onclick="Mudarestado('quartos_disponiveis')">
-								<!--<button type="submit" class="btn btn-primary" name="btn_verificar" id = "ancora"  onclick="Mudarestado('quartos_disponiveis')"> <i class="fa fa-pencil-square-o"></i>  Verificar</button>-->
+								<input type="submit" onclick="Nome(<?php echo $_GET['id_produto'] ?>)" class="btn btn-primary" name="btn_verificar" value="Verificar">
 							</div>
 						</form>
 

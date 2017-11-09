@@ -1,5 +1,5 @@
 <?php
-		 session_start();
+		session_start();
 
 		include("conexao_banco.php");
 
@@ -10,6 +10,8 @@
 			$cores=$rsConsulta['cores'];
 		}
 ?>
+
+
 
 <!DOCTYPE html>
 <html class="no-js">
@@ -109,9 +111,6 @@
 											<h4><?php echo($rs['descricao_quarto']);?></h4>
 										<div class="property-meta entry-meta clearfix ">
 											<?php
-												$id_cliente = $_GET['id_cliente'];
-												$id_produto = $_GET['id_produto'];
-												$nome_cliente = $_GET['nome_cliente'];
 												$sql = "select * from view_carac_quartos where id_quarto =".$_SESSION['id_quarto'];
 												$select = mysql_query($sql);
 												while($rs_consulta = mysql_fetch_array($select)){
@@ -146,7 +145,7 @@
 									<form action="" method="post">
 										<div class="form-group">
 											<label>Responsável pela reserva</label>
-											<input type="text" class="form-control" placeholder="Obs: Cliente que fará o pagamento no hotel/resort/pousada" name="">
+											<input type="text" class="form-control" placeholder="Obs: Cliente que fará o pagamento no hotel/resort/pousada" name="" <?php echo $_SESSION['id_cliente']?>>
 										</div>
 										<div class="form-group">
 											<label>CPF</label>
