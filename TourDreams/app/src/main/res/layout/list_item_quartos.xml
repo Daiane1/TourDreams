@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="15dp"
+    android:weightSum="1"
+    android:background="@drawable/box_shadow">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="180dp"
+        android:layout_weight="0.40">
+
+        <ImageView
+            android:id="@+id/img_produto_busca"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="4dp"
+            android:src="@drawable/resort1"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_weight="0.60"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/nome_produto_busca"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="15dp"
+            android:text="Só aqui na Casa do Vinicius você tem o melhor lugar para descansar"
+            android:textColor="#000"
+            android:textSize="13dp" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <LinearLayout
+                android:layout_weight="0.5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Banheiro"
+                    android:textAlignment="center"
+                    android:textColor="#000"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_weight="0.5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:gravity="end"
+            android:text="Valor Final"
+            android:textColor="#313131"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/preco_produto_busca"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:gravity="end"
+            android:text="R$ 455,55"
+            android:textColor="#21b300"
+            android:textSize="22dp" />
+
+
+    </LinearLayout>
+
+</LinearLayout>

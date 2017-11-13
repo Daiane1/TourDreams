@@ -235,18 +235,51 @@ $nome_cliente=$_GET['nome_cliente'];
 								<table class="table table-hover">
 								  <thead>
 									<tr>
-									  <th>Data</th>
+									  <th>Data Entrada</th>
+									  <th>Data Saída</th>
 									  <th>Empresa Parceira</th>
 									  <th>Local</th>
+									  <th>Preço reserva</th>
 									  <th>Status</th>
 									</tr>
 								  </thead>
 								  <tbody id="items">
+									<?php
+										$sql = "select * from view_reserva_cliente where id_cliente=".$_GET['id_cliente'];
+										$select = mysql_query($sql);
+										while($rs = mysql_fetch_array($select)){
+											$preco_diaria=$rs['valor_reserva'];
+											$dt_entrada=$rs['dt_entrada'];
+											$dt_saida=$rs['dt_saida'];
+											$dt_nasc_sem_hora_entrada = substr($dt_entrada, 0,10);
+											$dt_nasc_sem_hora_saida = substr($dt_saida, 0,10);
+											
+											$dt_nasc_sem_hora_entrada = explode("-", $dt_entrada );
+											$dt_nasc_sem_hora_saida = explode("-", $dt_saida );
+											
+											$dia = $dt_nasc_sem_hora_entrada[2]; 
+											$mes = $dt_nasc_sem_hora_entrada[1];	
+											$ano = $dt_nasc_sem_hora_entrada[0];
+											
+											$dia_saida = $dt_nasc_sem_hora_saida[2]; 
+											$mes_saida = $dt_nasc_sem_hora_saida[1];	
+											$ano_saida = $dt_nasc_sem_hora_saida[0];
+										
+										
+											$dt_nasc_volta_entrada = $dia."/".$mes."/".$ano;
+											$dt_nasc_volta_saida = $dia_saida."/".$mes_saida."/".$ano_saida;
+										?>
 									<tr>
-									  <td>20/10/2017</td>
-									  <td>Hotel Maneiro</td>
-									  <td>Maneiro Hotels</td>
-									  <td>Esperando Confirmação</td>
+										
+										<td><?php echo $dt_nasc_volta_entrada?></td>
+										<td><?php echo $dt_nasc_volta_saida?></td>
+										<td><?php echo $rs['nome_fantasia'];?></td>
+										<td><?php echo $rs['logradouro'];?>, <?php echo $rs['numero'];?> </td>
+										<td>R$ <?php echo number_format($preco_diaria, 2, ',', '');?></td>
+										<td><?php echo $rs['status_reserva'];?></td>
+										<?php
+											}
+										?>
 									</tr>
 								  </tbody>
 								</table>
@@ -254,11 +287,85 @@ $nome_cliente=$_GET['nome_cliente'];
 
 							 </div><!--/tab-pane-->
 							  </div><!--/tab-pane-->
-						  </div><!--/tab-content-->
-
-						</div><!--/col-9-->
+						  </div><!--/tab-content-->						
+					</div><!--/col-9-->
 				</div><!--/row-->
                                </hr>
+				
+
+		<div class="properties-area recent-property" style="background-color: #FFF;">
+            <div class="container">
+                <div class="row">
+				
+				<div class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title">
+                    <h2>Seus Locais Visitados</h2>
+                    <p>"Encontre, Conheça, Reserve e Curta a sua viagem em nosso Portal de Viagens"</p>
+				</div>
+				
+				
+            <div class="col-md-9  pr0 padding-top-40 properties-page">
+                    <div class="col-md-12 clear">
+                        <div id="list-type" class="proerty-th">
+
+						<?php
+						$sql = "select * from view_reserva_cliente where id_cliente =".$_GET['id_cliente'];
+						$select = mysql_query($sql) or die (mysql_error());
+						while($rs = mysql_fetch_array($select)){
+							$preco_diaria=$rs['valor_reserva'];
+						?>
+                            <div class="col-sm-6 col-md-4 p0">
+                                    <div class="box-two proerty-item">
+                                        <div class="item-thumb">
+                                            <?php echo "<img src='Parceiro/Arquivos/".$rs['foto_principal_site']."'>"?>
+                                        </div>
+
+                                        <div class="item-entry overflow">
+											<h5><a href=""><?php echo($rs['nome_fantasia'])?></a></h5>
+											<div class="dot-hr"></div>
+											<span class="pull-left"><i class="fa fa-binoculars"></i>  <b>Milhas :</b> <?php echo($rs['qtd_milhas']);?> </span>
+											<span class="proerty-price pull-right">R$ <?php echo number_format($preco_diaria, 2, ',', '');?></span>
+										</div>
+
+										<div class="vote">
+											<label>
+												<input  name="fb" value="1" />
+												<i class="fa"></i>
+											</label>
+											<label>
+												<input name="fb" value="2" />
+												<i class="fa"></i>
+											</label>
+											<label>
+												<input  name="fb" value="3" />
+												<i class="fa"></i>
+											</label>
+											<label>
+												<input  name="fb" value="4" />
+												<i class="fa"></i>
+											</label>
+											<label>
+												<input name="fb" value="5" />
+												<i class="fa"></i>
+											</label>
+										</div>
+                                    </div>
+                            </div>
+							<?php
+								}
+
+							?>
+                        </div>
+                    </div>
+
+
+            </div>
+				
+                
+                </div>
+            </div>
+        </div>
+						   
+		
 
 
 

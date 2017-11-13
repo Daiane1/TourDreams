@@ -11,8 +11,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.GridView;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -20,44 +18,40 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Promocoes extends AppCompatActivity {
+public class ReservarQuarto extends AppCompatActivity {
 
     String url, parametros;
-    List<ItensPromocoes> list_promocoes = new ArrayList<>();
 
-    ArrayAdapter<ItensPromocoes> adapter;
+    List<ReservarQuartoGetSetter> list_quartos = new ArrayList<>();
+    ArrayAdapter<ReservarQuartoGetSetter> adapter;
+
     Context context;
-
-    ListView list_view_promocoes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_promocoes);
+        setContentView(R.layout.activity_reservar_quarto);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         context = this;
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        list_view_promocoes = (ListView) findViewById(R.id.list_promocoes);
-        carregarPromocoes();
+
 
     }
 
-
-    private void carregarPromocoes() {
+    private void buscarProduto() {
 
         ConnectivityManager connMgr = (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected()){
 
-            url =  this.getString(R.string.link)+"produto_promocoes.php";
+            url =  this.getString(R.string.link)+"detalhes_produto.php";
 
-            parametros ="";
+            parametros = "id_produto=" + id_produto_vem;
 
-
-            new Promocoes.Preencher_promocoes().execute(url);
+            new ReservarQuarto.preencher_quartos().execute(url);
 
         }else{
 
@@ -66,11 +60,10 @@ public class Promocoes extends AppCompatActivity {
 
     }
 
+    public class preencher_quartos extends AsyncTask<String, Void, String> {
 
-    private class Preencher_promocoes extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... urls){
-
 
             return Conexao.postDados(urls[0], parametros);
 
@@ -79,28 +72,25 @@ public class Promocoes extends AppCompatActivity {
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String resultado){
-
             Gson gson = new Gson();
-            ItensPromocoes[] itensPromocoes = gson.fromJson(resultado, ItensPromocoes[].class);
+            ReservarQuartoGetSetter[] reservarQuartoGetSetters = gson.fromJson(resultado, ReservarQuartoGetSetter[].class);
 
+           for(int i = 0; i < reservarQuartoGetSetters.length;i++){
 
-
-            for(int i = 0; i < itensPromocoes.length;i++){
-
-                list_promocoes.add(itensPromocoes[i]);
+               list_quartos.add(reservarQuartoGetSetters[i]);
 
             }
 
-            adapter = new PromocesAdapter(
+            adapter = new ReservarQuartoAdapter(
                     context,
-                    R.layout.list_item_promocoes,
-                    list_promocoes);
+                    R.layout.list_item_quartos,
+                    list_quartos);
 
 
-            list_view_promocoes.setAdapter(adapter);
+            list_view_produto.setAdapter(adapter);
 
         }
 
-    }
 
+    }
 }

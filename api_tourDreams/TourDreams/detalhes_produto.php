@@ -128,7 +128,7 @@ if(isset($_POST['btnRegistrar_parceiro']))
 		
 		<script>
 		
-		function Nome(id_produto){
+		function Nome(produto, cliente, nome){
              $("#form_reserva").submit(function(event){
 				 
 				 
@@ -136,7 +136,7 @@ if(isset($_POST['btnRegistrar_parceiro']))
                  
                 $.ajax({
                     type: "POST",
-			        url: "quartos.php?id_produto=" + id_produto,
+			        url: "quartos.php?id_produto=" + produto + "&id_cliente=" + cliente + "&nome_cliente=" + nome,
                     data: new FormData($("#form_reserva")[0]),
                     cache:false,
                     contentType:false,
@@ -159,8 +159,7 @@ if(isset($_POST['btnRegistrar_parceiro']))
              });
 		}; 		
         </script>
-		
-		
+	
 
     </head>
     <body>
@@ -363,36 +362,30 @@ if(isset($_POST['btnRegistrar_parceiro']))
 						<?php
 						$id_cliente = $_GET['id_cliente'];
 						$id_produto = $_GET['id_produto'];
-						$nome_cliente = $_GET['nome_cliente'];
+						$nome_cliente = "'".addslashes ($_GET['nome_cliente'])."'";
 
-						
+
 						
 						if(isset($_POST['btn_verificar'])){
 							$entrada = $_POST['entrada'];
 							$saida = $_POST['saida'];
-							if(strtotime($saida) <= strtotime($entrada)){
+							$entrada_banco = implode("-",array_reverse(explode("/",$entrada)));	
+							$saida_banco = implode("-",array_reverse(explode("/",$saida)));
+							$sql_code_select_disponivel="select * from tbl_quartos where id_produto = '$id_produto'  and id_quarto not in(
+							select id_quarto from tbl_reserva where('$entrada_banco' between dt_entrada and dt_saida) or ('$saida_banco' between dt_entrada and dt_saida)
+							);";
+							$select_result = mysql_query($sql_code_select_disponivel) or die (mysql_error());
+							if(mysql_num_rows($select_result) > 0){
 								echo "<script type='text/javascript'>
-								window.alert('Datas Inválidas')
+								location.hash='#quartos';
 								</script>";
-							}else{
-								$entrada_banco = implode("-",array_reverse(explode("/",$entrada)));	
-								$saida_banco = implode("-",array_reverse(explode("/",$saida)));
-								$sql_code_select_disponivel="select * from tbl_quartos where id_produto = '$id_produto'  and id_quarto not in(
-								select id_quarto from tbl_reserva where('$entrada_banco' between dt_entrada and dt_saida) or ('$saida_banco' between dt_entrada and dt_saida)
-								);";
-								$select_result = mysql_query($sql_code_select_disponivel) or die (mysql_error());
-								if(mysql_num_rows($select_result) > 0){
-									echo "<script type='text/javascript'>
-									location.hash='#quartos';
-									</script>";
-								}else{
-									echo "<script type='text/javascript'>
-									window.alert('Todos os quartos já foram alugados nessas datas')
-									</script>";
-								}
 								
+								
+							}else{
+								echo "<script type='text/javascript'>
+								window.alert('Todos os quartos já foram alugados nessas datas')
+								</script>";
 							}
-							
 						}
 						
 						?>
@@ -401,7 +394,7 @@ if(isset($_POST['btnRegistrar_parceiro']))
 							<div class="col-sm-6">
                                 <div class="form-group">
 									<i class="fa fa-calendar"></i>   <label>Entrada</label>
-                                    <input type="date" class="form-control" name="entrada">
+                                    <input type="date" class="form-control" name="entrada" required>
                                 </div>
                             </div>
 
@@ -409,22 +402,19 @@ if(isset($_POST['btnRegistrar_parceiro']))
 							<div class="col-sm-6">
                                 <div class="form-group">
 									<i class="fa fa-calendar"></i>   <label>Saída</label>
-                                    <input type="date" class="form-control" name="saida">
+                                    <input type="date" class="form-control" name="saida" required>
                                 </div>
                             </div>
 							
 							<div class="col-sm-12 text-center">
-								<input type="submit" onclick="Nome(<?php echo $_GET['id_produto'] ?>)" class="btn btn-primary" name="btn_verificar" value="Verificar">
+								<input type="submit" onclick="Nome(<?php echo $id_produto?>,<?php echo $id_cliente?>,<?php echo $nome_cliente?>)" class="btn btn-primary" name="btn_verificar" value="Verificar">
 							</div>
 						</form>
 
                         </aside>
                 </div>
-
-
-
-
-
+				
+				
 			</div>
             </div>
         </div>

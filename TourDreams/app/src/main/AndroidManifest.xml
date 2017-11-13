@@ -82,6 +82,10 @@
         <activity
             android:name=".FiltroDeBusca"
             android:label="@string/title_activity_filtro_de_busca"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ReservarQuarto"
+            android:label="@string/title_activity_reservar_quarto"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

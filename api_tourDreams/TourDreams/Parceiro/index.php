@@ -112,6 +112,16 @@
 
 						<b class="arrow"></b>
 					</li>
+					
+					<li class="">
+						<a href="minhas_reservas.php?nome_empresa=<?php echo$_GET['nome_empresa'];?>&id_parceiro=<?php echo$_GET['id_parceiro'];?>">
+							<i class="menu-icon fa fa-building-o"></i>
+							<span class="menu-text"> Minhas Reservas </span>
+						</a>
+
+						<b class="arrow"></b>
+					</li>
+					
 				</ul>
 
 				<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">

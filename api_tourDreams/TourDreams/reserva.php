@@ -1,6 +1,7 @@
 <?php
+	
 		session_start();
-
+		
 		include("conexao_banco.php");
 
 		$cor = "#fff";
@@ -11,7 +12,34 @@
 		}
 ?>
 
+	<?php
 
+	$cpf_cliente="";
+	$celular_cliente="";
+	$email_cliente="";
+
+	$id_quarto = $_GET['id_quarto'];
+	$id_cliente = $_GET['id_cliente'];
+
+	if(isset($_POST['btn_reserva_finalizada'])){
+	  $responsavel = $_POST['responsavel'];
+	  $entrada = $_POST['entrada'];
+	  $saida = $_POST['saida'];
+	  $qtd_criancas = $_POST['selectKids'];
+	  $qtd_adulto = $_POST['selectAdultos'];
+
+		
+	  $entrada_banco = implode("-",array_reverse(explode("/",$entrada)));	
+	  $saida_banco = implode("-",array_reverse(explode("/",$saida)));
+	  $result = $_SESSION['dias'] * $_SESSION['preco_diaria'];
+	 
+
+	  $sql="insert into tbl_reserva(id_quarto, id_cliente, dt_entrada, dt_saida, nome_responsavel, id_adulto, id_crianca, valor_reserva,status_reserva)";
+	  $sql=$sql."values(".$id_quarto.", ".$id_cliente.", '".$entrada_banco."', '".$saida_banco."', '".$responsavel."', ".$qtd_criancas.", ".$qtd_adulto.", '".$result."','Pendente')";
+	  mysql_query($sql);
+	}
+
+	 ?>
 
 <!DOCTYPE html>
 <html class="no-js">
@@ -48,7 +76,10 @@
 			background-color:<?php switch ($cores) {case "": echo $cor;break; default: echo $cores;break;}?>;
 		}
 		</style>
-
+		
+		
+		
+		
     </head>
     <body>
 
@@ -86,7 +117,7 @@
       	   include('menu.php');
         ?>
 
-
+		
 
 
 
@@ -96,13 +127,25 @@
                     <div class="proerty-th">
 							<ul class="thumbnails">
 								<?php
-									if (isset ($_SESSION['id_quarto'])) {
-										$sql = "select * from view_quartos where id_quarto =".$_SESSION['id_quarto'];
+								
+								$diferenca = strtotime($_SESSION['saida']) - strtotime($_SESSION['entrada']);
+								$dias = floor($diferenca / (60 * 60 * 24));
+								
+								$_SESSION['dias'] = $dias;
+								
+								
+								$entrada=$_SESSION['entrada'];
+								$saida=$_SESSION['saida'];
+								
+							
+								
+								if (isset ($_GET['id_quarto'])) {
+										$sql = "select * from view_quartos where id_quarto =".$_GET['id_quarto']." group by id_quarto;";
 										$select = mysql_query($sql);
 										while($rs = mysql_fetch_array($select)){
 											$preco_diaria=$rs['preco_diaria'];
+											$_SESSION['preco_diaria'] = $preco_diaria;
 											$id_quarto=$rs['id_quarto'];
-											$_SESSION['id_quarto'] = $id_quarto;
 								?>
 								<div class="col-md-4">
 									<div class="thumbnail" id="quartos">
@@ -111,7 +154,7 @@
 											<h4><?php echo($rs['descricao_quarto']);?></h4>
 										<div class="property-meta entry-meta clearfix ">
 											<?php
-												$sql = "select * from view_carac_quartos where id_quarto =".$_SESSION['id_quarto'];
+												$sql = "select * from view_carac_quartos where id_quarto =".$_GET['id_quarto'];
 												$select = mysql_query($sql);
 												while($rs_consulta = mysql_fetch_array($select)){
 											?>
@@ -128,6 +171,7 @@
 											?>
 										</div>
 											<h4 align="center">R$ <?php echo number_format($preco_diaria, 2, ',', '');?></h4>
+											
 										</div>
 									</div>
 								</div>
@@ -142,47 +186,95 @@
 							<div class="box-for overflow">
 								<div class="col-md-12 col-xs-12 login-blocks">
 									<h2>Reserva</h2>
+									
+									<?php
+										$select_reserva="select * from tbl_cliente where id_cliente=".$_GET['id_cliente'];
+										$select_code_result_reserva = mysql_query($select_reserva);
+										if($rsConsulta=mysql_fetch_array($select_code_result_reserva)){
+											$cpf_cliente=$rsConsulta['cpf_cliente'];
+											$email_cliente=$rsConsulta['email_cliente'];
+											$celular_cliente=$rsConsulta['celular_cliente'];
+										}
+										
+									
+									?>
+									
 									<form action="" method="post">
 										<div class="form-group">
 											<label>Responsável pela reserva</label>
-											<input type="text" class="form-control" placeholder="Obs: Cliente que fará o pagamento no hotel/resort/pousada" name="" <?php echo $_SESSION['id_cliente']?>>
+											<input type="text" class="form-control" placeholder="Obs: Cliente que fará o pagamento no hotel/resort/pousada" name="responsavel">
+										</div>
+										<div class="form-group">
+											<label>Data de Entrada</label>
+											<input id="entrada" type="text" class="form-control" name="entrada" value="<?php echo date('d/m/Y', strtotime($entrada));?>" readonly>
+										</div>
+										<div class="form-group">
+											<label>Data de Saída</label>
+											<input id="saida"  type="text"  class="form-control" name="saida" value="<?php echo date('d/m/Y', strtotime($saida));?>" readonly>
 										</div>
 										<div class="form-group">
 											<label>CPF</label>
-											<input type="text" class="form-control" name=""  placeholder="Digite seu cpf" onkeypress='mascaraMutuario(this,cpfCnpj)' onblur='clearTimeout()' onkeypress='return SomenteNumero(event)' maxlength="14">
+											<input type="text" class="form-control" name="cpf"  placeholder="Digite seu cpf" onkeypress='mascaraMutuario(this,cpfCnpj)' onblur='clearTimeout()' onkeypress='return SomenteNumero(event)' maxlength="14" value="<?php echo $cpf_cliente?>" readonly>
 										</div>
 										<div class="form-group">
 											<label>Celular</label>
-											<input type="text" class="form-control" placeholder="Digite seu celular" name="celular" onkeyup="mascaraCelular( this, mtel );"  onkeypress='return SomenteNumero(event)' maxlength="15">
+											<input type="text" class="form-control" placeholder="Digite seu celular" name="celular" onkeyup="mascaraCelular( this, mtel );"  onkeypress='return SomenteNumero(event)' maxlength="15" value="<?php echo $celular_cliente?>" readonly>
 										</div>
 										<div class="form-group">
 											<label>Email</label>
-											<input type="email" class="form-control" placeholder="Digite seu email" name="">
+											<input type="email" class="form-control" placeholder="Digite seu email" name="email" value="<?php echo $email_cliente?>" readonly>
 										</div>
 										<div class="form-group">
 											<label>Adultos</label>
-											<select id="basic" class="selectpicker show-tick form-control">
-												<option>1</option>
-												<option>2</option>
-												<option>3</option>
+											<select name = "selectAdultos" id="basic" class="selectpicker show-tick form-control">
+												<?php
+												$sql = "select * from tbl_qtdadultos where id_adulto > 0";
+										
+												if($qtd_adulto != ''){
+													$sql = $sql . " and id_adulto !=".$id_adulto;
+													?>
+													<option value="<?php echo($id_adulto);?>"><?php echo($qtd_adulto);?></option>		
+												<?php }?>
+												
+												
+												<?php
+													$select = mysql_query($sql);
+													while($rs = mysql_fetch_array($select)){
+												?>
+													<option value="<?php echo($rs['id_adulto']);?>"><?php echo($rs['qtd_adulto']);?></option>														
+												<?php
+													}
+												?>
+													
 											</select>
 										</div>
 										<div class="form-group">
 											<label>Crianças</label>
-											<select id="basic" class="selectpicker show-tick form-control">
-												<option>1</option>
-												<option>2</option>
-												<option>3</option>
+											<select name = "selectKids" id="basic" class="selectpicker show-tick form-control">
+												<?php
+												$sql = "select * from tbl_qtdcriancas where id_crianca > 0";
+										
+												if($qtd_criancas != ''){
+													$sql = $sql . " and id_crianca !=".$id_crianca;
+													?>
+													<option value="<?php echo($id_crianca);?>"><?php echo($qtd_criancas);?></option>		
+												<?php }?>
+												
+												
+												<?php
+													$select = mysql_query($sql);
+													while($rs = mysql_fetch_array($select)){
+												?>
+													<option value="<?php echo($rs['id_crianca']);?>"><?php echo($rs['qtd_criancas']);?></option>														
+												<?php
+													}
+												?>
+													
 											</select>
 										</div>
 
-										<div class="single-property-header">
-                                            <h1 class="property-title">  Valor</h1>
-                                            <span class="property-price">R$300,00</span>
-                                        </div>
-
 										<div class="text-center">
-											<button type="submit" class="btn btn-default"> Reservar</button>
+											<button type="submit" class="btn btn-default" name="btn_reserva_finalizada"> Reservar</button>
 										</div>
 									</form>
 									<br>

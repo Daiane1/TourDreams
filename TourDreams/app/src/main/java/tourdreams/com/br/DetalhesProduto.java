@@ -1,6 +1,9 @@
 package tourdreams.com.br;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -11,13 +14,18 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.RatingBar;
@@ -30,7 +38,11 @@ import com.squareup.picasso.Picasso;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ForkJoinPool;
@@ -51,6 +63,15 @@ public class    DetalhesProduto extends AppCompatActivity {
     String url, parametros, parametros_coment;
     Integer id_produto_vem;
 
+    Button btn_reservar;
+    static Date data_checkin, data_checkout;
+
+
+    static TextView txt_checkin_detalhes;
+    static TextView txt_checkout_detalhes;
+
+
+
     Context context;
 
     @Override
@@ -61,6 +82,10 @@ public class    DetalhesProduto extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         context = this;
+
+        txt_checkin_detalhes = (TextView) findViewById(R.id.txt_checkin_detalhes);
+        txt_checkout_detalhes = (TextView) findViewById(R.id.txt_checkout_detalhes);
+
 
         id_produto_vem = getIntent().getExtras().getInt("id_produto");
 
@@ -77,6 +102,71 @@ public class    DetalhesProduto extends AppCompatActivity {
 
         list_view_comentarios = (ListView)findViewById(R.id.list_view_comentarios);
         comentariosProduto();
+
+
+        btn_reservar = (Button) findViewById(R.id.btn_reservar);
+
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        Date data = new Date();
+        Calendar  cal = Calendar.getInstance();
+        cal.setTime(data);
+        final Date data_atual = cal.getTime();
+                /*
+        try {
+            data_checkin = formato.parse(txt_checkin_detalhes.getText().toString());
+            data_checkout = formato.parse(txt_checkout_detalhes.getText().toString());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }*/
+
+
+
+
+
+        btn_reservar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (txt_checkin_detalhes.getText().toString().equals("Selecione uma data") || txt_checkout_detalhes.getText().toString().equals("Selecione uma data")){
+                    AlertDialog alertDialog = new AlertDialog.Builder(DetalhesProduto.this).create();
+
+                    alertDialog.setTitle("Alerta");
+                    alertDialog.setMessage("Por favor, selecione uma data");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
+                } else if (data_checkout.before(data_checkin)){
+                    AlertDialog alertDialog = new AlertDialog.Builder(DetalhesProduto.this).create();
+
+                    alertDialog.setTitle("Alerta");
+                    alertDialog.setMessage("Por favor, a data de CHECK-OUT precisa ser maior que a data de CHECK-IN");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
+                }else if(data_checkin.before(data_atual) || data_checkout.before(data_atual) ){
+                    AlertDialog alertDialog = new AlertDialog.Builder(DetalhesProduto.this).create();
+
+                    alertDialog.setTitle("Alerta");
+                    alertDialog.setMessage("Por favor, a data de Entrada ou Saída precisa ser maior do que do dia de hoje !");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                }else {
+                    Intent intent = new Intent(DetalhesProduto.this, ReservarQuarto.class);
+                    startActivity(intent);
+                }
+            }
+        });
 
     }
 
@@ -321,6 +411,82 @@ public class    DetalhesProduto extends AppCompatActivity {
 
         }
 
+    }
+
+    public void calendario_checkin(View view) {
+        //Abrir o calendario
+        DialogFragment calendario = new DetalhesProduto.DatePickerFragment();
+        calendario.show(getSupportFragmentManager(), "datepicker");
+    }
+
+
+    public void calendario_checkout(View view) {
+        //Abrir o calendario
+        DialogFragment calendario = new DetalhesProduto.DatePickerFragment_checkout();
+        calendario.show(getSupportFragmentManager(), "datepicker");
+    }
+
+    public static class DatePickerFragment_checkout extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+
+        @NonNull
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+
+            final Calendar c = Calendar.getInstance();
+
+            int ano = c.get(Calendar.YEAR);
+            int mes = c.get(Calendar.MONTH);
+            int dia = c.get(Calendar.DAY_OF_MONTH);
+
+            //Cria uma nova instancia de calendario e retorna
+            return new DatePickerDialog(getActivity(), this, ano, mes, dia);
+        }
+
+        @Override
+        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+            //função chamada após a escolha da data
+
+            String dataSelecionada = String.format("%02d/%02d/%d",
+                    dayOfMonth, ++month , year );
+            data_checkout = new Date(year, ++month, dayOfMonth);
+
+
+            txt_checkout_detalhes.setText(dataSelecionada);
+
+        }
+    }
+
+    public static class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+
+        @NonNull
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+
+            final Calendar c = Calendar.getInstance();
+
+            int ano = c.get(Calendar.YEAR);
+            int mes = c.get(Calendar.MONTH);
+            int dia = c.get(Calendar.DAY_OF_MONTH);
+
+            //Cria uma nova instancia de calendario e retorna
+            return new DatePickerDialog(getActivity(), this, ano, mes, dia);
+        }
+
+        @Override
+        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+            //função chamada após a escolha da data
+
+            String dataSelecionada = String.format("%02d/%02d/%d",
+                    dayOfMonth, ++month , year );
+            data_checkin = new Date(year, ++month, dayOfMonth);
+
+
+
+
+
+            txt_checkin_detalhes.setText(dataSelecionada);
+
+        }
     }
 
 

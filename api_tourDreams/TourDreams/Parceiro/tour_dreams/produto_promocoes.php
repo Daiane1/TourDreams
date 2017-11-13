@@ -23,24 +23,24 @@
 		
 			
 			$obj = array("id_produto" => $dados['id_produto'] ,
-      "nome" => utf_encode ($dados['nome_fantasia']),
-      "status" => utf_encode ($dados['status']),
-      "tipo_viagem" =>utf_encode ($dados['tipo_viagem']),
-      "estilo_produto" => utf_encode ($dados['estilo_produto']),
-      "qtd_milhas" => utf_encode ($dados['qtd_milhas']),
+      "nome" => utf8_encode ($dados['nome_fantasia']),
+      "status" => utf8_encode ($dados['status']),
+      "tipo_viagem" =>utf8_encode ($dados['tipo_viagem']),
+      "estilo_produto" => utf8_encode ($dados['estilo_produto']),
+      "qtd_milhas" => utf8_encode ($dados['qtd_milhas']),
 	  "preco" => number_format($dados['preco_diaria'], 2, "," , "."),
       "numero_cep" => $dados['numero_cep'],
-      "logradouro" => utf_encode ($dados['logradouro']),
+      "logradouro" => utf8_encode ($dados['logradouro']),
       "numero" => $dados['numero'],
-      "complemento" => utf_encode ($dados['complemento']),
-      "bairro" => utf_encode ($dados['bairro']),
-      "local" => utf_encode ($dados['cidade'] . " - " .$dados['estado']),
+      "complemento" => utf8_encode ($dados['complemento']),
+      "bairro" => utf8_encode ($dados['bairro']),
+      "local" => utf8_encode ($dados['cidade'] . " - " .$dados['estado']),
       //"uf" => $dados['uf'],
-      "img_produto" => utf_encode ($dados['foto_principal']),
-      "descricao" => utf_encode ($dados['descricao_produto']),
+      "img_produto" => utf8_encode ($dados['foto_principal']),
+      "descricao" => utf8_encode ($dados['descricao_produto']),
 	  "milhas_necessarias" => $dados['milhas_necessarias'],
 	  "foto_brinde" =>  $dados['foto_brinde'],
-	  "nome_brinde" => utf_encode ($dados['nome_brinde']));
+	  "nome_brinde" => utf8_encode ($dados['nome_brinde']));
 	  
 
 			$lista[] = $obj;

@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="tourdreams.com.br.DetalhesProduto"
-    tools:showIn="@layout/activity_detalhes_produto">
+    tools:showIn="@layout/activity_detalhes_produto"
+    >
 
     <ScrollView
         android:layout_width="match_parent"
@@ -16,9 +17,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="5dp"
-            android:layout_marginLeft="10dp"
-            android:background="#fff"
+            android:padding="15dp"
+            android:background="#85e4e4e4"
             >
 
            <TextView
@@ -50,53 +50,83 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="15dp"
-                android:weightSum="2">
+                android:orientation="horizontal">
 
-                <TextView
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
+
+                <TableRow
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Checkin"
-                    android:textColor="#000"
-                    android:textSize="24dp"/>
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="0.5"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/edittext_bg"
+                    android:onClick="calendario_checkin">
 
-                <TextView
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="15dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="sans-serif"
+                            android:text=" Check-in"
+                            android:textColor="#000"
+                            android:textSize="14dp" />
+
+                        <TextView
+                            android:id="@+id/txt_checkin_detalhes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Selecione uma data"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="-10dp"
+                            android:textColor="@color/cor_azul" />
+                    </LinearLayout>
+
+
+                </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Checkout"
-                    android:textSize="24dp"
-                    android:textColor="#000"
-                    />
-            </LinearLayout>
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_weight="0.5"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/edittext_bg"
+                    android:onClick="calendario_checkout">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="2">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" Check-out"
+                            android:textColor="#000"
+                            android:fontFamily="sans-serif"
+                            android:textSize="14dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginBottom="15dp"/>
 
-                <TextView
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="19/09/2017"
-                    android:textSize="18dp"
-                    android:drawableLeft="@drawable/ic_date_range_black_24dp"
-                    />
-
-
-                <TextView
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="19/09/2017"
-                    android:textSize="18dp"
-                    android:drawableLeft="@drawable/ic_date_range_black_24dp"
-                    />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:text="Selecione uma data"
+                            android:layout_marginTop="-10dp"
+                            android:textColor="@color/cor_azul"
+                            android:id="@+id/txt_checkout_detalhes"/>
+                    </LinearLayout>
+                </TableRow>
             </LinearLayout>
 
             <LinearLayout
@@ -120,6 +150,7 @@
                     android:background="@color/cor_verde"
                     android:textAlignment="center"
                     android:drawableLeft="@drawable/ic_send_white_24dp"
+                    android:id="@+id/btn_reservar"
                     />
 
 
