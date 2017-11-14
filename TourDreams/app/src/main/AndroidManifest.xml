@@ -86,6 +86,10 @@
         <activity
             android:name=".ReservarQuarto"
             android:label="@string/title_activity_reservar_quarto"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".FinalizarReserva"
+            android:label="@string/title_activity_finalizar_reserva"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

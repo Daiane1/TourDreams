@@ -18,28 +18,7 @@ $nome_cliente=$_GET['nome_cliente'];
 		}
 ?>
 
-<?php
-	if(isset($_POST['btnPublicar_Perfil'])){
-		
-		if(isset($_GET['id_cliente'])){
-			$id_cliente = (int)$_GET['id_cliente'];
-			$descricao_blog = $_POST ['comentario'];
-			
-			$extensao = strtolower(substr($_FILES['foto_blog']['name'], -4));
-			$foto_blog = md5(time()).$extensao;
-			$diretorio = "Arquivos_Conheca_Destino/";
-			move_uploaded_file($_FILES['foto_blog']['tmp_name'], $diretorio.$foto_blog);
-		
-			$sql="insert into tbl_blog(id_cliente, foto_blog, descricao_blog, data_publicacao, id_reserva)";
-			$sql=$sql."values(".$id_cliente.",'".$foto_blog."', '".$descricao_blog."', now(),'2')";
 
-			
-			mysql_query ($sql);
-			
-			
-		}
-	}
-?>
 
 	
 
@@ -82,6 +61,43 @@ $nome_cliente=$_GET['nome_cliente'];
 		}
 	</style>
 
+	
+	<script type="text/javascript" src="jquery.js"></script>
+	
+	<script>
+	function Modal(id_reserva,id_cliente,nome_cliente){
+		$.ajax({
+			type: "GET",
+			url: "comentar.php?id_cliente=" + id_cliente + "&nome_cliente=" + nome_cliente +  "&id_reserva=" + id_reserva,
+			data: {},
+			cache:false,
+            contentType:false,
+            processData:false,
+            async:true,
+			success: function(dados){
+				$('.comentar_reserva').html(dados);
+			}
+		});
+	}
+	
+	function Comentar(id_reserva,id_cliente,nome_cliente){
+		$.ajax({
+			type: "POST",
+			url: "comentar.php?id_cliente=" + id_cliente + "&nome_cliente=" + nome_cliente +  "&id_reserva=" + id_reserva,
+			data: {comentario: $("#comentario").val()},
+			success: function(dados){
+				$('.comentar_reserva').html(dados);
+				
+				alert("comentado com sucesso");
+			}
+		});
+		
+	}
+	
+	
+	</script>
+	
+	
     </head>
     <body>
 
@@ -123,6 +139,9 @@ $nome_cliente=$_GET['nome_cliente'];
 
         <hr>
 				<div class="container bootstrap snippet">
+				
+			
+				
 					<div class="row">
 					</div>
 					<div class="row">
@@ -161,52 +180,52 @@ $nome_cliente=$_GET['nome_cliente'];
 								<table class="table table-hover">
 								  <thead>
 									<tr>
-									  <th>Data</th>
-									  <th>Milhas Ganhas</th>
+									  <th>Data Finalizada</th>
+									  <th>Milhas Ganhas</th> 
 									  <th>Local</th>
 									  <th>Empresa Parceira</th>
-									  <th>Sua Avaliação</th>
-									  <th>Publicar</th>
+									  <th>Comentar</th>
 									</tr>
 								  </thead>
-								  <tbody id="items">
-									<tr data-toggle="collapse" data-target="#demo1" class="accordion-toggle ">
-									  <td>10/10/2017</td>
-									  <td>580</td>
-									  <td>Hotel Maneiro</td>
-									  <td>Maneiro Hotels</td>
-									  <td>4,5</td>
-									  <td><button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-plus"></span></button></td>
-									</tr>
-						<tr>
+									<tbody id="items">
+									<?php
+										$id_cliente=$_GET['id_cliente'];
+										$nome_cliente = "'".addslashes ($_GET['nome_cliente'])."'";
+									
+										$sql = "select * from view_reserva_cliente where(dt_saida < now()) and id_cliente=".$_GET['id_cliente'];
+										$select = mysql_query($sql);
+										while($rs = mysql_fetch_array($select)){
+											$dt_saida=$rs['dt_saida'];
+											$dt_nasc_sem_hora_saida = substr($dt_saida, 0,10);
+											$dt_nasc_sem_hora_saida = explode("-", $dt_saida );
+										
+											$dia_saida = $dt_nasc_sem_hora_saida[2]; 
+											$mes_saida = $dt_nasc_sem_hora_saida[1];	
+											$ano_saida = $dt_nasc_sem_hora_saida[0];
+									
+											$dt_nasc_volta_saida = $dia_saida."/".$mes_saida."/".$ano_saida;
+										?>
+										<tr data-toggle="collapse" data-target="#demo1" class="accordion-toggle ">
+										  <td><?php echo $dt_nasc_volta_saida?></td>
+										  <td><?php echo $rs['qtd_milhas'];?></td>
+										  <td><?php echo $rs['logradouro'];?>, <?php echo $rs['numero'];?> </td>
+										  <td><?php echo $rs['nome_fantasia'];?></td>
+										  
+										  <td><button type="button" class="btn btn-default btn-xs" onclick="Modal(<?php echo($rs["id_reserva"])?>,<?php echo $id_cliente?>,<?php echo $nome_cliente?>)"><span class="glyphicon glyphicon-plus"></span></button></td>
+										
+										<?php
+											}
+										?>
+										</tr>
+										
+						<tr>		</tbody>
 							
 							<td colspan="12" class="hiddenRow">
 							
-								
-							<form action="perfil.php?id_cliente=<?php echo($id_cliente);?>&nome_cliente=<?php echo($nome_cliente);?>" method="post" name="frm_blog" enctype="multipart/form-data"> 
-								<div class="accordian-body collapse" id="demo1">
-								  <table class="table table-striped">
-									  <span>Obs: Essas publicações serão visíveis para outros clientes.</span>
-
-										 <tbody>
-											<tr id='addr0'>
-												<td>
-
-												</td>
-												<td>
-												<input type="text" name='comentario'  placeholder='Comentario' class="form-control"/>
-												</td>
-												<td>
-												<input type="file" class="form-control" name="foto_blog"/>
-												</td>
-											</tr>
-											<tr id='addr1'></tr>
-										</tbody>
-
-									</table>
-									<button id="add_row" name="btnPublicar_Perfil" class="btn btn-default pull-left">Publicar</button>
-								</div> 
-							</form>
+								<div class="comentar_reserva">
+									
+								</div>
+							
 							</td>
 						</tr>
 

@@ -6,15 +6,16 @@ package tourdreams.com.br;
 
 public class ReservarQuartoGetSetter {
     private int id_quarto;
-    private String descricao_quarto, preco_diaria, foto_quarto;
+    private String descricao_quarto, preco_diaria, foto_quarto, data_entrada, data_saida;
 
-    private CaracteristicasQuarto[] caracteristicasQuartos;
 
-    public ReservarQuartoGetSetter(int id_quarto, String descricao_quarto, String preco_diaria, String foto_quarto) {
+    public ReservarQuartoGetSetter(int id_quarto, String descricao_quarto, String preco_diaria, String foto_quarto, String data_entrada, String data_saida) {
         this.id_quarto = id_quarto;
         this.descricao_quarto = descricao_quarto;
         this.preco_diaria = preco_diaria;
         this.foto_quarto = foto_quarto;
+        this.data_entrada = data_entrada;
+        this.data_saida = data_saida;
     }
 
     public int getId_quarto() {
@@ -49,11 +50,19 @@ public class ReservarQuartoGetSetter {
         this.foto_quarto = foto_quarto;
     }
 
-    public CaracteristicasQuarto[] getCaracteristicasQuartos() {
-        return caracteristicasQuartos;
+    public String getData_entrada() {
+        return data_entrada;
     }
 
-    public void setCaracteristicasQuartos(CaracteristicasQuarto[] caracteristicasQuartos) {
-        this.caracteristicasQuartos = caracteristicasQuartos;
+    public void setData_entrada(String data_entrada) {
+        this.data_entrada = data_entrada;
+    }
+
+    public String getData_saida() {
+        return data_saida;
+    }
+
+    public void setData_saida(String data_saida) {
+        this.data_saida = data_saida;
     }
 }

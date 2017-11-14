@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="tourdreams.com.br.FinalizarReserva"
+    tools:showIn="@layout/activity_finalizar_reserva"
+    android:background="#f2f2f2">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp">
+
+
+        <TextView
+            android:layout_margin="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dados Pessoais:"
+            android:textColor="#171718"
+            android:textSize="18dp"/>
+
+        <TextView
+            android:layout_width="180dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-30dp"
+            android:background="@drawable/linha_bottom"/>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Resonsável pela reserva"
+            android:textSize="20dp"
+            android:textColor="#000" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@drawable/mais_clara"
+            android:textSize="18dp"
+            android:paddingTop="3dp"
+            android:paddingLeft="10dp"
+            android:textColor="#414141"
+            android:id="@+id/edit_nome_cliente"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/edittext_bg">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="15dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="sans-serif"
+                        android:text=" Check-in"
+                        android:textColor="#000"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/checkin_reserva"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="-10dp"
+                        android:textColor="@color/cor_azul" />
+                </LinearLayout>
+
+
+            </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="15dp"
+                android:layout_weight="0.5"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/edittext_bg"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" Check-out"
+                        android:textColor="#000"
+                        android:fontFamily="sans-serif"
+                        android:textSize="14dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginBottom="15dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+
+                        android:layout_marginTop="-10dp"
+                        android:textColor="@color/cor_azul"
+                        android:id="@+id/checkout_reserva"/>
+                </LinearLayout>
+            </TableRow>
+        </LinearLayout>
+
+        <TextView
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cliente:"
+            android:textColor="#000"
+            android:textSize="20dp"/>
+        <TextView
+            android:layout_marginRight="15dp"
+
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@drawable/mais_clara"
+            android:textSize="18dp"
+            android:paddingTop="5dp"
+            android:paddingLeft="10dp"
+            android:id="@+id/txt_nome_principal"/>
+
+
+        <TextView
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="CPF:"
+            android:textColor="#000"
+            android:textSize="20dp"/>
+        <TextView
+            android:layout_marginRight="15dp"
+
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@drawable/mais_clara"
+            android:textSize="18dp"
+            android:paddingTop="5dp"
+            android:paddingLeft="10dp"
+            android:id="@+id/txt_cpf"/>
+
+        <TextView
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Celular:"
+            android:textColor="#000"
+            android:textSize="20dp"/>
+        <TextView
+            android:layout_marginRight="100dp"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:textSize="18dp"
+            android:paddingTop="5dp"
+            android:paddingLeft="10dp"
+            android:background="@drawable/mais_clara"
+            android:id="@+id/txt_celular"/>
+
+        <TextView
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Email:"
+            android:textColor="#000"
+            android:textSize="20dp"/>
+        <TextView
+            android:layout_marginRight="15dp"
+            android:textSize="18dp"
+            android:paddingTop="5dp"
+            android:paddingLeft="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@drawable/mais_clara"
+            android:id="@+id/txt_email"/>
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Finalizar Reserva"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:paddingLeft="15dp"
+            android:textColor="#FFF"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:id="@+id/btn_reservar_final"
+            android:layout_gravity="right"
+            />
+
+
+    </LinearLayout>
+</ScrollView>

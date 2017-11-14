@@ -1,6 +1,7 @@
 package tourdreams.com.br;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -10,7 +11,9 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -20,10 +23,14 @@ import java.util.List;
 
 public class ReservarQuarto extends AppCompatActivity {
 
-    String url, parametros;
+    String url, parametros, data_entrada, data_saida;
+    ListView list_view_quartos;
 
     List<ReservarQuartoGetSetter> list_quartos = new ArrayList<>();
     ArrayAdapter<ReservarQuartoGetSetter> adapter;
+    Integer id_produto_vem, id_quarto;
+
+    String checkin_reserva, checkout_reserva;
 
     Context context;
 
@@ -34,22 +41,50 @@ public class ReservarQuarto extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        id_produto_vem = getIntent().getExtras().getInt("id_produto_vai");
+
+        data_entrada = getIntent().getExtras().getString("data_entrada");
+        data_saida = getIntent().getExtras().getString("data_saida");
+
+        list_view_quartos = (ListView) findViewById(R.id.list_view_quartos);
+
+        list_view_quartos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                ReservarQuartoGetSetter reservarQuartoGetSetter = adapter.getItem(position);
+
+                id_quarto = reservarQuartoGetSetter.getId_quarto();
+
+                checkin_reserva = reservarQuartoGetSetter.getData_entrada();
+                checkout_reserva = reservarQuartoGetSetter.getData_saida();
+
+                Intent intent = new Intent(ReservarQuarto.this, FinalizarReserva.class);
+
+                intent.putExtra("checkin_reserva", checkin_reserva);
+                intent.putExtra("checkout_reserva", checkout_reserva);
+
+
+                startActivity(intent);
+            }
+        });
+
         context = this;
 
 
+        buscarProduto();
 
 
     }
 
-    private void buscarProduto() {
+   private void buscarProduto() {
 
         ConnectivityManager connMgr = (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected()){
 
-            url =  this.getString(R.string.link)+"detalhes_produto.php";
+            url =  this.getString(R.string.link)+"reservar_quarto.php";
 
-            parametros = "id_produto=" + id_produto_vem;
+            parametros = "id_produto=" + id_produto_vem + "&checkin=" + data_entrada + "&checkout=" + data_saida;
 
             new ReservarQuarto.preencher_quartos().execute(url);
 
@@ -87,7 +122,7 @@ public class ReservarQuarto extends AppCompatActivity {
                     list_quartos);
 
 
-            list_view_produto.setAdapter(adapter);
+            list_view_quartos.setAdapter(adapter);
 
         }
 

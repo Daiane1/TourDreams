@@ -163,6 +163,11 @@ public class    DetalhesProduto extends AppCompatActivity {
                             });
                 }else {
                     Intent intent = new Intent(DetalhesProduto.this, ReservarQuarto.class);
+
+                    intent.putExtra("id_produto_vai", id_produto_vem);
+                    intent.putExtra("data_entrada", txt_checkin_detalhes.getText().toString());
+                    intent.putExtra("data_saida", txt_checkout_detalhes.getText().toString());
+
                     startActivity(intent);
                 }
             }

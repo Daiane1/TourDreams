@@ -22,54 +22,54 @@ import java.util.List;
 
 public class ProdutosHomeAdapter extends ArrayAdapter<ProdutosHome> {
 
-    int resource;
-    Context context;
-    public ProdutosHomeAdapter(Context context, int resource, List<ProdutosHome> objects) {
-        super(context, resource, objects);
-        this.resource = resource;
-    }
-
-    @NonNull
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-
-        View v = convertView;
-
-        if (v == null) {
-            v = LayoutInflater.from(getContext())
-                    .inflate(resource,null);
-            /* Resource é o layout do item da lista */
+        int resource;
+        Context context;
+        public ProdutosHomeAdapter(Context context, int resource, List<ProdutosHome> objects) {
+            super(context, resource, objects);
+            this.resource = resource;
         }
 
-        ProdutosHome item = getItem(position); /*Pegando o item que está sendo carregado naquela posição */
+        @NonNull
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
 
-        if (item != null) {
+            View v = convertView;
 
-            ImageView img_produto = (ImageView) v.findViewById(R.id.img_produto);
-            TextView nome_produto = (TextView) v.findViewById(R.id.nome_produto);
-            TextView nome_local = (TextView) v.findViewById(R.id.nome_local);
-            TextView descricao_produto = (TextView) v.findViewById(R.id.descricao_produto);
-            TextView preco_produto = (TextView) v.findViewById(R.id.preco_produto);
+            if (v == null) {
+                v = LayoutInflater.from(getContext())
+                        .inflate(resource,null);
+                /* Resource é o layout do item da lista */
+            }
+
+            ProdutosHome item = getItem(position); /*Pegando o item que está sendo carregado naquela posição */
+
+            if (item != null) {
+
+                ImageView img_produto = (ImageView) v.findViewById(R.id.img_produto);
+                TextView nome_produto = (TextView) v.findViewById(R.id.nome_produto);
+                TextView nome_local = (TextView) v.findViewById(R.id.nome_local);
+                TextView descricao_produto = (TextView) v.findViewById(R.id.descricao_produto);
+                TextView preco_produto = (TextView) v.findViewById(R.id.preco_produto);
 
 
 
-            String url = getContext().getString(R.string.link_imagens) + item.getImg_produto();
+                String url = getContext().getString(R.string.link_imagens) + item.getImg_produto();
 
 
 
-            Picasso.with(getContext())
-                    .load(url)
-                    .into(img_produto);
+                Picasso.with(getContext())
+                        .load(url)
+                        .into(img_produto);
 
 
-            //img_produto.setImageResource(Picasso.with(getContext()).load(item.getImg_produto()).into(img_produto));
-            nome_produto.setText(item.getNome());
-            nome_local.setText(item.getLocal());
-            descricao_produto.setText(item.getDescricao());
-            preco_produto.setText(item.getPreco());
+                //img_produto.setImageResource(Picasso.with(getContext()).load(item.getImg_produto()).into(img_produto));
+                nome_produto.setText(item.getNome());
+                nome_local.setText(item.getLocal());
+                descricao_produto.setText(item.getDescricao());
+                preco_produto.setText(item.getPreco());
+            }
+
+            return v;
         }
-
-        return v;
-    }
 
 }

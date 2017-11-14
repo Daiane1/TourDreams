@@ -6,89 +6,166 @@
     android:weightSum="1"
     android:background="@drawable/box_shadow">
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="180dp"
-        android:layout_weight="0.40">
 
-        <ImageView
-            android:id="@+id/img_produto_busca"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="4dp"
-            android:src="@drawable/resort1"/>
 
-    </LinearLayout>
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_weight="0.60"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/nome_produto_busca"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="15dp"
-            android:text="Só aqui na Casa do Vinicius você tem o melhor lugar para descansar"
-            android:textColor="#000"
-            android:textSize="13dp" />
-
+        android:gravity="center"
+        android:orientation="vertical"
+        android:background="#f2f2f2"
+        android:id="@+id/id_produto"
+        android:layout_marginTop="10dp">
 
         <LinearLayout
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="1">
+            android:orientation="vertical"
+            android:background="@drawable/img_redonda">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_margin="5dp"
+                android:id="@+id/img_quarto_reserva"/>
+
+
+            <TextView
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#282828"
+                android:text="Descrição:"
+                android:layout_marginLeft="10dp"
+                android:textSize="16dp"/>
+
+            <TextView
+                android:id="@+id/descricao_quarto_reserva"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12dp"
+                android:textColor="#414141"/>
 
             <LinearLayout
-                android:layout_weight="0.5"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
-                <TextView
+
+                <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Banheiro"
-                    android:textAlignment="center"
-                    android:textColor="#000"/>
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="0.5"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/edittext_bg">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="15dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="sans-serif"
+                            android:text=" Check-in"
+                            android:textColor="#000"
+                            android:textSize="14dp" />
+
+                        <TextView
+                            android:id="@+id/txt_checkin_quarto"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="-10dp"
+                            android:textColor="@color/cor_azul" />
+                    </LinearLayout>
+
+
+                </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_weight="0.5"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/edittext_bg"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" Check-out"
+                            android:textColor="#000"
+                            android:fontFamily="sans-serif"
+                            android:textSize="14dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginBottom="15dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+
+                            android:layout_marginTop="-10dp"
+                            android:textColor="@color/cor_azul"
+                            android:id="@+id/txt_checkout_quarto"/>
+                    </LinearLayout>
+                </TableRow>
             </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="30dp"
+                android:textSize="13dp"
+                android:text="Á partir de"/>
 
             <LinearLayout
-                android:layout_weight="0.5"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="horizontal"
+                android:layout_marginLeft="30dp"
+                >
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="18dp"
+                    android:textColor="#006400"
+                    android:textAlignment="center"
+                    android:id="@+id/preco_quarto_reserva"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:textSize="14dp"
+                    android:text="Diária"
+                    android:layout_marginBottom="20dp"/>
+
             </LinearLayout>
-
         </LinearLayout>
-
-
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="15dp"
-            android:gravity="end"
-            android:text="Valor Final"
-            android:textColor="#313131"
-            android:textSize="16dp" />
-
-        <TextView
-            android:id="@+id/preco_produto_busca"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="15dp"
-            android:gravity="end"
-            android:text="R$ 455,55"
-            android:textColor="#21b300"
-            android:textSize="22dp" />
-
-
     </LinearLayout>
 
 </LinearLayout>

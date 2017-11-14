@@ -17,16 +17,16 @@
     <string name="link_imagem_brinde">http://www.site.tourdreams.com/CMS/Arquivos/</string>-->
 
 
-    <string name="link">http://10.107.144.5/TourDreams/Parceiro/tour_dreams/</string>
+    <!--<string name="link">http://10.107.144.5/TourDreams/Parceiro/tour_dreams/</string>
     <string name="link_imagens">http://10.107.144.5/TourDreams/Parceiro/Arquivos/</string>
     <string name="link_imagens_carac">http://10.107.144.5/TourDreams/CMS/Fotos_Mobile/</string>
-    <string name="link_imagem_brinde">http://10.107.144.5/TourDreams/CMS/Arquivos/</string>
+    <string name="link_imagem_brinde">http://10.107.144.5/TourDreams/CMS/Arquivos/</string>-->
 
 
-    <!--<string name="link">http://10.107.134.11/TourDreams/Parceiro/tour_dreams/</string>
+    <string name="link">http://10.107.134.11/TourDreams/Parceiro/tour_dreams/</string>
     <string name="link_imagens">http://10.107.134.11/TourDreams/Parceiro/Arquivos/</string>
     <string name="link_imagens_carac">http://10.107.134.11/TourDreams/CMS/Fotos_Mobile/</string>
-    <string name="link_imagem_brinde">http://10.107.134.11/TourDreams/CMS/Arquivos/</string>-->
+    <string name="link_imagem_brinde">http://10.107.134.11/TourDreams/CMS/Arquivos/</string>
 
 
     <string name="title_activity_meu_perfil">Meu Perfil</string>
@@ -35,6 +35,7 @@
     <string name="title_activity_promocoes">Promocoes</string>
     <string name="title_activity_filtro_de_busca">Filtro De Busca</string>
     <string name="title_activity_reservar_quarto">Reservar Quarto</string>
+    <string name="title_activity_finalizar_reserva">FinalizarReserva</string>
 </resources>
 
 

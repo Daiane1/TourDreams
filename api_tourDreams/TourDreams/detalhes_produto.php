@@ -289,8 +289,14 @@ if(isset($_POST['btnRegistrar_parceiro']))
 
 
 						<section id="comments" class="comments wow fadeInRight animated">
-                            <h4 class="text-uppercase wow fadeInLeft animated">2 Comentários</h4>
+                            <h4 class="text-uppercase wow fadeInLeft animated">Comentários</h4>
 
+							<?php
+							$sql_select_coment = "select * from view_coment where id_produto =".$_GET['id_produto'];
+								$select_coment = mysql_query($sql_select_coment);
+								while($rsconsulta = mysql_fetch_array($select_coment)){
+									
+							?>
 
                             <div class="row comment">
                                 <div class="col-sm-3 col-md-2 text-center-xs">
@@ -299,29 +305,19 @@ if(isset($_POST['btnRegistrar_parceiro']))
                                     </p>
                                 </div>
                                 <div class="col-sm-9 col-md-10">
-                                    <h5 class="text-uppercase">Nome Pessoa</h5>
-                                    <p class="posted"><i class="fa fa-clock-o"></i> 31 de Agosto de 2017 às 14:30</p>
-                                    <p>Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos.</p>
+                                    <h5 class="text-uppercase"><?php echo($rsconsulta['nome_cliente']);?></h5>
+                                    <p class="posted"><i class="fa fa-clock-o"></i> <?php echo($rsconsulta['data']);?></p>
+                                    <p><?php echo($rsconsulta['comentario']);?></p>
                                 </div>
                             </div>
+							
+							<?php
+								}
+							?>
 
 
 
-                            <div class="row comment last">
-
-                                <div class="col-sm-3 col-md-2 text-center-xs">
-                                    <p>
-                                        <img src="assets/img/client-face1.png" class="img-responsive img-circle" alt="">
-                                    </p>
-                                </div>
-
-                                <div class="col-sm-9 col-md-10">
-                                   <h5 class="text-uppercase">Nome Pessoa</h5>
-                                    <p class="posted"><i class="fa fa-clock-o"></i> 31 de Agosto de 2017 às 14:30</p>
-                                    <p>Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos.</p>
-                                </div>
-
-                            </div>
+                            
 
                         </section>
 

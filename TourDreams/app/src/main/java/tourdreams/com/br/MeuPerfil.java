@@ -36,7 +36,7 @@ public class MeuPerfil extends AppCompatActivity {
 
         id_cliente = preferences.getString("id_cliente", "");
         milhas = preferences.getString("milhas", "");
-        nome_cliente = preferences.getString("nome_cliente", "");
+
         rg_cliente = preferences.getString("rg_cliente","");
         cpf_cliente = preferences.getString("cpf_cliente","");
         email_cliente = preferences.getString("email_cliente", "");
