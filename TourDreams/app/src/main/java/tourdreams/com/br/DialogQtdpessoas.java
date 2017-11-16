@@ -11,10 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
- * Created by nicol on 29/08/2017.
+ * Created by 16165886 on 16/11/2017.
  */
 
-public class DialogCaixa extends DialogFragment {
+public class DialogQtdpessoas extends DialogFragment {
 
     ImageView remover_quartos_image, adcionar_quartos_image,
             remover_adultos_image, adcionar_adultos_image,
@@ -25,7 +25,7 @@ public class DialogCaixa extends DialogFragment {
     int contagem_adultos = 1;
     int contagem_criancas = 0;
 
-    Button aplicar_selecao, desfazer_selecao;
+    Button aplicar_selecaoDt, desfazer_selecaoDt;
 
 
     DialogFragment self;
@@ -37,32 +37,31 @@ public class DialogCaixa extends DialogFragment {
 
         self = this;
 
-        View v = inflater.inflate(R.layout.caixa_dialogo, null);
+        View v = inflater.inflate(R.layout.caixa_qtd_pessoas, null);
 
 
-        adcionar_adultos_image= (ImageView) v.findViewById(R.id.adcionar_adultos_image);
-        remover_adultos_image = (ImageView) v.findViewById(R.id.remover_adultos_image);
+        adcionar_adultos_image= (ImageView) v.findViewById(R.id.adcionar_adultos_image_dt);
+        remover_adultos_image = (ImageView) v.findViewById(R.id.remover_adultos_image_dt);
 
-        adcionar_criancas_image = (ImageView) v.findViewById(R.id.adcionar_criancas_image);
-        remover_criancas_image = (ImageView) v.findViewById(R.id.remover_criancas_image);
+        adcionar_criancas_image = (ImageView) v.findViewById(R.id.adcionar_criancas_image_dt);
+        remover_criancas_image = (ImageView) v.findViewById(R.id.remover_criancas_image_dt);
 
-        text_adultos_dialog = (TextView) v.findViewById(R.id.text_adultos_dialog);
-        text_criancas_dialog = (TextView) v.findViewById(R.id.text_criancas_dialog);
+        text_adultos_dialog = (TextView) v.findViewById(R.id.count_adultos);
+        text_criancas_dialog = (TextView) v.findViewById(R.id.count_criancas);
 
-        aplicar_selecao = (Button) v.findViewById(R.id.aplicar_selecao);
-        aplicar_selecao.setOnClickListener(new View.OnClickListener() {
+        aplicar_selecaoDt = (Button) v.findViewById(R.id.aplicar_selecaoDt);
+        aplicar_selecaoDt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.text_adultos.setText(text_adultos_dialog.getText());
-                MainActivity.text_criancas.setText(text_criancas_dialog.getText());
 
-
+                DetalhesProduto.txt_adulto_detalhes.setText(text_adultos_dialog.getText());
+                DetalhesProduto.txt_crianca_detalhes.setText(text_criancas_dialog.getText());
                 self.dismiss();
             }
         });
 
-        desfazer_selecao = (Button) v.findViewById(R.id.desfazer_selecao);
-        desfazer_selecao.setOnClickListener(new View.OnClickListener() {
+        desfazer_selecaoDt = (Button) v.findViewById(R.id.desfazer_selecaoDt);
+        desfazer_selecaoDt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 self.dismiss();

@@ -92,10 +92,8 @@ public class MainActivity extends AppCompatActivity
 
         text_checkin = (TextView) findViewById(R.id.text_checkin);
         text_checkout = (TextView) findViewById(R.id.text_checkout);
-        adcionar_quartos_image = (ImageView) findViewById(R.id.adcionar_quartos_image);
 
         text_adultos = (TextView) findViewById(R.id.text_adultos);
-        text_quartos = (TextView) findViewById(R.id.text_quartos);
         text_criancas = (TextView) findViewById(R.id.text_criancas);
 
 

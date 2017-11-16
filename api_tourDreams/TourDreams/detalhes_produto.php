@@ -355,7 +355,11 @@ if(isset($_POST['btnRegistrar_parceiro']))
                                 </div>
                             </div>
 
+						
 						<?php
+						
+						if(isset($_GET['id_cliente'])){
+						
 						$id_cliente = $_GET['id_cliente'];
 						$id_produto = $_GET['id_produto'];
 						$nome_cliente = "'".addslashes ($_GET['nome_cliente'])."'";
@@ -384,8 +388,16 @@ if(isset($_POST['btnRegistrar_parceiro']))
 							}
 						}
 						
+						}
+						
 						?>
 
+						<?php
+								if(isset($_GET['id_cliente'])){
+							
+						?>
+							
+						
 						<form method="post" id="form_reserva" action="">
 							<div class="col-sm-6">
                                 <div class="form-group">
@@ -402,11 +414,45 @@ if(isset($_POST['btnRegistrar_parceiro']))
                                 </div>
                             </div>
 							
+							
+							
 							<div class="col-sm-12 text-center">
 								<input type="submit" onclick="Nome(<?php echo $id_produto?>,<?php echo $id_cliente?>,<?php echo $nome_cliente?>)" class="btn btn-primary" name="btn_verificar" value="Verificar">
 							</div>
 						</form>
+						
+						<?php
+							}else{
+						?>
 
+						<form method="post" action="registrar_user.php">
+							<div class="col-sm-6">
+                                <div class="form-group">
+									<i class="fa fa-calendar"></i>   <label>Entrada</label>
+                                    <input type="date" class="form-control" name="entrada">
+                                </div>
+                            </div>
+
+
+							<div class="col-sm-6">
+                                <div class="form-group">
+									<i class="fa fa-calendar"></i>   <label>Saída</label>
+                                    <input type="date" class="form-control" name="saida">
+                                </div>
+                            </div>
+							
+							
+							
+							<div class="col-sm-12 text-center">
+								<input type="submit" class="btn btn-primary" value="Registrar"/>
+							</div>
+						</form>
+						
+						<?php
+							}
+						?>
+						
+						
                         </aside>
                 </div>
 				

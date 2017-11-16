@@ -88,7 +88,85 @@ $nome_cliente=$_GET['nome_cliente'];
 			success: function(dados){
 				$('.comentar_reserva').html(dados);
 				
-				alert("comentado com sucesso");
+				alert("Comentado com sucesso");
+			}
+		});
+		
+	}
+	
+	
+	function Avaliacao(id_reserva,id_cliente,nome_cliente){
+		
+		
+		var av0 =  $('input[name=avaliar]:checked').val();
+		var av1 =  $('input[name=avaliar1]:checked').val();
+		var av2 =  $('input[name=avaliar2]:checked').val();
+		var av3 =  $('input[name=avaliar3]:checked').val();
+		
+		$.ajax({
+			type: "POST",
+			url: "avaliar.php?id_cliente=" + id_cliente + "&nome_cliente=" + nome_cliente +  "&id_reserva=" + id_reserva,
+			data: {avaliar: av0,   avaliar1: av1,  avaliar2: av2,  avaliar3: av3},
+			success: function(dados_avaliar){
+				$('.comentar_reserva').html(dados_avaliar);
+				
+				alert("Avaliacão feita com sucesso");
+				
+			}
+		});
+		
+	}
+	
+	
+	function Modal_Avaliar(id_reserva,id_cliente,nome_cliente){
+		$.ajax({
+			type: "GET",
+			url: "avaliar.php?id_cliente=" + id_cliente + "&nome_cliente=" + nome_cliente +  "&id_reserva=" + id_reserva,
+			data: {},
+			cache:false,
+            contentType:false,
+            processData:false,
+            async:true,
+			success: function(dados){
+				$('.comentar_reserva').html(dados);
+			}
+		});
+	}
+	
+	
+	function Modal_Postar(id_reserva,id_cliente,nome_cliente){
+		$.ajax({
+			type: "GET",
+			url: "postar.php?id_cliente=" + id_cliente + "&nome_cliente=" + nome_cliente +  "&id_reserva=" + id_reserva,
+			data: {},
+			cache:false,
+            contentType:false,
+            processData:false,
+            async:true,
+			success: function(dados){
+				$('.postar_reserva').html(dados);
+			}
+		});
+	}
+	
+	function Postar(id_reserva,id_cliente,nome_cliente){
+		
+		var form;
+		$('#file_foto').change(function (event) {
+			form = new FormData();
+			form.append('file_foto', event.target.files[0]);
+			var name = event.target.files[0].content.name;
+		});
+
+		
+		$.ajax({
+			type: "POST",
+			url: "postar.php?id_cliente=" + id_cliente + "&nome_cliente=" + nome_cliente +  "&id_reserva=" + id_reserva,
+			data: {coment: $("#coment").val(), file_foto:$("#file_foto").val()},
+			success: function(dados){
+				$('.postar_reserva').html(dados);
+				
+				alert("Postado com sucesso");
 			}
 		});
 		
@@ -172,6 +250,7 @@ $nome_cliente=$_GET['nome_cliente'];
 						  <ul class="nav nav-tabs" id="myTab">
 							<li class="active"><a href="#home" data-toggle="tab">Reservas Finalizadas</a></li>
 							<li><a href="#messages" data-toggle="tab">Acompanhamento da Reserva</a></li>
+							<li><a href="#planejamento" data-toggle="tab">Planejamentos das reservas</a></li>
 						  </ul>
 
 						  <div class="tab-content">
@@ -185,6 +264,7 @@ $nome_cliente=$_GET['nome_cliente'];
 									  <th>Local</th>
 									  <th>Empresa Parceira</th>
 									  <th>Comentar</th>
+									  <th>Avaliar</th>
 									</tr>
 								  </thead>
 									<tbody id="items">
@@ -212,6 +292,7 @@ $nome_cliente=$_GET['nome_cliente'];
 										  <td><?php echo $rs['nome_fantasia'];?></td>
 										  
 										  <td><button type="button" class="btn btn-default btn-xs" onclick="Modal(<?php echo($rs["id_reserva"])?>,<?php echo $id_cliente?>,<?php echo $nome_cliente?>)"><span class="glyphicon glyphicon-plus"></span></button></td>
+										  <td><button type="button" class="btn btn-default btn-xs" onclick="Modal_Avaliar(<?php echo($rs["id_reserva"])?>,<?php echo $id_cliente?>,<?php echo $nome_cliente?>)"><span class="glyphicon glyphicon-plus"></span></button></td>
 										
 										<?php
 											}
@@ -227,6 +308,11 @@ $nome_cliente=$_GET['nome_cliente'];
 								</div>
 							
 							</td>
+							
+							
+							
+							
+							
 						</tr>
 
 
@@ -305,6 +391,73 @@ $nome_cliente=$_GET['nome_cliente'];
 								</div>
 
 							 </div><!--/tab-pane-->
+							 
+							 
+							 <div class="tab-pane" id="planejamento">
+
+							   <h2></h2>
+
+							  <div class="table-responsive">
+								<table class="table table-hover">
+								  <thead>
+									<tr>
+									  <th>Data Entrada</th>
+									  <th>Data Saída</th>
+									  <th>Empresa Parceira</th>
+									  <th>Postar</th>
+									</tr>
+								  </thead>
+								  <tbody id="items">
+									<?php
+										$sql = "select * from view_reserva_cliente where (now() between dt_entrada and dt_saida) or (now() between dt_entrada and dt_saida) and id_cliente=".$_GET['id_cliente']." and status_reserva='Aprovada'";
+										$select = mysql_query($sql);
+										while($rs = mysql_fetch_array($select)){
+											$preco_diaria=$rs['valor_reserva'];
+											$dt_entrada=$rs['dt_entrada'];
+											$dt_saida=$rs['dt_saida'];
+											$dt_nasc_sem_hora_entrada = substr($dt_entrada, 0,10);
+											$dt_nasc_sem_hora_saida = substr($dt_saida, 0,10);
+											
+											$dt_nasc_sem_hora_entrada = explode("-", $dt_entrada );
+											$dt_nasc_sem_hora_saida = explode("-", $dt_saida );
+											
+											$dia = $dt_nasc_sem_hora_entrada[2]; 
+											$mes = $dt_nasc_sem_hora_entrada[1];	
+											$ano = $dt_nasc_sem_hora_entrada[0];
+											
+											$dia_saida = $dt_nasc_sem_hora_saida[2]; 
+											$mes_saida = $dt_nasc_sem_hora_saida[1];	
+											$ano_saida = $dt_nasc_sem_hora_saida[0];
+										
+										
+											$dt_nasc_volta_entrada = $dia."/".$mes."/".$ano;
+											$dt_nasc_volta_saida = $dia_saida."/".$mes_saida."/".$ano_saida;
+										?>
+									<tr>
+										
+										<td><?php echo $dt_nasc_volta_entrada?></td>
+										<td><?php echo $dt_nasc_volta_saida?></td>
+										<td><?php echo $rs['nome_fantasia'];?></td>
+										<td><button type="button" class="btn btn-default btn-xs" onclick="Modal_Postar(<?php echo($rs["id_reserva"])?>,<?php echo $id_cliente?>,<?php echo $nome_cliente?>)"><span class="glyphicon glyphicon-plus"></span></button></td>
+										<?php
+											}
+										?>
+									</tr>
+								  </tbody>
+								  
+									<td colspan="12" class="hiddenRow">
+							
+										<div class="postar_reserva">
+											
+										</div>
+							
+									</td>
+								  
+								</table>
+								</div>
+
+							 </div><!--/tab-pane-->
+							 
 							  </div><!--/tab-pane-->
 						  </div><!--/tab-content-->						
 					</div><!--/col-9-->
@@ -499,5 +652,41 @@ $nome_cliente=$_GET['nome_cliente'];
        }
    }
  </script>
+ 
+ 
+ <script>
+	$(function(){
+    var loading = $('#loadbar').hide();
+    $(document)
+    .ajaxStart(function () {
+        loading.show();
+    }).ajaxStop(function () {
+    	loading.hide();
+    });
+    
+    $("label.btn").on('click',function () {
+    	var choice = $(this).find('input:radio').val();
+    	$('#loadbar').show();
+    	$('#quiz').fadeOut();
+    	setTimeout(function(){
+           $( "#answer" ).html(  $(this).checking(choice) );      
+            $('#quiz').show();
+            $('#loadbar').fadeOut();
+           /* something else */
+    	}, 1500);
+    });
+
+    $ans = 3;
+
+    $.fn.checking = function(ck) {
+        if (ck != $ans)
+            return 'INCORRECT';
+        else 
+            return 'CORRECT';
+    }; 
+});	
+ 
+ </script>
+ 
 
 </html>

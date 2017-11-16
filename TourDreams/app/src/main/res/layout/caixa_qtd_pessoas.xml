@@ -51,7 +51,7 @@
             android:layout_height="30dp"
             android:background="@drawable/fotinha_azul"
             android:src="@drawable/ic_remove_white_36dp"
-            android:id="@+id/remover_adultos_image"/>
+            android:id="@+id/remover_adultos_image_dt"/>
         <TextView
             android:layout_weight="0.1"
             android:layout_width="wrap_content"
@@ -60,7 +60,7 @@
             android:textSize="20dp"
             android:text="1"
             android:foregroundGravity="right"
-            android:id="@+id/text_adultos_dialog"
+            android:id="@+id/count_adultos"
 
             />
 
@@ -70,7 +70,7 @@
             android:layout_height="30dp"
             android:background="@drawable/fotinha_azul_direita"
             android:src="@drawable/ic_add_white_36dp"
-            android:id="@+id/adcionar_adultos_image"/>
+            android:id="@+id/adcionar_adultos_image_dt"/>
 
 
     </LinearLayout>
@@ -108,7 +108,7 @@
             android:layout_height="30dp"
             android:background="@drawable/fotinha_azul"
             android:src="@drawable/ic_remove_white_36dp"
-            android:id="@+id/remover_criancas_image"/>
+            android:id="@+id/remover_criancas_image_dt"/>
         <TextView
             android:layout_weight="0.1"
             android:layout_width="wrap_content"
@@ -117,7 +117,7 @@
             android:textSize="20dp"
             android:text="1"
             android:foregroundGravity="right"
-            android:id="@+id/text_criancas_dialog"
+            android:id="@+id/count_criancas"
             />
 
         <ImageView
@@ -126,7 +126,7 @@
             android:layout_height="30dp"
             android:background="@drawable/fotinha_azul_direita"
             android:src="@drawable/ic_add_white_36dp"
-            android:id="@+id/adcionar_criancas_image"/>
+            android:id="@+id/adcionar_criancas_image_dt"/>
 
 
     </LinearLayout>
@@ -155,8 +155,8 @@
             android:background="#00000000"
             android:fontFamily="sans-serif"
             android:textStyle="bold"
-            android:id="@+id/aplicar_selecao"
-             />
+            android:id="@+id/aplicar_selecaoDt"
+            />
 
         <Button
             android:layout_marginLeft="25dp"
@@ -167,8 +167,8 @@
             android:background="#00000000"
             android:fontFamily="sans-serif"
             android:textStyle="bold"
-            android:id="@+id/desfazer_selecao"/>
-            <!-- android:onClick="fechar_dialog" -->
+            android:id="@+id/desfazer_selecaoDt"/>
+        <!-- android:onClick="fechar_dialog" -->
 
 
     </LinearLayout>

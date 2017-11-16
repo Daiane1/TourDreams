@@ -131,13 +131,7 @@
                 </TableRow>
             </LinearLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginLeft="30dp"
-                android:textSize="13dp"
-                android:text="Á partir de"/>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -161,7 +155,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
                     android:textSize="14dp"
-                    android:text="Diária"
+                    android:text="Valor Final"
                     android:layout_marginBottom="20dp"/>
 
             </LinearLayout>

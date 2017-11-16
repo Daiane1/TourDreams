@@ -70,6 +70,7 @@ public class    DetalhesProduto extends AppCompatActivity {
     static TextView txt_checkin_detalhes;
     static TextView txt_checkout_detalhes;
 
+    static TextView txt_crianca_detalhes, txt_adulto_detalhes;
 
 
     Context context;
@@ -85,6 +86,9 @@ public class    DetalhesProduto extends AppCompatActivity {
 
         txt_checkin_detalhes = (TextView) findViewById(R.id.txt_checkin_detalhes);
         txt_checkout_detalhes = (TextView) findViewById(R.id.txt_checkout_detalhes);
+
+        txt_crianca_detalhes = (TextView) findViewById(R.id.txt_crianca_detalhes);
+        txt_adulto_detalhes = (TextView) findViewById(R.id.txt_adulto_detalhes);
 
 
         id_produto_vem = getIntent().getExtras().getInt("id_produto");
@@ -161,12 +165,29 @@ public class    DetalhesProduto extends AppCompatActivity {
                                     dialog.dismiss();
                                 }
                             });
+                    alertDialog.show();
+                }else if (txt_adulto_detalhes.getText().toString().equals("0")) {
+
+                    AlertDialog alertDialog = new AlertDialog.Builder(DetalhesProduto.this).create();
+
+                    alertDialog.setTitle("Alerta");
+                    alertDialog.setMessage("Por favor selecione pelo menos 1 adulto responsável em sua viagem.");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
+
                 }else {
                     Intent intent = new Intent(DetalhesProduto.this, ReservarQuarto.class);
 
                     intent.putExtra("id_produto_vai", id_produto_vem);
                     intent.putExtra("data_entrada", txt_checkin_detalhes.getText().toString());
                     intent.putExtra("data_saida", txt_checkout_detalhes.getText().toString());
+                    intent.putExtra("adultos", txt_adulto_detalhes.getText().toString());
+                    intent.putExtra("criancas", txt_crianca_detalhes.getText().toString());
 
                     startActivity(intent);
                 }
@@ -492,6 +513,11 @@ public class    DetalhesProduto extends AppCompatActivity {
             txt_checkin_detalhes.setText(dataSelecionada);
 
         }
+    }
+
+    public void abrirDialogDt(View view) {
+        DialogQtdpessoas dialogQtdpessoas = new DialogQtdpessoas();
+        dialogQtdpessoas.show(getFragmentManager(), "dialogQtdpessoas");
     }
 
 

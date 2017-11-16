@@ -50,6 +50,100 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:background="@drawable/edittext_bg">
+
+
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_weight="1.5"
+                    android:background="@drawable/edittext_bg"
+                    android:onClick="abrirDialogDt">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="15dp"
+                            android:textAlignment="center"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="sans-serif"
+                            android:text="Adultos"
+                            android:textColor="#000"
+                            android:textSize="14dp" />
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="25dp"
+                            android:text="0"
+                            android:textAlignment="center"
+                            android:textColor="#000"
+                            android:textSize="18dp"
+                            android:id="@+id/txt_adulto_detalhes"/>
+
+
+                    </LinearLayout>
+                </TableRow>
+
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_weight="1.5"
+                    android:background="@drawable/edittext_bg"
+                    android:onClick="abrirDialogDt">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="15dp"
+                            android:textAlignment="center"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="sans-serif"
+                            android:text="Crianças"
+                            android:textColor="#000"
+                            android:textSize="14dp" />
+
+
+                        <TextView
+                            android:id="@+id/txt_crianca_detalhes"
+                            android:layout_width="match_parent"
+                            android:layout_height="25dp"
+                            android:text="0"
+                            android:textAlignment="center"
+                            android:textColor="#000"
+                            android:textSize="18dp"
+                            />
+                    </LinearLayout>
+                </TableRow>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
 
