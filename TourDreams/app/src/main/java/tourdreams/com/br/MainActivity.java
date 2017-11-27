@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity
             email_cliente_nav.setText("O melhor portal de viagens");
             nome_cliente_nav.setText("TourDreams");
 
-            Picasso.with(this).load(R.drawable.logo_tourdreams).resize(120,100).centerCrop().transform(new CircleTransform()).into(img_cliente_nav);
+            Picasso.with(this).load(R.drawable.logo_entrada).resize(55,120).centerCrop().into(img_cliente_nav);
 
             carregarProdutos();
 

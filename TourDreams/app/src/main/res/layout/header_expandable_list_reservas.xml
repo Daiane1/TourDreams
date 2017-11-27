@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
               android:padding="8dp"
-    android:background="#ff81a1e6"
+    android:background="@color/colorPrimary"
               android:orientation="horizontal"
               android:weightSum="10">
 
@@ -12,25 +12,15 @@
         android:id="@+id/header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#ff81a1e6"
         android:paddingBottom="2dp"
         android:paddingTop="2dp"
-        android:text="Header"
+        android:text="Proximas Reservas"
         android:textAllCaps="false"
-        android:textColor="#ff000000"
-        android:textSize="30sp"
+        android:textColor="#fff"
+        android:textSize="22sp"
         android:typeface="serif"
         android:layout_gravity="center"
         android:layout_marginLeft="30dp"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Count"
-        android:id="@+id/count"
-        android:layout_gravity="center|left"
-        android:layout_marginLeft="5dp"
-        android:gravity="left"/>
 
 </LinearLayout>

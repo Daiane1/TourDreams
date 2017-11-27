@@ -99,16 +99,15 @@ public class MinhasReservas extends AppCompatActivity {
         listItems = new HashMap<String, List<ItemPojo>>();
 
         // A list of Headers. I've added the Headers as simple Strings.. However, you can also change them to Objects of POJO. The process which I've applied to the itemsList can also be applied here.
-        listHeader.add("A");
-        listHeader.add("B");
-        listHeader.add("C");
-        listHeader.add("D");
-        listHeader.add("E");
+        listHeader.add("Proximas Reservas");
+        listHeader.add("Reservas Finalizadas");
+        listHeader.add("Reservas Rejeitadas");
 
 
         ArrayList<ItemPojo> itemPojoList = new ArrayList<>();
 
-        ItemPojo itemPojo = new ItemPojo(R.drawable.plus, "Resort1" , "Casa da mãe Joana", "11/10/2017", "16/10/2017");
+        ItemPojo itemPojo = new ItemPojo(R.drawable.resort1, "Nino Hotels" , "São Paulo, Brasil", "01/11/2017", "05/11/2017");
+
         itemPojoList.add(itemPojo);
 
         listItems.put(listHeader.get(0), itemPojoList);
