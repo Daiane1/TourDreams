@@ -153,7 +153,7 @@ public class FinalizarReserva extends AppCompatActivity {
 
             alertDialog.setTitle("Reserva efetuada com sucesso");
             alertDialog.setMessage("Para saber mais sobre sua reserva acesse:" +
-                    "www.tourdreams.com.");
+                    "www.site.tourdreams.com.");
             alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Obrigado",
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {

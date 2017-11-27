@@ -42,6 +42,10 @@ public class PesquisarProduto extends AppCompatActivity {
     String resultado_listener;
     String url, parametros;
 
+    String checkin_home, checkout_home, pesquisa_home ="";
+
+    Boolean home = false;
+
     ArrayAdapter<ProdutosBusca> adapter;
 
     ListView list_view_produto_busca;
@@ -116,7 +120,34 @@ public class PesquisarProduto extends AppCompatActivity {
         list_view_produto_busca = (ListView) findViewById(R.id.list_resultado_busca);
 
 
+        home = getIntent().getExtras().getBoolean("home");
+        checkin_home  = getIntent().getExtras().getString("checkin_home");
+        checkout_home  = getIntent().getExtras().getString("checkout_home");
+        pesquisa_home = getIntent().getExtras().getString("pesquisa_home");
+
         context = this;
+
+        if (home){
+
+            ConnectivityManager connMgr = (ConnectivityManager)getApplication().getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+            if (networkInfo != null && networkInfo.isConnected()){
+
+                url =  getApplication().getString(R.string.link)+"busca_basica.php";
+
+                parametros = "busca_home&localizacao=" + pesquisa_home + "&dt_entrada=" + checkin_home + "&dt_saida=" + checkout_home ;
+
+
+                new PesquisarProduto.Preencher_busca().execute(url);
+            }else{
+
+                Toast.makeText(getApplicationContext(), "Nenhuma Conexao foi detectada", Toast.LENGTH_LONG).show();
+            }
+        }else {
+            //Acabou
+        }
+
+
 
         adapter = new ProdutosBuscaAdapter(
                 context,

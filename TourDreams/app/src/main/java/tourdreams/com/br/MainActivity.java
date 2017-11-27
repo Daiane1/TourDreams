@@ -14,6 +14,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -27,6 +28,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.NumberPicker;
@@ -39,6 +41,7 @@ import com.squareup.picasso.Picasso;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
@@ -60,11 +63,18 @@ public class MainActivity extends AppCompatActivity
     List<ProdutosHome> list_produto = new ArrayList<>();
     ArrayAdapter<ProdutosHome> adapter;
 
+
+    Button btn_pesquisar_home;
+
+    ArrayAdapter<ProdutosBusca> adapter_busca;
+
     int id_produto;
 
     TextView nome_cliente_nav, email_cliente_nav;
     ImageView img_cliente_nav;
     String id_cliente,milhas, nome_cliente, email_cliente, rg_cliente,cpf_cliente,senha_cliente,celular_cliente,foto_cliente;
+
+    EditText edit_pesquisa;
 
     SharedPreferences preferences;
 
@@ -96,6 +106,30 @@ public class MainActivity extends AppCompatActivity
         text_adultos = (TextView) findViewById(R.id.text_adultos);
         text_criancas = (TextView) findViewById(R.id.text_criancas);
 
+
+        edit_pesquisa = (EditText) findViewById(R.id.edit_pesquisa);
+
+        btn_pesquisar_home = (Button) findViewById(R.id.btn_pesquisar_home);
+        btn_pesquisar_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String checkin = text_checkin.getText().toString();
+                String checkout = text_checkout.getText().toString();
+
+                String pesquisa =edit_pesquisa.getText().toString();
+
+                Boolean home = true;
+
+                Intent intent = new Intent(MainActivity.this, PesquisarProduto.class);
+                intent.putExtra("checkin_home", checkin);
+                intent.putExtra("checkout_home", checkout);
+                intent.putExtra("pesquisa_home", pesquisa);
+                intent.putExtra("home", home);
+
+                startActivity(intent);
+            }
+        });
 
 
 
@@ -394,7 +428,25 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+    private class Preencher_busca extends AsyncTask<String, Void, String> {
 
+        @Override
+        protected String doInBackground(String... strings) {
+            return Conexao.postDados(strings[0], parametros);
+        }
+
+        @Override
+        protected void onPostExecute(String resultado) {
+            Gson gson = new Gson();
+            ProdutosBusca[] produtosBusca = gson.fromJson(resultado, ProdutosBusca[].class);
+
+            adapter_busca.addAll(Arrays.asList(produtosBusca));
+
+
+
+
+        }
+    }
 }
 
 

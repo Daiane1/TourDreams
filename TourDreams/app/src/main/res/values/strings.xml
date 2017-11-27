@@ -18,11 +18,11 @@
     <string name="link_site">www.site.tourdreams.com/registrar_user.php</string>-->
 
 
-    <string name="link">http://192.168.56.1/TourDreams/Parceiro/tour_dreams/</string>
-    <string name="link_imagens">http://192.168.56.1/TourDreams/Parceiro/Arquivos/</string>
-    <string name="link_imagens_carac">http://192.168.56.1/TourDreams/CMS/Fotos_Mobile/</string>
-    <string name="link_imagem_brinde">http://192.168.56.1/TourDreams/CMS/Arquivos/</string>
-    <string name="link_site">http://192.168.56.1/TourDreams/registrar_user.php</string>
+    <string name="link">http://10.107.144.5/TourDreams/Parceiro/tour_dreams/</string>
+    <string name="link_imagens">http://10.107.144.5/TourDreams/Parceiro/Arquivos/</string>
+    <string name="link_imagens_carac">http://10.107.144.5/TourDreams/CMS/Fotos_Mobile/</string>
+    <string name="link_imagem_brinde">http://10.107.144.5/TourDreams/CMS/Arquivos/</string>
+    <string name="link_site">http://10.107.144.5/TourDreams/registrar_user.php</string>
 
 
     <!--<string name="link">http://10.107.134.11/TourDreams/Parceiro/tour_dreams/</string>
