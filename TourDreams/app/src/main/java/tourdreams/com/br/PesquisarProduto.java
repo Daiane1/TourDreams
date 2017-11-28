@@ -57,8 +57,6 @@ public class PesquisarProduto extends AppCompatActivity {
             resultado_listener = query;
 
 
-       
-
             ConnectivityManager connMgr = (ConnectivityManager)getApplication().getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
             if (networkInfo != null && networkInfo.isConnected()){
@@ -68,7 +66,7 @@ public class PesquisarProduto extends AppCompatActivity {
                 parametros = "busca_basica=" + resultado_listener;
 
 
-                new PesquisarProduto.Preencher_busca().execute(url);
+                new PesquisarProduto.Preencher_busca_basica().execute(url);
 
             }else{
 
@@ -88,7 +86,7 @@ public class PesquisarProduto extends AppCompatActivity {
         }
     };
 
-    private class Preencher_busca extends AsyncTask<String, Void, String> {
+    private class Preencher_busca_basica extends AsyncTask<String, Void, String> {
 
         @Override
         protected String doInBackground(String... strings) {
@@ -97,12 +95,14 @@ public class PesquisarProduto extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String resultado) {
-            Gson gson = new Gson();
-            ProdutosBusca[] produtosBusca = gson.fromJson(resultado, ProdutosBusca[].class);
 
 
-            adapter.clear();
-            adapter.addAll(Arrays.asList(produtosBusca));
+                Gson gson = new Gson();
+                ProdutosBusca[] produtosBusca = gson.fromJson(resultado, ProdutosBusca[].class);
+
+
+                adapter.clear();
+                adapter.addAll(Arrays.asList(produtosBusca));
 
 
 
@@ -214,5 +214,35 @@ public class PesquisarProduto extends AppCompatActivity {
             Toast.makeText(context, teste2, Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    private class Preencher_busca extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... strings) {
+            return Conexao.postDados(strings[0], parametros);
+        }
+
+        @Override
+        protected void onPostExecute(String resultado) {
+
+
+            if(!resultado.isEmpty()){
+                Gson gson = new Gson();
+                ProdutosBusca[] produtosBusca = gson.fromJson(resultado, ProdutosBusca[].class);
+
+
+                adapter.clear();
+                adapter.addAll(Arrays.asList(produtosBusca));
+            }else{
+
+                Toast.makeText(context, "berro", Toast.LENGTH_LONG).show();
+            }
+
+
+
+
+
+        }
     }
 }
