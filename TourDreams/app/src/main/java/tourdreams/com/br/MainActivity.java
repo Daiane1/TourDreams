@@ -2,6 +2,7 @@ package tourdreams.com.br;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -53,8 +54,8 @@ public class MainActivity extends AppCompatActivity
     Context context;
     String parametros, url_foto = "", url="";
 
-    static TextView text_checkin;
-    static TextView text_checkout;
+    public static TextView text_checkin;
+    public static TextView text_checkout;
     Boolean usuariologado = false;
     int contagem = 1;
     ImageView adcionar_quartos_image;
@@ -63,6 +64,7 @@ public class MainActivity extends AppCompatActivity
     List<ProdutosHome> list_produto = new ArrayList<>();
     ArrayAdapter<ProdutosHome> adapter;
 
+    public static Boolean home;
 
     Button btn_pesquisar_home;
 
@@ -77,6 +79,9 @@ public class MainActivity extends AppCompatActivity
     EditText edit_pesquisa;
 
     SharedPreferences preferences;
+
+    public static String checkin , checkout;
+    public static String pesquisa;
 
 
     @Override
@@ -114,12 +119,12 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
 
-                String checkin = text_checkin.getText().toString();
-                String checkout = text_checkout.getText().toString();
+                checkin = text_checkin.getText().toString();
+                checkout = text_checkout.getText().toString();
+                home = true;
+                pesquisa =edit_pesquisa.getText().toString();
 
-                String pesquisa =edit_pesquisa.getText().toString();
 
-                Boolean home = true;
 
                 Intent intent = new Intent(MainActivity.this, PesquisarProduto.class);
                 intent.putExtra("checkin_home", checkin);
@@ -223,6 +228,14 @@ public class MainActivity extends AppCompatActivity
 
 
     private class Preencher_produtos extends AsyncTask<String, Void, String> {
+        ProgressDialog progressDialog;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = ProgressDialog.show(context, "Aguarde...", "Estamos Trabalhando");
+        }
+
         @Override
         protected String doInBackground(String... urls){
 
@@ -233,25 +246,35 @@ public class MainActivity extends AppCompatActivity
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String resultado){
+
+            progressDialog.dismiss();
+
             Gson gson = new Gson();
             ProdutosHome[] produtosHome = gson.fromJson(resultado, ProdutosHome[].class);
 
+            if(resultado.length() > 0){
+
+                for(int i = 0; i < produtosHome.length;i++){
+
+                    list_produto.add(produtosHome[i]);
+
+                }
+
+                adapter = new ProdutosHomeAdapter(
+                        context,
+                        R.layout.list_item_produto,
+                        list_produto);
 
 
+                list_view_produto.setAdapter(adapter);
 
-            for(int i = 0; i < produtosHome.length;i++){
+            } else {
 
-                list_produto.add(produtosHome[i]);
-
+                Toast.makeText(context, "Desculpe estamos com problemas de conexão.", Toast.LENGTH_SHORT).show();
             }
 
-            adapter = new ProdutosHomeAdapter(
-                    context,
-                    R.layout.list_item_produto,
-                    list_produto);
 
 
-            list_view_produto.setAdapter(adapter);
 
         }
 
@@ -323,6 +346,16 @@ public class MainActivity extends AppCompatActivity
 
     public void pesquisar_produto(MenuItem item) {
         Intent intent = new Intent(this, PesquisarProduto.class);
+        home = false;
+        checkin= "";
+        checkout = "";
+        pesquisa = "";
+        intent.putExtra("checkin_home", checkin);
+        intent.putExtra("checkout_home", checkout);
+        intent.putExtra("pesquisa_home", pesquisa);
+        intent.putExtra("home", home);
+
+
         startActivity(intent);
     }
 

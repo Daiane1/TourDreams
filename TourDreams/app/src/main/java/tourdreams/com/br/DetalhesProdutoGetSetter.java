@@ -7,8 +7,15 @@ package tourdreams.com.br;
 public class DetalhesProdutoGetSetter {
     int id_produto, qtd_milhas;
     String nome, status, tipo_viagem, estilo_produto, preco,  numero_cep, logradouro, numero,
-            complemento, bairro, local, descricao, img_produto;
+            complemento, bairro, local, descricao, img_produto, telefone;
 
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
 
     public int getId_produto() {
         return id_produto;

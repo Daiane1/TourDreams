@@ -9,7 +9,7 @@
 	
 	include_once 'conexao.php';
 	
-	$id_produto = $_POST['id_produto'];
+	$id_produto = $_GET['id_produto'];
 	
 	$sql = $dbcon->query(" select * from view_produto
         where id_produto = $id_produto;");
@@ -23,6 +23,7 @@
 			
 			$obj = array("id_produto" => $dados['id_produto'] ,
       "nome" => utf8_encode ($dados['nome_fantasia']),
+	  "telefone" => utf8_encode ($dados['telefone']),
       "status" => utf8_encode ($dados['status']),
       "tipo_viagem" =>utf8_encode ($dados['tipo_viagem']),
       "estilo_produto" => utf8_encode ($dados['estilo_produto']),

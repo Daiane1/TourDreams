@@ -1,6 +1,7 @@
 package tourdreams.com.br;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -10,6 +11,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ListView;
@@ -28,7 +30,11 @@ public class Promocoes extends AppCompatActivity {
     ArrayAdapter<ItensPromocoes> adapter;
     Context context;
 
+    ArrayAdapter<ProdutosHome> adapter_det;
+
     ListView list_view_promocoes;
+
+    Integer id_produto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +47,23 @@ public class Promocoes extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         list_view_promocoes = (ListView) findViewById(R.id.list_promocoes);
+
+
+        list_view_promocoes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ItensPromocoes itensPromocoes = adapter.getItem(position);
+
+                id_produto = itensPromocoes.getId_produto();
+
+                Intent detalhesProduto =  new Intent(Promocoes.this, DetalhesProduto.class);
+
+                detalhesProduto.putExtra("id_produto", id_produto);
+
+
+                startActivity(detalhesProduto);
+            }
+        });
         carregarPromocoes();
 
     }

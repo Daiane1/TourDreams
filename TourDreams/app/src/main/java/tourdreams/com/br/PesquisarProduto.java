@@ -1,6 +1,8 @@
 package tourdreams.com.br;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -11,6 +13,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
 import android.support.v7.widget.SearchView;
@@ -40,13 +43,16 @@ public class PesquisarProduto extends AppCompatActivity {
 
     MenuItem menuItem;
     String resultado_listener;
-    String url, parametros;
+    String url, parametros, parametros_medios;
 
     String checkin_home, checkout_home, pesquisa_home ="";
 
     Boolean home = false;
 
     ArrayAdapter<ProdutosBusca> adapter;
+    ArrayAdapter<ProdutosHome> adapter2;
+
+    Integer id_produto;
 
     ListView list_view_produto_busca;
     List<ProdutosBusca> list_produto_busca = new ArrayList<>();
@@ -119,6 +125,22 @@ public class PesquisarProduto extends AppCompatActivity {
 
         list_view_produto_busca = (ListView) findViewById(R.id.list_resultado_busca);
 
+        list_view_produto_busca.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ProdutosBusca produtosBusca = adapter.getItem(position);
+
+                id_produto = produtosBusca.getId_produto();
+
+                Intent detalhesProduto =  new Intent(PesquisarProduto.this, DetalhesProduto.class);
+
+                detalhesProduto.putExtra("id_produto", id_produto);
+
+
+                startActivity(detalhesProduto);
+            }
+        });
+
 
         home = getIntent().getExtras().getBoolean("home");
         checkin_home  = getIntent().getExtras().getString("checkin_home");
@@ -133,12 +155,12 @@ public class PesquisarProduto extends AppCompatActivity {
             NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
             if (networkInfo != null && networkInfo.isConnected()){
 
-                url =  getApplication().getString(R.string.link)+"busca_basica.php";
+                url =  getApplication().getString(R.string.link)+"busca_media.php";
 
-                parametros = "busca_home&localizacao=" + pesquisa_home + "&dt_entrada=" + checkin_home + "&dt_saida=" + checkout_home ;
+                parametros_medios = "localizacao=" + pesquisa_home + "&dt_entrada=" + checkin_home + "&dt_saida=" + checkout_home ;
 
 
-                new PesquisarProduto.Preencher_busca().execute(url);
+                new PesquisarProduto.Preencher_busca_media().execute(url);
             }else{
 
                 Toast.makeText(getApplicationContext(), "Nenhuma Conexao foi detectada", Toast.LENGTH_LONG).show();
@@ -216,27 +238,46 @@ public class PesquisarProduto extends AppCompatActivity {
 
     }
 
-    private class Preencher_busca extends AsyncTask<String, Void, String> {
+    private class Preencher_busca_media extends AsyncTask<String, Void, String> {
+
+        ProgressDialog progressDialog;
 
         @Override
-        protected String doInBackground(String... strings) {
-            return Conexao.postDados(strings[0], parametros);
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            progressDialog = ProgressDialog.show(context, "Aguarde...", "Estamos Buscando em nossa base de dados");;
         }
 
         @Override
-        protected void onPostExecute(String resultado) {
+        protected String doInBackground(String... strings) {
+            return Conexao.postDados(strings[0], parametros_medios);
+        }
+
+        @Override
+        protected void onPostExecute(String resultado2) {
+                progressDialog.dismiss();
 
 
-            if(!resultado.isEmpty()){
                 Gson gson = new Gson();
-                ProdutosBusca[] produtosBusca = gson.fromJson(resultado, ProdutosBusca[].class);
+                ProdutosBusca[] produtosBusca = gson.fromJson(resultado2, ProdutosBusca[].class);
 
-
+            if(!resultado2.isEmpty()){
                 adapter.clear();
                 adapter.addAll(Arrays.asList(produtosBusca));
             }else{
 
-                Toast.makeText(context, "berro", Toast.LENGTH_LONG).show();
+                AlertDialog alertDialog = new AlertDialog.Builder(PesquisarProduto.this).create();
+
+                alertDialog.setTitle("Desculpe,");
+                alertDialog.setMessage("Não encontramos nenhum hotel disponível para esta data, por favor pesquise outros hotéis.");
+                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                alertDialog.show();
             }
 
 

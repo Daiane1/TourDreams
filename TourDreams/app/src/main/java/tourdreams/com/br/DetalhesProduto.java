@@ -2,6 +2,7 @@ package tourdreams.com.br;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,6 +12,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -63,7 +65,7 @@ public class    DetalhesProduto extends AppCompatActivity {
     String url, parametros, parametros_coment;
     Integer id_produto_vem;
 
-    Button btn_reservar;
+    Button btn_reservar, btn_chat;
     static Date data_checkin, data_checkout;
 
 
@@ -72,6 +74,7 @@ public class    DetalhesProduto extends AppCompatActivity {
 
     static TextView txt_crianca_detalhes, txt_adulto_detalhes;
 
+    String telefone_hoteleiro;
 
     Context context;
 
@@ -109,6 +112,7 @@ public class    DetalhesProduto extends AppCompatActivity {
 
 
         btn_reservar = (Button) findViewById(R.id.btn_reservar);
+        btn_chat = (Button) findViewById(R.id.btn_chat);
 
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         Date data = new Date();
@@ -124,7 +128,13 @@ public class    DetalhesProduto extends AppCompatActivity {
         }*/
 
 
+        btn_chat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://api.whatsapp.com/send?phone=" + telefone_hoteleiro)));
 
+            }
+        });
 
 
         btn_reservar.setOnClickListener(new View.OnClickListener() {
@@ -374,18 +384,28 @@ public class    DetalhesProduto extends AppCompatActivity {
         Drawable d;
 
         DetalhesProdutoGetSetter[] detalhesProduto;
+        ProgressDialog progressDialog;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            progressDialog = ProgressDialog.show(context, "Aguarde...", "Carregando Produtos");
+        }
 
         @Override
         protected String doInBackground(String... urls){
             String retorno = Conexao.postDados(urls[0], parametros);
             Gson gson = new Gson();
-           detalhesProduto = gson.fromJson(retorno, DetalhesProdutoGetSetter[].class);
+            detalhesProduto = gson.fromJson(retorno, DetalhesProdutoGetSetter[].class);
+
 
             try {
                 //URL url_foto = new URL("http://www.site.tourdreams.com/Parceiro/Arquivos/" +  detalhesProduto[0].getImg_produto());
                 URL url_foto = new URL(getString(R.string.link_imagens) +  detalhesProduto[0].getImg_produto());
                 Bitmap image = BitmapFactory.decodeStream(url_foto.openConnection().getInputStream());
                  d = new BitmapDrawable(getResources(), image);
+
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -401,7 +421,7 @@ public class    DetalhesProduto extends AppCompatActivity {
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String resultado){
-
+            progressDialog.dismiss();
 
             CollapsingToolbarLayout produto = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
 
@@ -427,6 +447,7 @@ public class    DetalhesProduto extends AppCompatActivity {
             produto.setTitle(detalhesProduto[0].getNome());
             local_produto_selecionado.setText(detalhesProduto[0].getLocal());
             preco_produto_selecionado.setText(detalhesProduto[0].getPreco());
+            telefone_hoteleiro = detalhesProduto[0].getTelefone();
 
 
 
