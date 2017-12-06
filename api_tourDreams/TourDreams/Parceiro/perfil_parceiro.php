@@ -74,7 +74,7 @@
 								<li class="divider"></li>
 
 								<li>
-									<a href="index.php">
+									<a href="..\index.php">
 										<i class="ace-icon fa fa-power-off"></i>
 										Logout
 									</a>
@@ -101,7 +101,7 @@
 				
 				<ul class="nav nav-list">
 					<li class="active">
-						<a href="index.php?nome_empresa=<?php echo$_GET['nome_empresa'];?>&id_parceiro=<?php echo$_GET['id_parceiro'];?>">
+						<a href="index_parceiro.php?nome_empresa=<?php echo$_GET['nome_empresa'];?>&id_parceiro=<?php echo$_GET['id_parceiro'];?>">
 							<i class="menu-icon fa fa-briefcase"></i>
 							<span class="menu-text"> Home </span>
 						</a>
@@ -116,7 +116,18 @@
 
 						<b class="arrow"></b>
 					</li>
+					
+					<li class="">
+						<a href="minhas_reservas.php?nome_empresa=<?php echo$_GET['nome_empresa'];?>&id_parceiro=<?php echo$_GET['id_parceiro'];?>">
+							<i class="menu-icon fa fa-building-o"></i>
+							<span class="menu-text"> Minhas Reservas </span>
+						</a>
+
+						<b class="arrow"></b>
+					</li>
+					
 				</ul>
+
 					
 				<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
 					<i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
@@ -210,20 +221,35 @@
 												</div>
 
 												<div class="profile-info-row">
-													<div class="profile-info-name"> Localização </div>
+													<div class="profile-info-name"> CNPJ </div>
 
 													<div class="profile-info-value">
-													<i class="fa fa-map-marker light-orange bigger-110"></i>
+													
 														<span class="editable" id="country">  <?php echo($rs['cnpj']);?></span>
-														<span class="editable" id="city"> <?php echo($rs['estado_nascimento']);?></span>
+														
 													</div>
 												</div>
 												
 												<div class="profile-info-row">
-													<div class="profile-info-name"> CNPJ </div>
+													<div class="profile-info-name"> Localização </div>
 
 													<div class="profile-info-value">
-														<span class="editable" id="country">  <?php echo($rs['cnpj']);?></span>
+														
+														<?php
+														if (isset ($_GET['id_parceiro'])) {
+																$id_parceiro = (int)$_GET['id_parceiro'];
+																$sql_local = "select c.logradouro, c.numero, c.cidade,c.estado from tbl_parceiros as p inner join tbl_produto as pro on pro.id_parceiro = p.id_parceiro inner join tbl_cep as c on c.id_cep = pro.id_cep where pro.id_parceiro=".$id_parceiro;
+																$select_local = mysql_query($sql_local);
+															while($rslocal = mysql_fetch_array($select_local)){
+														?>
+														<i class="fa fa-map-marker light-orange bigger-110"></i>
+														<span class="editable" id="country">  <?php echo($rslocal['logradouro']);?></span>
+														<span class="editable" id="city"><?php echo($rslocal['cidade']);?></span>
+														
+														<?php
+														 }
+														}
+														?>
 													</div>
 												</div>
 
@@ -265,7 +291,7 @@
 				<div class="footer-inner">
 					<div class="footer-content">
 						<span class="bigger-120">
-							<span class="blue bolder">TourDreams</span>
+							<span class="blue bolder">Parceiros TourDreams</span>
 						</span>
 					</div>
 				</div>

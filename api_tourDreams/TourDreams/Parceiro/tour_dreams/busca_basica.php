@@ -3,13 +3,13 @@
 	header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
     header("Cache-Control: post-check=0, pre-check=0", false);
     header("Pragma: no-cache");
-	ini_set('default_charset','UTF-8');	
+	ini_set('default_charset','UTF-8');
 	header("Content-Type: text/html; charset=ISO-8859-1", true);
 	header("Content-Type: text/html; charset=UTF-8", true);
-	
+
 	include_once 'conexao.php';
-	
-		
+
+
 		$busca_basica = $_POST['busca_basica'];
 
 
@@ -19,21 +19,22 @@
 			left join view_avaliacoes as view_ava
 			on view_ava.id_produto = vf.id_produto
 			inner join tbl_parceiros as parc
-            on parc.id_parceiro = pd.id_parceiro
+      on parc.id_parceiro = pd.id_parceiro
 				where vf.nome_caracteristica LIKE '%$busca_basica%' or vf.nome_fantasia LIKE '%$busca_basica%'
 				or vf.logradouro LIKE '%$busca_basica%' or vf.bairro LIKE '%$busca_basica%'
 				or vf.cidade LIKE '%$busca_basica%' or vf.estado LIKE '%$busca_basica%'
 				or vf.pais LIKE '%$busca_basica%'
+                and pd.status = 'Aprovado'
 				group by vf.id_produto;");
 
-				
-				
+
+
 		if(mysqli_num_rows($sql) > 0){
-			
+
 			$lista = [];
-			
+
 			while($dados = $sql->fetch_array()){
-				$obj = array("id_produto" => $dados['id_produto'], 
+				$obj = array("id_produto" => $dados['id_produto'],
 				"img_produto_busca" => $dados['foto_principal'],
 				"nome_produto_busca" => $dados['nome_fantasia'],
 				"local_produto_busca" => ($dados['cidade'] . " - " .$dados['estado']. " , " .$dados['pais']),
@@ -42,11 +43,8 @@
 				);
 				$lista[] = $obj;
 			}
-			
+
 			echo json_encode($lista);
-				
-		} else {
-			echo ("Erro");
-			
+
 		}
  ?>

@@ -87,23 +87,25 @@ if(isset($_POST['btnRegistrar_parceiro']))
 
         <link  rel='stylesheet' type='text/css'>
 
-
-
-        <link rel="stylesheet" href="assets/css/normalize.css">
-        <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-        <link rel="stylesheet" href="assets/css/fontello.css">
-        <link href="assets/fonts/icon-7-stroke/css/pe-icon-7-stroke.css" rel="stylesheet">
-        <link href="assets/fonts/icon-7-stroke/css/helper.css" rel="stylesheet">
-        <link href="assets/css/animate.css" rel="stylesheet" media="screen">
-        <link rel="stylesheet" href="assets/css/bootstrap-select.min.css">
-        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="assets/css/icheck.min_all.css">
-        <link rel="stylesheet" href="assets/css/price-range.css">
-        <link rel="stylesheet" href="assets/css/owl.carousel.css">
-        <link rel="stylesheet" href="assets/css/owl.theme.css">
-        <link rel="stylesheet" href="assets/css/owl.transitions.css">
-        <link rel="stylesheet" href="assets/css/style.css">
-        <link rel="stylesheet" href="assets/css/responsive.css">
+		
+		<link rel="shortcut icon" href="Montagem/img/icon.png" type="image/x-icon">
+		
+	
+        <link rel="stylesheet" href="Montagem/css/normalize.css">
+        <link rel="stylesheet" href="Montagem/css/font-awesome.min.css">
+        <link rel="stylesheet" href="Montagem/css/fontello.css">
+        <link href="Montagem/fonts/icon-7-stroke/css/pe-icon-7-stroke.css" rel="stylesheet">
+        <link href="Montagem/fonts/icon-7-stroke/css/helper.css" rel="stylesheet">
+        <link href="Montagem/css/animate.css" rel="stylesheet" media="screen">
+        <link rel="stylesheet" href="Montagem/css/bootstrap-select.min.css">
+        <link rel="stylesheet" href="Teste/css/bootstrap.min.css">
+        <link rel="stylesheet" href="Montagem/css/icheck.min_all.css">
+        <link rel="stylesheet" href="Montagem/css/price-range.css">
+        <link rel="stylesheet" href="Montagem/css/owl.carousel.css">
+        <link rel="stylesheet" href="Montagem/css/owl.theme.css">
+        <link rel="stylesheet" href="Montagem/css/owl.transitions.css">
+        <link rel="stylesheet" href="Montagem/css/style.css">
+        <link rel="stylesheet" href="Montagem/css/responsive.css">
 
 	<style type="text/css">
 		.header-connect{
@@ -118,30 +120,10 @@ if(isset($_POST['btnRegistrar_parceiro']))
 
 
 
-        <div class="header-connect">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-5 col-sm-8  col-xs-12">
-                        <div class="header-half header-call">
-                            <p>
-                                <span><i class="pe-7s-call"></i> (11) 4222-2020</span>
-                                <span><i class="pe-7s-mail"></i> tour_dreams@tour.com</span>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-md-2 col-md-offset-5  col-sm-3 col-sm-offset-1  col-xs-12">
-                        <div class="header-half header-social">
-                            <ul class="list-inline">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <?php      	
+      	   include('header.php');
+        ?>
+		
 
 
         
@@ -256,76 +238,14 @@ if(isset($_POST['btnRegistrar_parceiro']))
 				</div>
 
 
-		<div class="count-area">
 		
-		
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title">
-                        <h2>O Sucesso da TourDreams </h2>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12 col-xs-12 percent-blocks m-main" data-waypoint-scroll="true">
-                        <div class="row">
-                            <div class="col-sm-3 col-xs-6">
-                                <div class="count-item">
-                                    <div class="count-item-circle">
-                                        <span class="pe-7s-users"></span>
-                                    </div>
-                                    <div class="chart" data-percent="5000">
-                                        <h2 class="percent" id="counter">0</h2>
-                                        <h5>Clientes </h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-3 col-xs-6">
-                                <div class="count-item">
-                                    <div class="count-item-circle">
-                                        <span class="pe-7s-home"></span>
-                                    </div>
-                                    <div class="chart" data-percent="12000">
-                                        <h2 class="percent" id="counter1">0</h2>
-                                        <h5>Produtos</h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-3 col-xs-6">
-                                <div class="count-item">
-                                    <div class="count-item-circle">
-                                        <span class="pe-7s-flag"></span>
-                                    </div>
-                                    <div class="chart" data-percent="120">
-                                        <h2 class="percent" id="counter2">0</h2>
-                                        <h5>Cidades </h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-3 col-xs-6">
-                                <div class="count-item">
-                                    <div class="count-item-circle">
-                                        <span class="pe-7s-graph2"></span>
-                                    </div>
-                                    <div class="chart" data-percent="5000">
-                                        <h2 class="percent"  id="counter3">5000</h2>
-                                        <h5>Reservas</h5>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
 		<div class="row">
             <div class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title">
                 <h2>Parceiros </h2>
             </div>
-        </div>
-
-		<div class="container">
+			
+			<div class="container">
 			<div class="col-xs-12">
 				<div class="carousel slide" id="myCarousel">
 					<div class="carousel-inner">
@@ -351,22 +271,18 @@ if(isset($_POST['btnRegistrar_parceiro']))
 					</div>
 
 
-					<nav>
-						<ul class="control-box pager">
-							<li><a data-slide="prev" href="#myCarousel" class=""><i class="glyphicon glyphicon-chevron-left"></i></a></li>
-							<li><a data-slide="next" href="#myCarousel" class=""><i class="glyphicon glyphicon-chevron-right"></i></li>
-						</ul>
-					</nav>
 				</div>
 
 			</div>
 
 		</div>
+			
+		</div>
+
+			
 
 
-
-
-
+		
 
 
 
@@ -386,24 +302,21 @@ if(isset($_POST['btnRegistrar_parceiro']))
       	   include('rodape.php');
         ?>
 
-        <script src="assets/js/modernizr-2.6.2.min.js"></script>
+        <script src="Montagem/js/vendor/modernizr-2.6.2.min.js"></script>
+        <script src="Montagem/js/jquery-1.10.2.min.js"></script>
+        <script src="Teste/js/bootstrap.min.js"></script>
+        <script src="Montagem/js/bootstrap-select.min.js"></script>
+        <script src="Montagem/js/bootstrap-hover-dropdown.js"></script>
+        <script src="Montagem/js/easypiechart.min.js"></script>
+        <script src="Montagem/js/jquery.easypiechart.min.js"></script>
+        <script src="Montagem/js/owl.carousel.min.js"></script>
+        <script src="Montagem/js/wow.js"></script>
+        <script src="Montagem/js/icheck.min.js"></script>
+        <script src="Montagem/js/price-range.js"></script>
+        <script type="text/javascript" src="Montagem/js/lightslider.min.js"></script>
+        <script src="Montagem/js/main.js"></script>
+		
 
-        <script src="assets/js/jquery-1.10.2.min.js"></script>
-        <script src="bootstrap/js/bootstrap.min.js"></script>
-        <script src="assets/js/bootstrap-select.min.js"></script>
-        <script src="assets/js/bootstrap-hover-dropdown.js"></script>
-
-        <script src="assets/js/easypiechart.min.js"></script>
-        <script src="assets/js/jquery.easypiechart.min.js"></script>
-
-        <script src="assets/js/owl.carousel.min.js"></script>
-        <script src="assets/js/wow.js"></script>
-
-
-        <script src="assets/js/icheck.min.js"></script>
-        <script src="assets/js/price-range.js"></script>
-
-        <script src="assets/js/main.js"></script>
 
     </body>
 

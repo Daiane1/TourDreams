@@ -16,6 +16,8 @@
 		$_SESSION['saida'] = $saida;
 		
 		
+		
+		
 		if(strtotime($saida) <= strtotime($entrada)){
 			echo "<script type='text/javascript'>
 			window.alert('Datas Inválidas')
@@ -37,6 +39,15 @@
 							$select_quartos_disponiveis = mysql_query($sql_quartos);
 						while($rs = mysql_fetch_array($select_quartos_disponiveis)){
 								$preco_diaria=$rs['preco_diaria'];
+								
+								$diferenca = strtotime($_SESSION['saida']) - strtotime($_SESSION['entrada']);
+								$dias = floor($diferenca / (60 * 60 * 24));
+								
+								$result = $dias * $preco_diaria;
+								
+								$_SESSION['result'] = $result;
+								
+								
 								$id_quarto=$rs['id_quarto'];
 								$_SESSION['id_quarto'] = $id_quarto;
 					?>
@@ -63,7 +74,7 @@
 									}
 								?>
 							</div>
-								<h4 align="center">R$ <?php echo number_format($preco_diaria, 2, ',', '');?></h4>
+								<h4 align="center">Preço final em: R$ <?php echo number_format($result, 2, ',', '');?></h4>
 							</div>
 						</div>
 						<div class="botao_reservar">

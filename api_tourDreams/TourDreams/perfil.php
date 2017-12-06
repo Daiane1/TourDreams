@@ -35,23 +35,25 @@ $nome_cliente=$_GET['nome_cliente'];
 
         <link  rel='stylesheet' type='text/css'>
 
-
-
-        <link rel="stylesheet" href="assets/css/normalize.css">
-        <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-        <link rel="stylesheet" href="assets/css/fontello.css">
-        <link href="assets/fonts/icon-7-stroke/css/pe-icon-7-stroke.css" rel="stylesheet">
-        <link href="assets/fonts/icon-7-stroke/css/helper.css" rel="stylesheet">
-        <link href="assets/css/animate.css" rel="stylesheet" media="screen">
-        <link rel="stylesheet" href="assets/css/bootstrap-select.min.css">
-        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="assets/css/icheck.min_all.css">
-        <link rel="stylesheet" href="assets/css/price-range.css">
-        <link rel="stylesheet" href="assets/css/owl.carousel.css">
-        <link rel="stylesheet" href="assets/css/owl.theme.css">
-        <link rel="stylesheet" href="assets/css/owl.transitions.css">
-        <link rel="stylesheet" href="assets/css/style.css">
-        <link rel="stylesheet" href="assets/css/responsive.css">
+		
+		<link rel="shortcut icon" href="Montagem/img/icon.png" type="image/x-icon">
+		
+	
+        <link rel="stylesheet" href="Montagem/css/normalize.css">
+        <link rel="stylesheet" href="Montagem/css/font-awesome.min.css">
+        <link rel="stylesheet" href="Montagem/css/fontello.css">
+        <link href="Montagem/fonts/icon-7-stroke/css/pe-icon-7-stroke.css" rel="stylesheet">
+        <link href="Montagem/fonts/icon-7-stroke/css/helper.css" rel="stylesheet">
+        <link href="Montagem/css/animate.css" rel="stylesheet" media="screen">
+        <link rel="stylesheet" href="Montagem/css/bootstrap-select.min.css">
+        <link rel="stylesheet" href="Teste/css/bootstrap.min.css">
+        <link rel="stylesheet" href="Montagem/css/icheck.min_all.css">
+        <link rel="stylesheet" href="Montagem/css/price-range.css">
+        <link rel="stylesheet" href="Montagem/css/owl.carousel.css">
+        <link rel="stylesheet" href="Montagem/css/owl.theme.css">
+        <link rel="stylesheet" href="Montagem/css/owl.transitions.css">
+        <link rel="stylesheet" href="Montagem/css/style.css">
+        <link rel="stylesheet" href="Montagem/css/responsive.css">
 
 
 	<style type="text/css">
@@ -150,15 +152,6 @@ $nome_cliente=$_GET['nome_cliente'];
 	}
 	
 	function Postar(id_reserva,id_cliente,nome_cliente){
-		
-		var form;
-		$('#file_foto').change(function (event) {
-			form = new FormData();
-			form.append('file_foto', event.target.files[0]);
-			var name = event.target.files[0].content.name;
-		});
-
-		
 		$.ajax({
 			type: "POST",
 			url: "postar.php?id_cliente=" + id_cliente + "&nome_cliente=" + nome_cliente +  "&id_reserva=" + id_reserva,
@@ -184,30 +177,10 @@ $nome_cliente=$_GET['nome_cliente'];
 
 
 
-        <div class="header-connect">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-5 col-sm-8  col-xs-12">
-                        <div class="header-half header-call">
-                            <p>
-                                <span><i class="pe-7s-call"></i> (11) 4222-2020</span>
-                                <span><i class="pe-7s-mail"></i> tour_dreams@tour.com</span>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-md-2 col-md-offset-5  col-sm-3 col-sm-offset-1  col-xs-12">
-                        <div class="header-half header-social">
-                            <ul class="list-inline">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <?php      	
+      	   include('header.php');
+        ?>
+		
 
 
        
@@ -250,7 +223,7 @@ $nome_cliente=$_GET['nome_cliente'];
 						  <ul class="nav nav-tabs" id="myTab">
 							<li class="active"><a href="#home" data-toggle="tab">Reservas Finalizadas</a></li>
 							<li><a href="#messages" data-toggle="tab">Acompanhamento da Reserva</a></li>
-							<li><a href="#planejamento" data-toggle="tab">Planejamentos das reservas</a></li>
+							<li><a href="#postar" data-toggle="tab">Viagens em andamento</a></li>
 						  </ul>
 
 						  <div class="tab-content">
@@ -393,7 +366,7 @@ $nome_cliente=$_GET['nome_cliente'];
 							 </div><!--/tab-pane-->
 							 
 							 
-							 <div class="tab-pane" id="planejamento">
+							 <div class="tab-pane" id="postar">
 
 							   <h2></h2>
 
@@ -457,6 +430,8 @@ $nome_cliente=$_GET['nome_cliente'];
 								</div>
 
 							 </div><!--/tab-pane-->
+							 
+							 
 							 
 							  </div><!--/tab-pane-->
 						  </div><!--/tab-content-->						
@@ -558,24 +533,25 @@ $nome_cliente=$_GET['nome_cliente'];
       	   include('rodape.php');
         ?>
 
-        <script src="assets/js/modernizr-2.6.2.min.js"></script>
+        <script src="Montagem/js/modernizr-2.6.2.min.js"></script>
 
-        <script src="assets/js/jquery-1.10.2.min.js"></script>
-        <script src="bootstrap/js/bootstrap.min.js"></script>
-        <script src="assets/js/bootstrap-select.min.js"></script>
-        <script src="assets/js/bootstrap-hover-dropdown.js"></script>
+        <script src="Montagem/js/jquery-1.10.2.min.js"></script>
+        <script src="Teste/js/bootstrap.min.js"></script>
+        <script src="Montagem/js/bootstrap-select.min.js"></script>
+        <script src="Montagem/js/bootstrap-hover-dropdown.js"></script>
 
-        <script src="assets/js/easypiechart.min.js"></script>
-        <script src="assets/js/jquery.easypiechart.min.js"></script>
+        <script src="Montagem/js/easypiechart.min.js"></script>
+        <script src="Montagem/js/jquery.easypiechart.min.js"></script>
 
-        <script src="assets/js/owl.carousel.min.js"></script>
-        <script src="assets/js/wow.js"></script>
+        <script src="Montagem/js/owl.carousel.min.js"></script>
+        <script src="Montagem/js/wow.js"></script>
 
 
-        <script src="assets/js/icheck.min.js"></script>
-        <script src="assets/js/price-range.js"></script>
+        <script src="Montagem/js/icheck.min.js"></script>
+        <script src="Montagem/js/price-range.js"></script>
 
-        <script src="assets/js/main.js"></script>
+        <script src="Montagem/js/main.js"></script>
+
 
     </body>
 

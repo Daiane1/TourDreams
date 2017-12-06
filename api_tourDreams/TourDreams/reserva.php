@@ -37,6 +37,12 @@
 	  $sql="insert into tbl_reserva(id_quarto, id_cliente, dt_entrada, dt_saida, nome_responsavel, id_adulto, id_crianca, valor_reserva,status_reserva)";
 	  $sql=$sql."values(".$id_quarto.", ".$id_cliente.", '".$entrada_banco."', '".$saida_banco."', '".$responsavel."', ".$qtd_criancas.", ".$qtd_adulto.", '".$result."','Pendente')";
 	  mysql_query($sql);
+	  
+	  
+	  echo "<script type='text/javascript'>
+	  window.alert('Reservado com sucesso')
+	  </script>";
+	  
 	}
 
 	 ?>
@@ -52,24 +58,26 @@
 
         <link  rel='stylesheet' type='text/css'>
 
-
-
-        <link rel="stylesheet" href="assets/css/normalize.css">
-        <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-        <link rel="stylesheet" href="assets/css/fontello.css">
-        <link href="assets/fonts/icon-7-stroke/css/pe-icon-7-stroke.css" rel="stylesheet">
-        <link href="assets/fonts/icon-7-stroke/css/helper.css" rel="stylesheet">
-        <link href="assets/css/animate.css" rel="stylesheet" media="screen">
-        <link rel="stylesheet" href="assets/css/bootstrap-select.min.css">
-        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="assets/css/icheck.min_all.css">
-        <link rel="stylesheet" href="assets/css/price-range.css">
-        <link rel="stylesheet" href="assets/css/owl.carousel.css">
-        <link rel="stylesheet" href="assets/css/owl.theme.css">
-        <link rel="stylesheet" href="assets/css/owl.transitions.css">
-        <link rel="stylesheet" href="assets/css/style.css">
-        <link rel="stylesheet" href="assets/css/responsive.css">
-
+		
+		<link rel="shortcut icon" href="Montagem/img/icon.png" type="image/x-icon">
+		
+	
+        <link rel="stylesheet" href="Montagem/css/normalize.css">
+        <link rel="stylesheet" href="Montagem/css/font-awesome.min.css">
+        <link rel="stylesheet" href="Montagem/css/fontello.css">
+        <link href="Montagem/fonts/icon-7-stroke/css/pe-icon-7-stroke.css" rel="stylesheet">
+        <link href="Montagem/fonts/icon-7-stroke/css/helper.css" rel="stylesheet">
+        <link href="Montagem/css/animate.css" rel="stylesheet" media="screen">
+        <link rel="stylesheet" href="Montagem/css/bootstrap-select.min.css">
+        <link rel="stylesheet" href="Teste/css/bootstrap.min.css">
+        <link rel="stylesheet" href="Montagem/css/icheck.min_all.css">
+        <link rel="stylesheet" href="Montagem/css/price-range.css">
+        <link rel="stylesheet" href="Montagem/css/owl.carousel.css">
+        <link rel="stylesheet" href="Montagem/css/owl.theme.css">
+        <link rel="stylesheet" href="Montagem/css/owl.transitions.css">
+        <link rel="stylesheet" href="Montagem/css/style.css">
+        <link rel="stylesheet" href="Montagem/css/responsive.css">
+		
 		<style type="text/css">
 		.header-connect{
 			padding-top: 10px;
@@ -303,24 +311,25 @@
       	   include('rodape.php');
         ?>
 
-        <script src="assets/js/modernizr-2.6.2.min.js"></script>
+        <script src="Montagem/js/modernizr-2.6.2.min.js"></script>
 
-        <script src="assets/js/jquery-1.10.2.min.js"></script>
-        <script src="bootstrap/js/bootstrap.min.js"></script>
-        <script src="assets/js/bootstrap-select.min.js"></script>
-        <script src="assets/js/bootstrap-hover-dropdown.js"></script>
+        <script src="Montagem/js/jquery-1.10.2.min.js"></script>
+        <script src="Teste/js/bootstrap.min.js"></script>
+        <script src="Montagem/js/bootstrap-select.min.js"></script>
+        <script src="Montagem/js/bootstrap-hover-dropdown.js"></script>
 
-        <script src="assets/js/easypiechart.min.js"></script>
-        <script src="assets/js/jquery.easypiechart.min.js"></script>
+        <script src="Montagem/js/easypiechart.min.js"></script>
+        <script src="Montagem/js/jquery.easypiechart.min.js"></script>
 
-        <script src="assets/js/owl.carousel.min.js"></script>
-        <script src="assets/js/wow.js"></script>
+        <script src="Montagem/js/owl.carousel.min.js"></script>
+        <script src="Montagem/js/wow.js"></script>
 
 
-        <script src="assets/js/icheck.min.js"></script>
-        <script src="assets/js/price-range.js"></script>
+        <script src="Montagem/js/icheck.min.js"></script>
+        <script src="Montagem/js/price-range.js"></script>
 
-        <script src="assets/js/main.js"></script>
+        <script src="Montagem/js/main.js"></script>
+
 
     </body>
 

@@ -3,7 +3,8 @@
 	include ('conexao_banco.php');
 	
 	session_start();
-
+	
+	
 	
 	if(isset($_GET['modo'])){
 		$modo=$_GET['modo'];
@@ -81,6 +82,40 @@
 						</small>
 					</a>
 				</div>
+				
+				<div class="navbar-buttons navbar-header pull-right" role="navigation">
+					<ul class="nav ace-nav">
+						<li class="light-blue dropdown-modal">
+							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
+								<span class="user-info">
+									<small>Bem Vindo,</small>
+									<?php echo $_GET['nome_empresa'];?>
+								</span>
+
+								<i class="ace-icon fa fa-caret-down"></i>
+							</a>
+
+							<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+								<li>
+									<a href="perfil_parceiro.php?nome_empresa=<?php echo$_GET['nome_empresa'];?>&id_parceiro=<?php echo$_GET['id_parceiro'];?>">
+										<i class="ace-icon fa fa-user"></i>
+										Perfil
+									</a>
+								</li>
+
+								<li class="divider"></li>
+
+								<li>
+									<a href="..\index.php">
+										<i class="ace-icon fa fa-power-off"></i>
+										Logout
+									</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				
 			</div>
 		</div>
 
@@ -98,7 +133,7 @@
 
 				<ul class="nav nav-list">
 					<li class="active">
-						<a href="index.php?nome_empresa=<?php echo$_GET['nome_empresa'];?>&id_parceiro=<?php echo$_GET['id_parceiro'];?>">
+						<a href="index_parceiro.php?nome_empresa=<?php echo$_GET['nome_empresa'];?>&id_parceiro=<?php echo$_GET['id_parceiro'];?>">
 							<i class="menu-icon fa fa-briefcase"></i>
 							<span class="menu-text"> Home </span>
 						</a>
@@ -229,11 +264,11 @@
 
 														<td>
 															<div class="hidden-sm hidden-xs action-buttons">
-																<a class="green" href="minhas_reservas.php?modo=aceitarReserva&id_reserva=<?php echo($rs['id_reserva']);?>&id_parceiro=<?php echo($rs['id_parceiro']);?>&nome_empresa=<?php echo($rs['nome_empresa']);?>">
+																<a class="green" href="minhas_reservas.php?modo=aceitarReserva&id_reserva=<?php echo($_SESSION['id_reserva']);?>&id_parceiro=<?php echo($rs['id_parceiro']);?>&nome_empresa=<?php echo($rs['nome_empresa']);?>">
 																	<i class="ace-icon fa fa-thumbs-up"></i>
 																</a>
 																
-																<a class="red" href="minhas_reservas.php?modo=recusarReserva&id_reserva=<?php echo($rs['id_reserva']);?>&id_parceiro=<?php echo($rs['id_parceiro']);?>&nome_empresa=<?php echo($rs['nome_empresa']);?>">
+																<a class="red" href="minhas_reservas.php?modo=recusarReserva&id_reserva=<?php echo($_SESSION['id_reserva']);?>&id_parceiro=<?php echo($rs['id_parceiro']);?>&nome_empresa=<?php echo($rs['nome_empresa']);?>">
 																	<i class="ace-icon fa fa-thumbs-down"></i>
 																</a>
 															</div>

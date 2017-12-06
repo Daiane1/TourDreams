@@ -50,29 +50,157 @@
 											<span class="pull-left"><i class="fa fa-binoculars"></i>  <b>Milhas :</b> <?php echo($rs['qtd_milhas']);?> </span>
 											<span class="proerty-price pull-right">R$ <?php echo number_format($preco_diaria, 2, ',', '');?></span>
 										</div>
-
+										
 										<div class="vote">
+											<?php
+												$sql_select_avalaiacoes = "select quarto.id_produto,	
+												AVG(ava.nota_limpeza) as limpeza,
+														
+												AVG (ava.nota_restaurante) as restaurante, 
+														
+												AVG(ava.nota_atendimento) as atendimento, 
+														
+												AVG(ava.nota_lazer) as lazer,
+														
+												AVG(((((ava.nota_limpeza + ava.nota_atendimento) + ava.nota_restaurante) + ava.nota_lazer) / 4)) AS media_geral
+												from tbl_quartos as quarto
+													
+												inner join tbl_reserva as rs
+													
+												on rs.id_quarto = quarto.id_quarto
+													
+												inner join tbl_avaliacoes as ava
+													
+												on ava.id_reserva = rs.id_reserva where id_produto =".$rs['id_produto'];
+												$select_avaliacoes = mysql_query($sql_select_avalaiacoes);
+												while($rsconsulta = mysql_fetch_array($select_avaliacoes)){
+														
+
+											?>
+								
+										
+											<?php
+												if(number_format($rsconsulta['media_geral'], 1, ',', '.') == 1){
+											?>
+										
 											<label>
 												<input  name="fb" value="1" />
 												<i class="fa"></i>
 											</label>
+											
+											<?php
+											}
+											?>
+											
+											<?php
+												if(number_format($rsconsulta['media_geral'], 1, ',', '.') == 2){
+											?>
+										
 											<label>
-												<input name="fb" value="2" />
+												<input  name="fb" value="1" />
 												<i class="fa"></i>
 											</label>
+											
 											<label>
-												<input  name="fb" value="3" />
+												<input  name="fb" value="1" />
 												<i class="fa"></i>
 											</label>
+											
+											<?php
+											}
+											?>
+											
+											<?php
+												if(number_format($rsconsulta['media_geral'], 1, ',', '.') == 3){
+											?>
+										
 											<label>
-												<input  name="fb" value="4" />
+												<input  name="fb" value="1" />
 												<i class="fa"></i>
 											</label>
+											
 											<label>
-												<input name="fb" value="5" />
+												<input  name="fb" value="1" />
 												<i class="fa"></i>
 											</label>
+											
+											<label>
+												<input  name="fb" value="1" />
+												<i class="fa"></i>
+											</label>
+											
+											<?php
+											}
+											?>
+											
+											<?php
+												if(number_format($rsconsulta['media_geral'], 1, ',', '.') == 4){
+											?>
+										
+											<label>
+												<input  name="fb" value="1" />
+												<i class="fa"></i>
+											</label>
+											
+											<label>
+												<input  name="fb" value="1" />
+												<i class="fa"></i>
+											</label>
+											
+											<label>
+												<input  name="fb" value="1" />
+												<i class="fa"></i>
+											</label>
+											
+											<label>
+												<input  name="fb" value="1" />
+												<i class="fa"></i>
+											</label>
+											
+											<?php
+											}
+											?>
+											
+											
+											<?php
+												if(number_format($rsconsulta['media_geral'], 1, ',', '.') == 5){
+											?>
+										
+											<label>
+												<input  name="fb" value="1" />
+												<i class="fa"></i>
+											</label>
+											
+											<label>
+												<input  name="fb" value="1" />
+												<i class="fa"></i>
+											</label>
+											
+											<label>
+												<input  name="fb" value="1" />
+												<i class="fa"></i>
+											</label>
+											
+											<label>
+												<input  name="fb" value="1" />
+												<i class="fa"></i>
+											</label>
+											
+											<label>
+												<input  name="fb" value="1" />
+												<i class="fa"></i>
+											</label>
+											
+											<?php
+											}
+											?>
+											
+											<?php
+											}
+											?>
+											
 										</div>
+										
                                     </div>
                             </div>
 							<?php
@@ -141,26 +269,153 @@
 										</div>
 
 										<div class="vote">
+											<?php
+												$sql_select_avalaiacoes = "select quarto.id_produto,	
+												AVG(ava.nota_limpeza) as limpeza,
+														
+												AVG (ava.nota_restaurante) as restaurante, 
+														
+												AVG(ava.nota_atendimento) as atendimento, 
+														
+												AVG(ava.nota_lazer) as lazer,
+														
+												AVG(((((ava.nota_limpeza + ava.nota_atendimento) + ava.nota_restaurante) + ava.nota_lazer) / 4)) AS media_geral
+												from tbl_quartos as quarto
+													
+												inner join tbl_reserva as rs
+													
+												on rs.id_quarto = quarto.id_quarto
+													
+												inner join tbl_avaliacoes as ava
+													
+												on ava.id_reserva = rs.id_reserva where id_produto =".$rs['id_produto'];
+												$select_avaliacoes = mysql_query($sql_select_avalaiacoes);
+												while($rsconsulta = mysql_fetch_array($select_avaliacoes)){
+														
+
+											?>
+								
+										
+											<?php
+												if(number_format($rsconsulta['media_geral'], 1, ',', '.') == 1){
+											?>
+										
 											<label>
 												<input  name="fb" value="1" />
 												<i class="fa"></i>
 											</label>
+											
+											<?php
+											}
+											?>
+											
+											<?php
+												if(number_format($rsconsulta['media_geral'], 1, ',', '.') == 2){
+											?>
+										
 											<label>
-												<input name="fb" value="2" />
+												<input  name="fb" value="1" />
 												<i class="fa"></i>
 											</label>
+											
 											<label>
-												<input  name="fb" value="3" />
+												<input  name="fb" value="1" />
 												<i class="fa"></i>
 											</label>
+											
+											<?php
+											}
+											?>
+											
+											<?php
+												if(number_format($rsconsulta['media_geral'], 1, ',', '.') == 3){
+											?>
+										
 											<label>
-												<input  name="fb" value="4" />
+												<input  name="fb" value="1" />
 												<i class="fa"></i>
 											</label>
+											
 											<label>
-												<input name="fb" value="5" />
+												<input  name="fb" value="1" />
 												<i class="fa"></i>
 											</label>
+											
+											<label>
+												<input  name="fb" value="1" />
+												<i class="fa"></i>
+											</label>
+											
+											<?php
+											}
+											?>
+											
+											<?php
+												if(number_format($rsconsulta['media_geral'], 1, ',', '.') == 4){
+											?>
+										
+											<label>
+												<input  name="fb" value="1" />
+												<i class="fa"></i>
+											</label>
+											
+											<label>
+												<input  name="fb" value="1" />
+												<i class="fa"></i>
+											</label>
+											
+											<label>
+												<input  name="fb" value="1" />
+												<i class="fa"></i>
+											</label>
+											
+											<label>
+												<input  name="fb" value="1" />
+												<i class="fa"></i>
+											</label>
+											
+											<?php
+											}
+											?>
+											
+											
+											<?php
+												if(number_format($rsconsulta['media_geral'], 1, ',', '.') == 5){
+											?>
+										
+											<label>
+												<input  name="fb" value="1" />
+												<i class="fa"></i>
+											</label>
+											
+											<label>
+												<input  name="fb" value="1" />
+												<i class="fa"></i>
+											</label>
+											
+											<label>
+												<input  name="fb" value="1" />
+												<i class="fa"></i>
+											</label>
+											
+											<label>
+												<input  name="fb" value="1" />
+												<i class="fa"></i>
+											</label>
+											
+											<label>
+												<input  name="fb" value="1" />
+												<i class="fa"></i>
+											</label>
+											
+											<?php
+											}
+											?>
+											
+											<?php
+											}
+											?>
+											
 										</div>
                                     </div>
                             </div>

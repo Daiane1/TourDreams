@@ -105,12 +105,23 @@ public class PesquisarProduto extends AppCompatActivity {
 
                 Gson gson = new Gson();
                 ProdutosBusca[] produtosBusca = gson.fromJson(resultado, ProdutosBusca[].class);
-
-
+            if(!resultado.isEmpty()){
                 adapter.clear();
                 adapter.addAll(Arrays.asList(produtosBusca));
+            }else{
 
+                AlertDialog alertDialog = new AlertDialog.Builder(PesquisarProduto.this).create();
 
+                alertDialog.setTitle("Desculpe,");
+                alertDialog.setMessage("Não encontramos nenhum hotel disponível para esta data, por favor pesquise outros hotéis.");
+                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                alertDialog.show();
+            }
 
 
         }

@@ -80,7 +80,7 @@
 			mysql_query($sql_code5) or die(mysql_error());
 		}	
 			
-		header("location:index.php?nome_empresa=".$nome_empresa."&id_parceiro=".$id);
+		header("location:index_parceiro.php?nome_empresa=".$nome_empresa."&id_parceiro=".$id);
 		
 	}
 	

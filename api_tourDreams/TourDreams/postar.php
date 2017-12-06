@@ -18,9 +18,9 @@
 		
 			
 		$sql_insert_reserva_postar="insert into tbl_blog(id_cliente,foto_blog,descricao_blog,data_publicacao,id_reserva)";
-		$sql_insert_reserva_postar=$sql_insert_reserva_postar."values(".$id_cliente.",'".$file_foto."','".$coment."',now()),".$id_cliente."";
+		$sql_insert_reserva_postar=$sql_insert_reserva_postar."values(".$id_cliente.",'".$file_foto."','".$coment."',now(),".$id_reserva.")";
 		
-		echo($sql_insert_reserva_postar);
+		
 		
 			
 		mysql_query ($sql_insert_reserva_postar);

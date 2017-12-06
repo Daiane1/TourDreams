@@ -6,8 +6,8 @@ include("conexao_banco.php");
 
 
 
-if(isset($_POST['btnRegistrar']))
-{
+if(isset($_POST['btnRegistrar'])){
+
 
   $nome = $_POST['nome'];
   $email = $_POST['email'];
@@ -24,130 +24,45 @@ if(isset($_POST['btnRegistrar']))
 	$ano = $dt_nasc[2];
 
 	$dt_banco = $ano."-".$mes."-".$dia;
+	
+	
+	
+	
+	$extensao = strtolower(substr($_FILES['file']['name'], -4));
+	$file = md5(time()).$extensao;
+	$diretorio = "Foto_clientes/";
+	move_uploaded_file($_FILES['file']['tmp_name'], $diretorio.$file);
 
 
-  $sql="insert into tbl_cliente(nome_cliente, email_cliente, celular_cliente, cpf_cliente, rg_cliente, senha_cliente, dt_nasc)";
-  $sql=$sql."values('".$nome."', '".$email."', '".$celular."', '".$cpf."', '".$rg."', '".$senha."', '".$dt_banco."')";
+	  $sql="insert into tbl_cliente(nome_cliente, email_cliente, celular_cliente, cpf_cliente, rg_cliente, senha_cliente, foto_cliente, dt_nasc)";
+	  $sql=$sql."values('".$nome."', '".$email."', '".$celular."', '".$cpf."', '".$rg."', '".$senha."', '".$file."', '".$dt_banco."')";
 
-  mysql_query($sql);
+	  mysql_query($sql);
 
-  echo "<script type='text/javascript'>
-  window.alert('Cadastrado com Sucesso')
-  </script>";
+  
+
+   $id_cliente=mysql_insert_id();
+
+   $sql_entrar = "SELECT * FROM tbl_cliente where id_cliente='".$id_cliente."'";
+   $sqlResult = mysql_query($sql_entrar);
+   
+    if($consulta=mysql_fetch_array($sqlResult)){
+		$id_cliente = $consulta['id_cliente'];
+		$nome_cliente = $consulta['nome_cliente'];
+		header("location:index.php?id_cliente=".$id_cliente."&nome_cliente=".$nome_cliente);
+	}else{
+		echo "<script type='text/javascript'>
+			window.alert('Erro no cadastro, tente novamente')
+		</script>";
+	}
+
 
 }
 
 
 
  ?>
-<?php
 
-
-
-	if(isset($_POST['btn_logar_cliente']))
-	{
-		$cpf=$_POST['cpf'];
-		$senha=$_POST['senha'];
-
-
-		include("conexao_banco.php");
-
-		$sql = "SELECT * FROM tbl_cliente where cpf_cliente = '".$cpf."' AND senha_cliente= '".$senha."'";
-		$sqlResult = mysql_query($sql);
-
-		if(mysql_num_rows ($sqlResult) > 0){
-			$_SESSION['cpf_cliente'] = $cpf;
-			$_SESSION['senha_cliente'] = $senha;
-
-			if($consulta=mysql_fetch_array($sqlResult)){
-				$id_cliente = $consulta['id_cliente'];
-				$nome_cliente = $consulta['nome_cliente'];
-				header("location:index.php?id_cliente=".$id_cliente."&nome_cliente=".$nome_cliente."");
-			}
-
-		}else{
-			echo "<script type='text/javascript'>
-			window.alert('Login ou Senha inválidos')
-			</script>";
-		}
-	}
-
-
-?>
-
-<?php
-
-
-if(isset($_POST['btnRegistrar_parceiro']))
-{
-  $empresa = $_POST['empresa'];
-  $nome_parceiro = $_POST['nome_parceiro'];
-  $cnpj = $_POST['cnpj'];
-  $senha = $_POST['senha'];
-  $gerente = $_POST['gerente'];
-  $telefone = $_POST['telefone'];
-  $celular = $_POST['celular'];
-  $email = $_POST['email'];
-
-
-
-  $sql="insert into tbl_parceiros(nome_empresa, nome_fantasia, cnpj, senha, nome_gerente, telefone, celular, email)";
-  $sql=$sql."values('".$empresa."', '".$nome_parceiro."', '".$cnpj."', '".$senha."', '".$gerente."', '".$celular."', '".$telefone."', '".$email."')";
-  mysql_query($sql);
-
-	$id_parceiro=mysql_insert_id();
-
-	$sql = "SELECT * FROM tbl_parceiros where id_parceiro='".$id_parceiro."'";
-	$sqlResult = mysql_query($sql);
-
-  if($consulta=mysql_fetch_array($sqlResult)){
-		$id = $consulta['id_parceiro'];
-		$nome_empresa = $consulta['nome_empresa'];
-		header("location:Parceiro/cadastro_parceiro.php?nome_empresa=".$nome_empresa."&id_parceiro=".$id);
-	}
-}
-
- ?>
-
-<?php
-
-
-
-	if(isset($_POST['btn_logar_parceiro']))
-	{
-		$cnpj=$_POST['cnpj'];
-		$senha=$_POST['senha'];
-
-
-		include("conexao_banco.php");
-
-		$sql = "SELECT * FROM tbl_parceiros where cnpj = '".$cnpj."' AND senha= '".$senha."'";
-		$sqlResult = mysql_query($sql);
-
-		if(mysql_num_rows ($sqlResult) > 0){
-			$_SESSION['cnpj'] = $cnpj;
-			$_SESSION['senha'] = $senha;
-
-			if($consulta=mysql_fetch_array($sqlResult)){
-				header("location:Parceiro/index.php");
-			}
-
-		}else{
-			echo "<script type='text/javascript'>
-			window.alert('Login ou Senha inválidos')
-			</script>";
-		}
-	}
-?>
-
-<?php
-		$cor = "#fff";
-		$sql = "select * from tbl_cores";
-		$select = mysql_query($sql);
-		if($rsConsulta=mysql_fetch_array($select)){
-			$cores=$rsConsulta['cores'];
-		}
-?>
 
 
 
@@ -161,26 +76,28 @@ if(isset($_POST['btnRegistrar_parceiro']))
 
         <link  rel='stylesheet' type='text/css'>
 
-
-
-        <link rel="stylesheet" href="assets/css/normalize.css">
-        <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-        <link rel="stylesheet" href="assets/css/fontello.css">
-        <link href="assets/fonts/icon-7-stroke/css/pe-icon-7-stroke.css" rel="stylesheet">
-        <link href="assets/fonts/icon-7-stroke/css/helper.css" rel="stylesheet">
-        <link href="assets/css/animate.css" rel="stylesheet" media="screen">
-        <link rel="stylesheet" href="assets/css/bootstrap-select.min.css">
-        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="assets/css/icheck.min_all.css">
-        <link rel="stylesheet" href="assets/css/price-range.css">
-        <link rel="stylesheet" href="assets/css/owl.carousel.css">
-        <link rel="stylesheet" href="assets/css/owl.theme.css">
-        <link rel="stylesheet" href="assets/css/owl.transitions.css">
-        <link rel="stylesheet" href="assets/css/style.css">
-        <link rel="stylesheet" href="assets/css/responsive.css">
+		
+		<link rel="shortcut icon" href="Montagem/img/icon.png" type="image/x-icon">
+		
+	
+        <link rel="stylesheet" href="Montagem/css/normalize.css">
+        <link rel="stylesheet" href="Montagem/css/font-awesome.min.css">
+        <link rel="stylesheet" href="Montagem/css/fontello.css">
+        <link href="Montagem/fonts/icon-7-stroke/css/pe-icon-7-stroke.css" rel="stylesheet">
+        <link href="Montagem/fonts/icon-7-stroke/css/helper.css" rel="stylesheet">
+        <link href="Montagem/css/animate.css" rel="stylesheet" media="screen">
+        <link rel="stylesheet" href="Montagem/css/bootstrap-select.min.css">
+        <link rel="stylesheet" href="Teste/css/bootstrap.min.css">
+        <link rel="stylesheet" href="Montagem/css/icheck.min_all.css">
+        <link rel="stylesheet" href="Montagem/css/price-range.css">
+        <link rel="stylesheet" href="Montagem/css/owl.carousel.css">
+        <link rel="stylesheet" href="Montagem/css/owl.theme.css">
+        <link rel="stylesheet" href="Montagem/css/owl.transitions.css">
+        <link rel="stylesheet" href="Montagem/css/style.css">
+        <link rel="stylesheet" href="Montagem/css/responsive.css">
         <script type="text/javascript">
 
-                  function mascaraData( campo, e )
+        function mascaraData( campo, e )
           {
           	var kC = (document.all) ? event.keyCode : e.keyCode;
           	var data = campo.value;
@@ -212,140 +129,132 @@ if(isset($_POST['btnRegistrar_parceiro']))
     <body>
 
 
-        <div class="header-connect">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-5 col-sm-8  col-xs-12">
-                        <div class="header-half header-call">
-                            <p>
-                                <span><i class="pe-7s-call"></i> (11) 4222-2020</span>
-                                <span><i class="pe-7s-mail"></i> tour_dreams@tour.com</span>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-md-2 col-md-offset-5  col-sm-3 col-sm-offset-1  col-xs-12">
-                        <div class="header-half header-social">
-                            <ul class="list-inline">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+        
+		<?php      	
+      	   include('header.php');
+        ?>
+		
 
         
         <?php      	
       	   include('menu.php');
         ?>
+		
+		
 
 
+			<div class="content-area user-profiel" style="background-color: #FFF;">&nbsp;
+				<div class="container">   
+					<div class="row">
+							<div class="col-sm-10 col-sm-offset-1 profiel-container">
 
+								<form action="registrar_user.php" method="post" enctype="multipart/form-data">
+										<div class="profiel-header">
+											<h3>
+												<b>Vem ser nosso cliente <br></b>
+												<small>O melhor portal de viagens para você.</small>
+											</h3>
+											<hr>
+										</div>
 
+										<div class="clear">
+											<div class="col-sm-3 col-sm-offset-1">
+												<div class="picture-container">
+													<div class="picture">
+														<img src="" class="picture-src" id="wizardPicturePreview" title=""/>
+														<input type="file" id="wizard-picture">
+													</div>
+													<h6>Foto Cliente</h6>
+												</div>
+											</div>
 
-        <div class="register-area" style="background-color:#FFF;">
-            <div class="container">
+											<div class="col-sm-3 padding-top-25">
 
-                <div class="col-md-6">
-                    <div class="box-for overflow">
-                        <div class="col-md-12 col-xs-12 register-blocks">
-                            <h2>Registrar</h2>
-                            <form action="registrar_user.php" method="post">
-                                <div class="form-group">
-                                    <label>Nome</label>
-                                    <input type="text" class="form-control" placeholder="Digite seu nome" name="nome">
-                                </div>
-								<div class="form-group">
-                                    <label>E-mail</label>
-                                    <input type="text" class="form-control" placeholder="Digite seu E-mail" name="email">
-                                </div>
-								<div class="form-group">
-                                    <label>Celular</label>
-                                    <input type="text" class="form-control" placeholder="Digite seu celular" name="celular" onkeyup="mascaraCelular( this, mtel );"  onkeypress='return SomenteNumero(event)' maxlength="15">
-                                </div>
+												<div class="form-group">
+													<label>Nome Completo <small></small></label>
+													<input name="nome" type="text" class="form-control" required>
+												</div>
+												 
+												<div class="form-group">
+													<label>Email <small></small></label>
+													<input name="email" type="email" class="form-control" required>
+												</div> 
+												<div class="form-group">
+													<label>Data de nascimento <small></small></label>
+													<input name="dt_nasc" type="text" class="form-control" required onkeypress="mascaraData( this, event )" maxlength="10" >
+												</div>
+											</div>
+											<div class="col-sm-3 padding-top-25">
+												<div class="form-group">
+													<label>Celular <small></small></label>
+													<input name="celular" type="text" class="form-control" required onkeyup="mascaraCelular( this, mtel );"  onkeypress='return SomenteNumero(event)' maxlength="15">
+												</div>
+												<div class="form-group">
+													<label>Senha<small></small></label>
+													<input type="password" class="form-control" name="senha">
+												</div>
+												
+											</div>
+											
+											
+											
+										</div>
 
-								<div class="form-group">
-                                    <label>CPF</label>
-                                    <input type="text" class="form-control" placeholder="Digite seu cpf" name="cpf" onblur='clearTimeout()' onkeypress='return SomenteNumero(event)' maxlength="14">
-                                </div>
+									<div class="clear">
+											<br>
+											<hr>
+											<br>
+											<div class="col-sm-5 col-sm-offset-1">
+												<div class="form-group">
+													<label>CPF :</label>
+													<input name="cpf" type="text" class="form-control" onblur='clearTimeout()' onkeypress='return SomenteNumero(event)' maxlength="11">
+												</div>
+											</div>  
 
+											<div class="col-sm-5">
+												<div class="form-group">
+													<label>RG</label>
+													<input name="rg" type="text" class="form-control" onkeypress='return SomenteNumero(event)' maxlength="9" >
+												</div>
+										</div>
+								
+										<div class="col-sm-5 col-sm-offset-1">
+											<br>
+											<input type="submit" class='btn btn-finish btn-primary' name="btnRegistrar" value="Cadastar" />
+										</div>
+										<br>
+									</div>
+								</form>
 
-								<div class="form-group">
-                                    <label>RG</label>
-                                    <input type="text" class="form-control" placeholder="Digite seu rg" name="rg" onkeypress='return SomenteNumero(event)' maxlength="9" >
-                                </div>
+								
+							</div><!-- end row -->
 
-								<div class="form-group">
-                                    <label>Senha</label>
-                                    <input type="password" class="form-control" name="senha"  placeholder="Digite sua senha">
-                                </div>
-                <div class="form-group">
-                                    <label>Data de Nascimento</label>
-                                    <input type="text" class="form-control" placeholder="Digite sua data de nascimento"  onkeypress="mascaraData( this, event )" name="dt_nasc" maxlength="10" >
-                                </div>
-
-                                <div class="text-center">
-                                    <button name="btnRegistrar" type="submit" class="btn btn-default">Registrar</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="box-for overflow">
-                        <div class="col-md-12 col-xs-12 login-blocks">
-                            <h2>Entrar</h2>
-                            <form action="registrar_user.php" method="post">
-                               <div class="form-group">
-                                    <label>CPF</label>
-                                    <input type="text" class="form-control" placeholder="Digite seu cpf" name="cpf" onblur='clearTimeout()' onkeypress='return SomenteNumero(event)' maxlength="14">
-                                </div>
-                                <div class="form-group">
-                                    <label>Senha</label>
-                                    <input type="password" class="form-control" name="senha"  placeholder="Digite sua senha">
-                                </div>
-                                <div class="text-center">
-                                    <button name="btn_logar_cliente" type="submit" class="btn btn-default"> Logar</button>
-                                </div>
-                            </form>
-                            <br>
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
-        </div>
+					</div>
+				</div>
+			</div>
         
         <?php      	
       	   include('rodape.php');
         ?>
 
+		
+        <script src="Montagem/js/vendor/modernizr-2.6.2.min.js"></script>
+        <script src="Montagem/js//jquery-1.10.2.min.js"></script>
+        <script src="Teste/js/bootstrap.min.js"></script>
+        <script src="Montagem/js/bootstrap-select.min.js"></script>
+        <script src="Montagem/js/bootstrap-hover-dropdown.js"></script>
+        <script src="Montagem/js/easypiechart.min.js"></script>
+        <script src="Montagem/js/jquery.easypiechart.min.js"></script>
+        <script src="Montagem/js/owl.carousel.min.js"></script>
+        <script src="Montagem/js/wow.js"></script>
+        <script src="Montagem/js/icheck.min.js"></script>
 
-         <script src="assets/js/modernizr-2.6.2.min.js"></script>
+        <script src="Montagem/js/price-range.js"></script> 
+        <script src="Montagem/js/jquery.bootstrap.wizard.js" type="text/javascript"></script>
+        <script src="Montagem/js/jquery.validate.min.js"></script>
+        <script src="Montagem/js/wizard.js"></script>
 
-        <script src="assets/js/jquery-1.10.2.min.js"></script>
-        <script src="bootstrap/js/bootstrap.min.js"></script>
-        <script src="assets/js/bootstrap-select.min.js"></script>
-        <script src="assets/js/bootstrap-hover-dropdown.js"></script>
-
-        <script src="assets/js/easypiechart.min.js"></script>
-        <script src="assets/js/jquery.easypiechart.min.js"></script>
-
-        <script src="assets/js/owl.carousel.min.js"></script>
-        <script src="assets/js/wow.js"></script>
-
-        <script src="assets/js/icheck.min.js"></script>
-        <script src="assets/js/price-range.js"></script>
-
-        <script src="assets/js/main.js"></script>
-
-
+        <script src="Montagem/js/main.js"></script>
 
 
 		</script>

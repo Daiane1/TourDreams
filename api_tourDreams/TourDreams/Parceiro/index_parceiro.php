@@ -71,7 +71,7 @@
 								<li class="divider"></li>
 
 								<li>
-									<a href="index.php">
+									<a href="..\index.php">
 										<i class="ace-icon fa fa-power-off"></i>
 										Logout
 									</a>
@@ -97,7 +97,7 @@
 
 				<ul class="nav nav-list">
 					<li class="active">
-						<a href="index.php?nome_empresa=<?php echo$_GET['nome_empresa'];?>&id_parceiro=<?php echo$_GET['id_parceiro'];?>">
+						<a href="index_parceiro.php?nome_empresa=<?php echo$_GET['nome_empresa'];?>&id_parceiro=<?php echo$_GET['id_parceiro'];?>">
 							<i class="menu-icon fa fa-briefcase"></i>
 							<span class="menu-text"> Home </span>
 						</a>

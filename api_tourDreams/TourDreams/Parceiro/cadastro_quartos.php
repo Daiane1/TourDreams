@@ -90,6 +90,9 @@
 		<link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
 
 		<script src="assets/js/ace-extra.min.js"></script>
+		
+		
+		
 	
 		
 	</head>
@@ -138,7 +141,7 @@
 								<li class="divider"></li>
 
 								<li>
-									<a href="index.php">
+									<a href="..\index.php">
 										<i class="ace-icon fa fa-power-off"></i>
 										Logout
 									</a>
@@ -179,6 +182,16 @@
 
 						<b class="arrow"></b>
 					</li>
+					
+					<li class="">
+						<a href="minhas_reservas.php?nome_empresa=<?php echo$_GET['nome_empresa'];?>&id_parceiro=<?php echo$_GET['id_parceiro'];?>">
+							<i class="menu-icon fa fa-building-o"></i>
+							<span class="menu-text"> Minhas Reservas </span>
+						</a>
+
+						<b class="arrow"></b>
+					</li>
+					
 				</ul>
 
 				<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
@@ -250,7 +263,7 @@
 
 																	<div class="col-xs-12 col-sm-5">
 																		<span class="block input-icon input-icon-right" style="width:140px;">
-																			<input type="text" id="inputInfo" class="width-100" name="preco" />
+																			<input type="text" id="inputInfo" class="width-100" name="preco"/>
 																		</span>
 																	</div>
 																</div>
